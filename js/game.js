@@ -1,43 +1,3 @@
-let inventory=[];
-let your_place;
-let new_place;
-let cash;
-let max_carried;
-let objects_carried ;
-let TV_channel;
-let money;
-let score;
-let rope_in_use = false;
-let window_broken = false;
-let toilet_flushed = false;
-let called_555_0987 = false;
-let called_555_6969 = false;
-let called_555_0439 = false;
-let rubber_worn = false;
-let hooker_fucked = false;
-let door_W_open = false;
-let radio_listened = false;
-let wine_ordered = false;
-let telephone_ringing = false;
-let telephone_answered = false;
-let hole_peeped = false;
-let girl_2_fucked = false;
-let tied_to_bed = false;
-let drawer_open = false;
-let closet_open = false;
-let cabinet_open = false;
-let doll_inflated = false;
-let stool_climbed = false;
-let water_on = false;
-let pitcher_full = false;
-let seeds_planted = false;
-let seeds_watered = false;
-let apple_given = false;
-let candy_given = false;
-let flowers_given = false;
-let ring_given = false;
-let married_to_girl = false;
-
 
 function Command2_Click(){
 // On Error GoTo Err_Command2_Click
@@ -68,22 +28,26 @@ objects_carried = 1;
 GetLocationDescription (your_place);
 take_inventory(your_place, cash);
 init_new_game();
-//Me.txtCommand.SetFocus
 }
 
-function Command1_Click()
+function Submit_Click()
+{
 let strcommand;
 let strexits;
 let strVerb, noun;
-if(Me.txtCommand == "")  return;
-strcommand = UCase(Me.txtCommand.Text);
-if(Left(strcommand, 3) == "GO ") 
+if(txtCommand == "")  return;
+strcommand = txtCommand;
+strVerb = strcommand.split(' ')[0];
+noun = strcommand.split(' ')[1];
+
+if(strVerb == "GO ") 
 { 
     strcommand = Right(strcommand, Len(strcommand) - 3)
-strexits = Me.txtExits
-Me.txtCommand = ""
+    strexits = txtExits
+    txtCommand = "";
 }
-if(InStr(1, strcommand, " ") == 0) {
+
+if(!strcommand.contains(' ')) {
 if(strcommand == "N" || strcommand == "NORTH" && exits.includes("North")) {
 if(your_place == "b_hallwy") {
 your_place = "b_bathrm";
@@ -231,232 +195,212 @@ else if(your_place = "p_livrom") {
 your_place == "p_pntfoy";
 }
 }
-Forms!frmmain.txtActions = ""
+txtActions = ""
 jump();
 }
-strVerb = strcommand.split(' ')[0];
-noun = strcommand.split(' ')[1];
 }
-
-//your_place = getlocationabbr(Worksheets("MAIN").Range("c5").Value)
-switch(strVerb)
-{
-case "go":
-break;
-case "press", "push":
-    {
-    if(noun == "button") {
-      
-        if(your_place == "b_bar") {
-          
-            password = InputBox("A voice says  //What's the password?'  (one word) ")
-            if(UCase(password) = "BELLYBUTTON") {
-              
-                write_message "The curtain pulls back!!"
-                addexit your_place, " && East"
-            Else
-              write_message "Wrong!!"
-          }
-        else if(your_place = "c_htdesk" || your_place = "p_pntfoy") {
-          
-            if(is_here("blonde")) {
-              write_message "The blonde says  'You can't go there!'"
-            Else
-              
-                write_long_message (7)
-                if(your_place = "c_htdesk") {
-                  your_place = "p_pntfoy"
-                Else
-                  your_place = "c_htdesk"
-              }
-        }
-        Else
-          not_yet_but_maybe_later
-        }
-    Else
-      write_message "Pushy chump, eh???"
-    }
-
-
-
-Case "enter"
-  
-  
-
-    if(Not is_here("noun")) {
-      find_me_one
-
-    else if(noun = "bushes") {
-      your_place = p_garden
-
-    else if(noun = "window") {
-      
-        if(window_broken) {
-          your_place = b_inroom
-        Else
-          not_yet_but_maybe_later
-      }
-
-    else if(noun = "door_west") {
-      
-        if(door_W_open) {
-          your_place = d_disco
-        Else
-          write_message "The door is closed"
-      }
-
-    else if(noun = "elevator") {
-      write_message "Push the button to enter the elevator"
-
-    Else
-      I_cant_do_that
-    }
-
-
-Case "eat"
-  
-
-    if(Not is_here(noun)) && (Not is_carried(noun))) {
-      find_me_one
-
-    else if(noun = "blonde" || noun = "waitress" || noun = "hooker" || noun = "girl") {
-      
-        write_long_message (8)
-        purgatory
-     
-    else if(noun = "mushroom") {
-      
-        write_long_message (31)
-        your_place = Int(3 * Rnd) + 1
-        //sleep (600)
-        write_long_message (your_place) + 1)
-   
-    else if(noun = "garbage" || noun = "apple_core") {
-      write_message "Too moldy!"
-
-    else if(noun = "apple") {
-      write_message "Sorry ... not hungry!"
-
-    else if(noun = "pills") {
-      
-        write_long_message (26)
-        purgatory
-  
-    Else
-      write_message "Tastes awful!"
-    }
-
-Case "drink"
-  
-
-    if(Not is_carried(noun)) {
-      I_dont_have_it
-
-    Else
-      
-        switch(noun
-          
-          Case "whiskey"
-           write_message "This stuff is rot-gut!  Give it to someone ... I don't want it."
-          Case "beer"
-          write_message "Heh...heh...hey!!!!  This stuff's OK!"
-          Case "wine"
-          write_message "Sour grapes...."
-          Case "water"
-          write_message "Thanks!"
-          Case Else
-          write_message "Get your head examined!!!!"
-          End Select
-        
-        if(noun = "beer" || noun = "water") {
-          
-            //put_object noun = false
-            objects_carried = objects_carried - 1
-          }
-      }
-
-  
-
-Case "buy", "order"
-//cash = 240
-    if(cash < 1) || (is_carried("wallet") = False)) {
-      purgatory
-      //sorry_no_cash
-    Else
-
-      switch(noun
-      
-        Case "whiskey", "beer"
-          
-            if(your_place <> "b_bar")) {
-              not_yet_but_maybe_later
-            Else
-       
-                if(object_place(noun, your_place) = True) {
-                  write_message "Sorry ... all out!"
-       
-                Else
-       
-                    write_message "I give the bartender $5 && he places it on the bar."
-                    cash = cash - 5
-                    put_object noun, your_place
-                  }
-            }
-        Case "wine"
-       
-            if(your_place <> "d_disco")) {
-              not_yet_but_maybe_later
-            else if(object_place(noun, your_place) = True) {
-       
-                  write_message "All out!"
-                Else
-       
-                    write_message "The waitress takes $100 && says she'll return"
-                    //sleep (3000)
-                    write_message "Poor service!!!"
-                    //sleep (2000)
-                    cash = cash - 1
-                    put_object noun, your_place
-                  }
-       
-       
-
-       Case "rubber", "magazine"
-          
-            if(your_place <> "d_phrmcy")) {
-              not_yet_but_maybe_later
-            else if(is_here(noun)) {
-       
-                    if(noun = "rubber") {
-                    buy_rubber
-                    put_object noun, "youhaveit"
-                    objects_carried = objects_carried + 1
-                    Else
-                    write_message "He takes $100 && gives me the magazine"
-                    cash = cash - 1
-                    put_object noun, "youhaveit"
+switch (strVerb) {
+    case "go":
+    break;
+    case "press", "push":
+        {
+        if(noun == "button") {
+            if(your_place == "b_bar") {
+                    let text;
+                    let password = prompt("A voice says  'What's the password?'  (one word) ", "");
+                    if(password.toUpperCase() == "BELLYBUTTON") {
+                        write_message("The curtain pulls back!!");
+                        addexit(your_place, " and East");
                     }
-                Else
-                  write_message "Sorry!!! --- sold out!"
-              }
-          
-
-        Case "hooker"
-       
-            if(is_here("hooker")) {
-              write_message "You've already paid the pimp, stupid!!!!"
-            Else
-              find_me_one
+                    else
+                      write_message("Wrong!!");
             }
-        Case Else
-       
-        write_message "cash can't buy everything!!!!"
-       End Select
+            else if(your_place = "c_htdesk" || your_place == "p_pntfoy") {
+                if(is_here("blonde")) {
+                    write_message("The blonde says 'You can't go there!'");
+                }
+                else
+                {    
+                    write_long_message (7)
+                }
+                if(your_place = "c_htdesk") 
+                        your_place = "p_pntfoy"
+                    else
+                        your_place = "c_htdesk"
+                }
+                //else
+                    //not_yet_but_maybe_later
+                // else
+                // write_message("Pushy chump, eh???"
+                // }
+            }
+        }
+
+        case "enter":
+        if(!is_here("noun")) 
+          find_me_one();
+        else if(noun = "bushes") 
+          your_place = p_garden;
+        else if(noun == "window") {
+            if(window_broken) 
+              your_place = b_inroom;
+            else
+              not_yet_but_maybe_later}
+        else if(noun == "door_west") {
+            if(door_W_open) 
+              your_place = d_disco;
+            else
+              write_message("The door is closed");
+          }
+    
+        else if(noun == "elevator") 
+          write_message("Push the button to enter the elevator");
+        else
+          I_cant_do_that();
+            break;
+        case "eat":
+          if(!is_here(noun) && (!is_carried(noun))){ 
+            find_me_one();
+            }
+          else if(noun == "blonde" || noun =="waitress" || noun == "hooker" || noun == "girl") {
+              write_long_message (8);
+              purgatory();
+          }
+          else if(noun = "mushroom") {
+              write_long_message (31);
+              your_place = Int(3 * Rnd) + 1;
+              //sleep (600)
+              write_long_message (your_place) + 1;
+          }         
+          else if(noun == "garbage" || noun == "apple_core") {
+            write_message("Too moldy!");
+          }
+          else if(noun = "apple") {
+            write_message("Sorry ... ! hungry!");
+          }
+          else if(noun = "pills") {
+            
+              write_long_message (26);
+              purgatory();
+          }
+          else
+            write_message("Tastes awful!");
+        break;
+
+        case "drink":
+          if(!is_carried(noun)) {
+            I_dont_have_it();
+            }
+            else{
+              switch(noun)
+              {
+                case "whiskey":
+                    write_message("This stuff is rot-gut!  Give it to someone ... I don't want it.");
+                case "beer":
+                    write_message("Heh...heh...hey!!!!  This stuff's OK!");
+                case "wine":
+                    write_message("Sour grapes....");
+                case "water":
+                    write_message("Thanks!");
+                default:
+                   write_message("Get your head examined!!!!");
+              }
+              
+              if(noun == "beer" || noun == "water") {
+                  //put_object noun = false
+                  objects_carried--;
+                }
+            }
+        break;
+      case "buy", "order":
+      //cash = 240
+          if(cash < 1 || !is_carried("wallet")) {
+            purgatory();
+            //sorry_no_cash
+          }
+          else
+        {
+            switch(noun)
+            {
+              case "whiskey", "beer":
+                {
+                  if(your_place != "b_bar") 
+                    not_yet_but_maybe_later();
+                  else
+                      if(!object_place(noun, your_place)) 
+                        write_message("Sorry ... all out!");
+                      else
+                          write_message("I give the bartender $5 and he places it on the bar.");
+                          cash -=5;
+                          put_object(noun, your_place);
+                        }
+                  }
+                  break;
+              case "wine":
+                  if(your_place != "d_disco") 
+                    not_yet_but_maybe_later();
+                  else if(object_place(noun, your_place)) 
+                        write_message("All out!");
+                    else
+                        {
+                          write_message("The waitress takes $100 && says she'll return");
+                          sleep(3000);
+                          write_message("Poor service!!!");
+                          sleep (2000);
+                          cash --;
+                          put_object(noun, your_place);
+                        }
+             
+             break;
+             case "rubber", "magazine":
+                {
+                  if(your_place != "d_phrmcy") 
+                    not_yet_but_maybe_later();
+                  else if(is_here(noun)) {
+             
+                          if(noun = "rubber") {
+                            buy_rubber();
+                            put_object(noun, "youhaveit");
+                            objects_carried ++;
+                          }
+                          else
+                        {
+                            write_message("He takes $100 && gives me the magazine");
+                            cash--;
+                            put_object(noun, "youhaveit");
+                          }
+                        }
+                      else
+                        write_message("Sorry!!! --- sold out!");
+                    }
+                break;                
+      
+              case "hooker":
+                {             
+                  if(is_here("hooker")) 
+                    write_message("You've already paid the pimp, stupid!!!!");
+                  else
+                    find_me_one();
+                  
+              break;
+                }
+              default:
+              write_message("cash can't buy everything!!!!"
+            }
+      }
+              default:
+        break;
 }
+//your_place = getlocationabbr(Worksheets("MAIN").Range("c5").Value)
+
+
+
+
+
   
 
 
-Case "climb"
+case "climb"
   
 
     if(noun = "stool") {
@@ -465,43 +409,43 @@ Case "climb"
           
             OK
             stool_climbed = True
-        Else
-          write_message "It's not on the floor here!"
+        else
+          write_message("It's ! on the floor here!"
       }
 
     else if(is_here(noun) || is_carried(noun)) {
      I_cant_do_that
 
-    Else
+    else
       find_me_one
 }
 
 
-Case "water"
+case "water"
   
 
     if(noun = "on" || noun = "off") {
       
-        if(Not is_here("sink")) {
-          write_message "Find a working sink!"
-        Else
+        if(! is_here("sink")) {
+          write_message("Find a working sink!"
+        else
           
             water_on = noun = "on"
             if(water_on) {
               
-                write_message "Water is running in the sink"
+                write_message("Water is running in the sink"
                 put_object "water", your_place
-            else if(Not pitcher_full) {
+            else if(! pitcher_full) {
               
                 OK
                 put_object "water", False
               }
           }
  
-    else if(Not is_carried("water")) {
-      write_message "I have no water!"
+    else if(! is_carried("water")) {
+      write_message("I have no water!"
 
-    else if(Not is_here(noun)) {
+    else if(! is_here(noun)) {
       find_me_one
 
     else if(noun = "seeds") {
@@ -510,39 +454,39 @@ Case "water"
         pitcher_full = False
         if(your_place = p_garden) {
           
-            write_message "A tree sprouts!!"
+            write_message("A tree sprouts!!"
             put_object "tree", your_place
             put_object "seeds", False
-        Else
-          write_message "The seeds need better soil to grow."
+        else
+          write_message("The seeds need better soil to grow."
       }
 
-    Else
+    else
       
-        write_message "It pours into the ground."
+        write_message("It pours into the ground."
         put_object "water", False
         pitcher_full = False
       }
 
-Case "fill"
+case "fill"
   
 
-    if(Not (noun = "pitcher")) {
+    if(! (noun = "pitcher")) {
       I_cant_do_that
 
-    else if(Not is_carried("pitcher")) {
-      write_message "I don't have it!"
+    else if(! is_carried("pitcher")) {
+      write_message("I don't have it!"
 
-    else if(Not is_here("sink")) {
-      write_message "Find a working sink!!"
+    else if(! is_here("sink")) {
+      write_message("Find a working sink!!"
 
-    else if(Not water_on) {
-      write_message "No water!!"
+    else if(! water_on) {
+      write_message("No water!!"
 
     else if(pitcher_full) {
-      write_message "The pitcher is already full!"
+      write_message("The pitcher is already full!"
 
-    Else
+    else
       
         OK
         pitcher_full = True
@@ -550,32 +494,32 @@ Case "fill"
 
 
 
-Case "pour"
+case "pour"
   
 
-    if(Not (noun = "water")) {
+    if(! (noun = "water")) {
       I_cant_do_that
 
-    else if(Not is_carried("pitcher")) {
-      write_message "You have nothing to pour it with!"
+    else if(! is_carried("pitcher")) {
+      write_message("You have nothing to pour it with!"
       
-    else if(Not pitcher_full) {
-      write_message "The pitcher is empty."
+    else if(! pitcher_full) {
+      write_message("The pitcher is empty."
 
-    else if(your_place <> "p_garden") || (Not is_here("seeds"))) {
-      write_message "It pours into the ground."
+    else if(your_place <> "p_garden") || (! is_here("seeds"))) {
+      write_message("It pours into the ground."
 
-    Else
+    else
       
-        write_message "A tree sprouts!!"
+        write_message("A tree sprouts!!"
         put_object "tree", your_place
       }
 
 
 
-Case "listen"
+case "listen"
 
-    if(Not is_here(noun)) && (Not is_carried(noun))) {
+    if(! is_here(noun)) && (! is_carried(noun))) {
       find_me_one
 
     else if(noun = "radio") {
@@ -583,68 +527,68 @@ Case "listen"
         if(is_carried("radio")) {
           
             if(radio_listened) {
-              write_message "Punk rock!!!!!"
-            Else
+              write_message("Punk rock!!!!!"
+            else
               
-                write_message "An advertisement says 'Call 555-0987 for all your liquor needs!!!!'"
+                write_message("An advertisement says 'Call 555-0987 for all your liquor needs!!!!'"
                 radio_listened = True
               }
-        Else
-          write_message "Take it && put it next to my ear!"
+        else
+          write_message("Take it && put it next to my ear!"
       }
 
-    Else
-      write_message "Quiet as a mouse in heat!"
+    else
+      write_message("Quiet as a mouse in heat!"
 }
 
-Case "Close"
+case "Close":
   
 
-    if(Not is_here(noun)) {
+    if(! is_here(noun)) {
       find_me_one
 
     switch(noun
 
-      Case "desk"
+      case "desk"
                   
           Close (drawer_open)
           if(is_here("newspaper")) {
             put_object "newspaper", False
           }
-      Case "closet"
+      case "closet"
         
           Close (closet_open)
           if(is_here("doll")) {
             put_object "doll", False
           }
-      Case "cabinet"
+      case "cabinet"
         if(stool_climbed) {
           
             Close ("cabinet_open")
             if(is_here("pitcher")) {
               put_object "pitcher", False
-            Else
-              write_message "I can't reach it!"
+            else
+              write_message("I can't reach it!"
             }
         }
-      Case "door_west"
+      case "door_west"
                   
           Close (door_W_open)
          // Path d_entrnc, west = false
-      Case Else
+      case else
         I_cant_do_that
 
     End Select
 }
 
-Case "jump"
+case "jump"
   
 
     if(your_place = "b_balcny" || your_place = "b_wledge") {
       falling_down
 
-    Else
-      write_message "Whoooopeeeee!!!"
+    else
+      write_message("Whoooopeeeee!!!"
 
   }
   
@@ -652,23 +596,23 @@ Case "jump"
 //{ Softporn Adventure, include file 6 }
 
 
-Case "marry"
+case "marry"
     if(noun <> "girl") {
-      write_message "No way, weirdo!!"
+      write_message("No way, weirdo!!"
 
-    else if(Not is_here("girl")) {
-      write_message "No girl!!"
+    else if(! is_here("girl")) {
+      write_message("No girl!!"
 
     else if(your_place <> "c_marryc") {
       not_yet_but_maybe_later
 
-    else if((cash < 30) || (Not is_carried("wallet"))) {
+    else if((cash < 30) || (! is_carried("wallet"))) {
       
-        if(cash < 20) || (Not is_carried("wallet"))) {
-          write_message "The girl says 'But you'll need $2000 for the honeymoon suite!'"
-        write_message "The preacher says 'I'll need $1000 too!!'"
+        if(cash < 20) || (! is_carried("wallet"))) {
+          write_message("The girl says 'But you'll need $2000 for the honeymoon suite!'"
+        write_message("The preacher says 'I'll need $1000 too!!'"
       }
-    Else
+    else
       
         write_long_message (33)
         cash = cash - 30
@@ -681,35 +625,35 @@ Case "marry"
 
 
 
-Case "fuck"
+case "fuck"
 
-    if(Not is_here(noun)) && (Not is_carried(noun)) && (noun <> "you")) {
+    if(! is_here(noun)) && (! is_carried(noun)) && (noun <> "you")) {
       find_me_one
 
-    Else
+    else
     switch(noun
    
 
-       Case "hooker"
+       case "hooker"
         
           if(hooker_fucked) {
-            write_message "She can't take it any more!!!!"
-          Else
+            write_message("She can't take it any more!!!!"
+          else
             
               if(rubber_worn) {
                 
                   hooker_fucked = True
                   score = score + 1
                   write_long_message (21)
-              Else
+              else
                 
-                  write_message "Oh no!!! I've got the dreaded atomic clap!!! I'm dead!!"
+                  write_message("Oh no!!! I've got the dreaded atomic clap!!! I'm dead!!"
                   purgatory
                 }
             }
         
 
-      Case "doll"
+      case "doll"
         
           if(is_carried("doll")) {
             if(doll_inflated) {
@@ -717,19 +661,19 @@ Case "fuck"
                 write_long_message (22)
                 put_object "doll", False
                 objects_carried = objects_carried - 1
-            Else
-              write_message "Inflate it first -- stupid!!!"
+            else
+              write_message("Inflate it first -- stupid!!!"
              }
-            Else
-            write_message "I can't unless I'm holding it close"
+            else
+            write_message("I can't unless I'm holding it close"
         }
 
-      Case "girl"
+      case "girl"
         
 
  switch(your_place
 
-Case "c_hmoons"
+case "c_hmoons"
               
                 if(wine_ordered) {
                   
@@ -739,70 +683,70 @@ Case "c_hmoons"
                     tied_to_bed = True
                     put_object "girl", "p_jacuzi"
                     put_object "rope", your_place
-                Else
-                  write_message "She says  'Get me wine!!!  I'm nervous!!'"
+                else
+                  write_message("She says  'Get me wine!!!  I'm nervous!!'"
               }
-Case "p_jacuzi"
+case "p_jacuzi"
               
                 if(apple_given) {
                   
                     score = score + 1
                     write_long_message (23)
                    // game_}ed = True
-                Else
+                else
                   not_yet_but_maybe_later
 }
           End Select
 
-Case "bartender"
+case "bartender"
         
-          write_message "He jumps over the bar && kills me!!"
+          write_message("He jumps over the bar && kills me!!"
           purgatory
 
-      Case "you"
-      write_message "Not tonight -- I have a headache!!"
-      Case "waitress"
-      write_message "She kicks me in the groin && says 'Wise up - Buster!!'"
-      Case "blonde"
-      write_message "She says 'I'm working! Leave me alone!!'"
-      Case "pimp"
-      write_message "He says 'You'll never have enough cash for me - fool!'.  I guess he's gay!"
-      Case "bum"
-      write_message "To do that I need vaseline!!"
-      Case "businessman"
-      write_message "No way!!!  You're weird!!"
-      Case "off"
-      write_message "Fuck off yourself, asshole!!!"
+      case "you"
+      write_message("! tonight -- I have a headache!!"
+      case "waitress"
+      write_message("She kicks me in the groin && says 'Wise up - Buster!!'"
+      case "blonde"
+      write_message("She says 'I'm working! Leave me alone!!'"
+      case "pimp"
+      write_message("He says 'You'll never have enough cash for me - fool!'.  I guess he's gay!"
+      case "bum"
+      write_message("To do that I need vaseline!!"
+      case "businessman"
+      write_message("No way!!!  You're weird!!"
+      case "off"
+      write_message("Fuck off yourself, asshole!!!"
 
-      Case Else
-      write_message "Pervert!"
+      case else
+      write_message("Pervert!"
 
     End Select
  }
-Case "wear", "use"
+case "wear", "use"
     
-    if(Not is_here(noun)) && (Not is_carried(noun)) && (noun <> "knife")) {
+    if(! is_here(noun)) && (! is_carried(noun)) && (noun <> "knife")) {
       find_me_one
 
-    Else
+    else
     switch(noun
 
-      Case "rubber"
+      case "rubber"
         
-          write_message "It tickles!!"
+          write_message("It tickles!!"
           rubber_worn = True
           put_object "rubber", "youhaveit"
 
-      Case "toilet"
-          write_message ".....I got those constipation blues.........."
+      case "toilet"
+          write_message(".....I got those constipation blues.........."
           writeln ("Ahhh...relief! Thanks")
-      Case "bed"
+      case "bed"
         
-          write_message "Ahhhhh.......sleep!!!!"
+          write_message("Ahhhhh.......sleep!!!!"
           //sleep (1000)
           writeln ("No, I can't sleep!  Have to find me a girl!!!!")
       
-      Case "rope"
+      case "rope"
         
           if(is_carried("rope")) {
             
@@ -810,62 +754,62 @@ Case "wear", "use"
                 
                   put_object "rope", your_place
                   rope_in_use = True
-                  write_message "You tie the safety rope to the balcony"
-              Else
+                  write_message("You tie the safety rope to the balcony"
+              else
                 not_yet_but_maybe_later
               }
-          Else
+          else
             I_dont_have_it
         }
 
-      Case "passcard"
+      case "passcard"
         
           if(is_carried("passcard")) {
             
               if(your_place = "d_entrnc") {
                 
-                  write_message "I show my passcard && the door opens"
+                  write_message("I show my passcard && the door opens"
                 addexit your_place, " && West"
-              Else
+              else
                 not_yet_but_maybe_later
  }
-          Else
+          else
             I_dont_have_it
         }
 
-      Case "knife"
+      case "knife"
         
-          write_message "Let me see if(I still have the knife!"
+          write_message("Let me see if(I still have the knife!"
           //sleep (600)
           if(is_carried("knife")) {
             
               if(tied_to_bed) {
                 
-                  write_message "I do && it worked! Thanks!"
+                  write_message("I do && it worked! Thanks!"
                   tied_to_bed = False
-              Else
+              else
                 
-                  write_message "Samurai sex fi}!!!!!!!!!!!!!!!!!!!"
+                  write_message("Samurai sex fi}!!!!!!!!!!!!!!!!!!!"
                   //sleep (600)
                   writeln ("I stab myself in extacy!")
                   purgatory
               }
             
-          Else
+          else
             I_dont_have_it
         }
 
-      Case Else
+      case else
         I_cant_do_that
 
     End Select
 }
 
 
-Case "answer"
+case "answer"
   
 
-    if(Not is_here(noun)) {
+    if(! is_here(noun)) {
       find_me_one
 
     else if(noun <> "telephone") {
@@ -882,17 +826,17 @@ Case "answer"
         telephone_ringing = False
         telephone_answered = True
  
-    Else
-      write_message "It's not ringing!"
+    else
+      write_message("It's ! ringing!"
 
 }
 
-Case "call", "dial"
+case "call", "dial"
 
     if(your_place = p_pntpch) {
-      write_message "This only takes incoming calls!!"
+      write_message("This only takes incoming calls!!"
 
-    else if((noun = "555-6969") && (Not called_555_6969)) {
+    else if((noun = "555-6969") && (! called_555_6969)) {
       
         writeln ("")
         writeln ("A voice says 'Hello, please answer the questions with one word answers")
@@ -909,69 +853,69 @@ Case "call", "dial"
           your_part = LCase(your_part)
           your_object = LCase(your_object)
 
-    else if((noun = "555-0439") && (Not called_555_0439)) {
+    else if((noun = "555-0439") && (! called_555_0439)) {
       
         write_long_message (34)
         called_555_0439 = True
   
-    else if((noun = "555-0987") && married_to_girl && (Not called_555_0987)) {
+    else if((noun = "555-0987") && married_to_girl && (! called_555_0987)) {
       
         write_long_message (35)
         wine_ordered = True
         called_555_0987 = True
         put_object "wine", "c_hmoons"
-    Else
-      write_message "Nobody answers"
+    else
+      write_message("Nobody answers"
 
   }
 
-Case "break", "smash"
+case "break", "smash"
 
-    if(Not is_here(noun)) {
+    if(! is_here(noun)) {
       find_me_one
 
     else if(noun = "window") {
       
-        write_message "Let me see if(I have a hammer"
+        write_message("Let me see if(I have a hammer"
         //sleep (400)
         if(is_carried("hammer")) {
           
-            write_message "The window smashes to pieces"
+            write_message("The window smashes to pieces"
                 addexit your_place, " && South"
-        Else
+        else
           I_dont_have_it
       }
 
-    Else
+    else
       I_cant_do_that
 }
 
 
-Case "cut"
+case "cut"
   
 
-    write_message "Let me see if(I still have the knife!"
+    write_message("Let me see if(I still have the knife!"
     //sleep (600)
 
     if(is_carried("knife")) {
       
         if(noun = "rope") && tied_to_bed) {
           
-            write_message "I do && it worked! Thanks!"
+            write_message("I do && it worked! Thanks!"
             tied_to_bed = False
-        Else
+        else
           
-            write_message "Samurai sex fiend!!!!!!!!!!!!!!!!!!!"
+            write_message("Samurai sex fiend!!!!!!!!!!!!!!!!!!!"
             //sleep (600)
             writeln ("I stab myself in extacy!")
             purgatory
           }
 
-    Else
+    else
       I_dont_have_it
 }
 
-Case "dance"
+case "dance"
 
   
 
@@ -987,68 +931,68 @@ Case "dance"
 
 
 
-Case "kill"
+case "kill"
   
-  write_message "Try using a knife!!!"
+  write_message("Try using a knife!!!"
 
 
-Case "pay"
+case "pay"
 
   
 
-    if(Not is_here(noun)) {
+    if(! is_here(noun)) {
       find_me_one
 
-    Else
+    else
     
     switch(noun
     
-      Case "pimp"
+      case "pimp"
         
           if(hooker_fucked) {
-            write_message "He says 'I don't want your cash - stud!'"
-          Else
-            write_message "Try going up -- he'll take the cash) {"
+            write_message("He says 'I don't want your cash - stud!'"
+          else
+            write_message("Try going up -- he'll take the cash) {"
         }
 
-      Case "hooker"
-        write_message "You already paid the Pimp, stupid!!"
+      case "hooker"
+        write_message("You already paid the Pimp, stupid!!"
 
-      Case "blonde", "waitress", "girl"
+      case "blonde", "waitress", "girl"
         
-          write_message "She yells 'I'm not a whore!!!' && kills me!"
+          write_message("She yells 'I'm ! a whore!!!' && kills me!"
           purgatory
         
-      Case "preacher"
-        write_message "Bring a girl here to marry -- he'll take the cash) {!"
+      case "preacher"
+        write_message("Bring a girl here to marry -- he'll take the cash) {!"
 
-      Case "businessman"
-        write_message "He's too drunk to do business right now!"
+      case "businessman"
+        write_message("He's too drunk to do business right now!"
 
-      Case "bartender"
-        write_message "Buy something -- he'll take the cash) {"
+      case "bartender"
+        write_message("Buy something -- he'll take the cash) {"
 
-      Case "dealer"
-        write_message "Why not play 21 instead?  You'll lose anyway, fool!"
+      case "dealer"
+        write_message("Why ! play 21 instead?  You'll lose anyway, fool!"
 
-     Case Else
+     case else
       I_cant_do_that
 
     End Select
 }
 
-Case "smoke"
+case "smoke"
 
     if(noun = "plant") {
       
-        write_message "A cop beats me over the head!!!!"
+        write_message("A cop beats me over the head!!!!"
         purgatory
 
-    Else
+    else
       I_cant_do_that
 
 }
-Case "show"
+case "show"
   
 
     if(noun = "passcard") {
@@ -1057,65 +1001,65 @@ Case "show"
           
             if(your_place = "d_entrnc") {
               
-                write_message "I show my passcard && the door opens"
+                write_message("I show my passcard && the door opens"
                 addexit your_place, " && West"
-            Else
+            else
               not_yet_but_maybe_later
           }
-        Else
+        else
           I_dont_have_it
       }
 
-    Else
+    else
       I_cant_do_that
 }
 
-Case "smell"
-    if(Not is_here(noun)) && (Not is_carried(noun))) {
+case "smell"
+    if(! is_here(noun)) && (! is_carried(noun))) {
       find_me_one
 
-    Else
+    else
     
     switch(noun
-      Case "blonde"
-      write_message "Hmmm.....nice!!!!"
-      Case "hooker"
-      write_message "OK, who's eating tuna fish?!?!?!"
-      Case "toilet"
-      write_message "Arghhh...I'm going to puke!!!!!!"
-      Case "plant"
-      write_message "Ahhh..chooo!!!!!!  I guess I'm allergic!"
-      Case "garbage"
-      write_message "Yechhhhh!!!!!"
-      Case "flowers"
-      write_message "Smells like perfume!!!"
-      Case Else
-      write_message "Smells OK"
+      case "blonde"
+      write_message("Hmmm.....nice!!!!"
+      case "hooker"
+      write_message("OK, who's eating tuna fish?!?!?!"
+      case "toilet"
+      write_message("Arghhh...I'm going to puke!!!!!!"
+      case "plant"
+      write_message("Ahhh..chooo!!!!!!  I guess I'm allergic!"
+      case "garbage"
+      write_message("Yechhhhh!!!!!"
+      case "flowers"
+      write_message("Smells like perfume!!!"
+      case else
+      write_message("Smells OK"
     End Select
 }
 
 
-Case "help"
+case "help"
     
    // give_help
 
-Case "kiss"
+case "kiss"
     
-    write_message "Don't do that!!!!  It gets me excited!!"
+    write_message("Don't do that!!!!  It gets me excited!!"
 
-Case "stab"
+case "stab"
     
     stab_someone
 
-Case "quit", "stop", "bye"
+case "quit", "stop", "bye"
     game_end
 
-Case "score"
+case "score"
     writeln ("")
     writeln ("Your score is '" & score & "' out of a possible '3'")
 
 
-Case "save"
+case "save"
     //p = pos(" ", objnam)
     //if(p > 0) { objnam = Copy(objnam, 1, p - 1)
     //assign( save_file, save_file_name(objnam) )
@@ -1125,11 +1069,11 @@ Case "save"
     //write_messagesave_file_name (objnam) + " saved"
 
 
-Case "restore"
+case "restore"
     
     //p = pos(" ", objnam)
     //if(p > 0) { objnam = Copy(objnam, 1, p - 1)
-    //write_message "Restoring from " + save_file_name(objnam)
+    //write_message("Restoring from " + save_file_name(objnam)
     //writeln
     ////assign( save_file, save_file_name(objnam) )
     //Reset (save_file)
@@ -1148,68 +1092,68 @@ Case "restore"
     //    writeln
     ////    writeln( "I/O error ", iores )
     //  }
-    //Else
+    //else
    //   write_long_message( integer(your_place) + 1 )
     //Close (save_file)
 
 
 
-Case "go"
+case "go"
 
 if(tied_to_bed) {
-      write_message "But I'm tied to the bed!!!!!"
+      write_message("But I'm tied to the bed!!!!!"
 
-    else if(Not (no_direction)) {
+    else if(! (no_direction)) {
       
-        if(your_place = "b_bedrm") && (direction = "north") && (Not hooker_fucked)) {
-          write_message "The Hooker says:  'Don't go there ... do me first!!'"
+        if(your_place = "b_bedrm") && (direction = "north") && (! hooker_fucked)) {
+          write_message("The Hooker says:  'Don't go there ... do me first!!'"
 
-        else if(your_place = "c_hallwy") && (direction = "south") && (Not married_to_girl)) {
-          write_message "The door is locked shut!"
+        else if(your_place = "c_hallwy") && (direction = "south") && (! married_to_girl)) {
+          write_message("The door is locked shut!"
 
-        else if(your_place = "d_entrnc") && (direction = west) && (Not door_W_open)) {
-          write_message "The door is closed!"
+        else if(your_place = "d_entrnc") && (direction = west) && (! door_W_open)) {
+          write_message("The door is closed!"
 
         else if(your_place = b_backrm) && (direction = up) && (TV_channel <> 6)) {
           
-            if(cash < 20) || (Not is_carried("wallet"))) {
-              write_message "The Pimp says I can't until I get $2000"
+            if(cash < 20) || (! is_carried("wallet"))) {
+              write_message("The Pimp says I can't until I get $2000"
             else if(hooker_fucked) {
-              write_message "The Pimp says 'No -- the hooker can't take it anymore!'"
-            Else
+              write_message("The Pimp says 'No -- the hooker can't take it anymore!'"
+            else
               
-                write_message "The Pimp takes $2000 && says OK"
+                write_message("The Pimp takes $2000 && says OK"
                 cash = cash - 20
                 your_place = "b_bedrm"
               }
       
-        else if(your_place = "b_balcny") && (direction = west) && (Not rope_in_use)) {
+        else if(your_place = "b_balcny") && (direction = west) && (! rope_in_use)) {
           falling_down
 
-        Else
+        else
           
             //new_place = Path(your_place, direction)
             if(new_place <> False) {
               your_place = new_place
-            Else
+            else
               I_cant_go_that_way
             }
        }
-    Else
+    else
       I_cant_do_that
 }
 
 
-Case "hail"
+case "hail"
   
 
     if(noun <> "taxi") {
-      write_message "Who are you kidding?  You're pulling at straws, fool!!"
+      write_message("Who are you kidding?  You're pulling at straws, fool!!"
 
     else if(your_place <> "b_street" && your_place <> "c_street" && your_place <> "d_street")) {
-      write_message "I'm not in the street, fool!!"
+      write_message("I'm ! in the street, fool!!"
 
-    Else
+    else
         write_long_message (6)
         taxi_destination = InputBox("WHERE TO?")
         if(Left(UCase(taxi_destination), 4) = "DISC") {
@@ -1219,7 +1163,7 @@ Case "hail"
         else if(Left(UCase(taxi_destination), 3) = "BAR") {
           new_place = "b_street"
         else if(new_place = "your_place" || new_place = False) {
-          write_message "Huh? - Hail another!"
+          write_message("Huh? - Hail another!"
         else if(is_carried("wine")) {
           
             wine_in_taxi
@@ -1228,11 +1172,11 @@ Case "hail"
             objects_carried = objects_carried - 1
         }
           
-            write_message "We arrive && I get out."
+            write_message("We arrive && I get out."
             your_place = new_place
 }
 
-Case "take", "get", "grab"
+case "take", "get", "grab"
   
 
     //if(noun = "inventory") {
@@ -1241,25 +1185,25 @@ Case "take", "get", "grab"
     //    For noun = first_object To last_object
     //      if(is_carried(noun)) {
             
-    //          if(Not anything_carried) {
-    //            write_message "I//m carrying the following:"
+    //          if(! anything_carried) {
+    //            write_message("I//m carrying the following:"
     //          anything_carried = True
     //          writeln (object_name(noun))
     //          if(noun = "wallet") && (cash > 0)) {
     //            writeln (" with $" & cash & "00")
-    //          Else
+    //          else
     //            writeln
     //        }
-    //    if(Not anything_carried) {
-    //      write_message "I//m not carrying anything!!"
+    //    if(! anything_carried) {
+    //      write_message("I//m ! carrying anything!!"
     //  }
 
     if(noun = "off") {
-      write_message "You're not a bird, fool!!"
+      write_message("You're ! a bird, fool!!"
 
     else if(noun = "all") {
       
-        write_message "You hog!!!"
+        write_message("You hog!!!"
         //sleep (300)
         writeln ("")
         //For noun = first_object To last_object
@@ -1275,7 +1219,7 @@ Case "take", "get", "grab"
         //              writeln ("The man says //Shoplifter!!// && shoots me")
         //              purgatory
         //            }
-        //          Else
+        //          else
                     
         //              put_object noun = youhavit
         //              objects_carried = objects_carried + 1
@@ -1285,7 +1229,7 @@ Case "take", "get", "grab"
         //              writeln ("Taken")
         //            }
         //        }
-        //      Else
+        //      else
         //        cant_do_that
         //    }
         //}
@@ -1293,30 +1237,30 @@ Case "take", "get", "grab"
     else if(is_carried(noun)) {
       I_already_have_it
 
-    else if(Not is_here(noun)) {
+    else if(! is_here(noun)) {
       find_me_one
 
     else if(objects_carried >= max_carried) {
-      write_message "I'm carrying too much!!!"
+      write_message("I'm carrying too much!!!"
 
-    else if(Not takeable_objects(noun)) {
+    else if(! takeable_objects(noun)) {
       I_cant_do_that
 
     else if(your_place = "d_phrmcy") && (noun = "magazine" || noun = "rubber")) {
       
-        write_message "The man says 'Shoplifter!!' && shoots me"
+        write_message("The man says 'Shoplifter!!' && shoots me"
         purgatory
 
-    else if((noun = "water") && (Not is_carried("pitcher"))) {
-      write_message "Get me the pitcher so I don't spill it!"
+    else if((noun = "water") && (! is_carried("pitcher"))) {
+      write_message("Get me the pitcher so I don't spill it!"
 
-    else if((noun = "candy") && (your_place = "b_bedrm") && (Not hooker_fucked)) {
-          write_message "The Hooker says:  'Don't take it ... do me first!!'"
+    else if((noun = "candy") && (your_place = "b_bedrm") && (! hooker_fucked)) {
+          write_message("The Hooker says:  'Don't take it ... do me first!!'"
 
     else if((noun = "rope") && rope_in_use) {
-      write_message "It is tied to the balcony"
+      write_message("It is tied to the balcony"
 
-    Else
+    else
       
         OK
         put_object noun, "youhaveit"
@@ -1327,7 +1271,7 @@ Case "take", "get", "grab"
       }
 }
 
-Case "drop", "leave", "plant", "give"
+case "drop", "leave", "plant", "give"
   
 
     if(noun = "inventory" || noun = "taxi" || noun = "on" || noun = "off") {
@@ -1345,14 +1289,14 @@ Case "drop", "leave", "plant", "give"
 //              put_object noun = your_place
 //              objects_carried = objects_carried - 1
 //            }
-//        if(Not anything_carried) {
+//        if(! anything_carried) {
 //          writeln ("I did//t carry anything!!")
 //      }
 
-//    else if(Not is_carried(noun)) {
+//    else if(! is_carried(noun)) {
 //      I_dont_have_it
 
-    Else
+    else
       
         put_object noun, your_place
         objects_carried = objects_carried - 1
@@ -1362,26 +1306,26 @@ Case "drop", "leave", "plant", "give"
           rubber_worn = False
         else if(your_place = "d_disco") && (is_here("girl")) && (noun = "candy" || noun = "flowers" || noun = "ring")) {
             switch(noun
-              Case "candy"
-                  write_message "She smiles && eats a couple!!"
+              case "candy"
+                  write_message("She smiles && eats a couple!!"
                   candy_given = True
               
-              Case "flowers"
+              case "flowers"
                 
-                  write_message "She blushes profusely && puts them in her hair!"
+                  write_message("She blushes profusely && puts them in her hair!"
                   flowers_given = True
                   put_object "flowers", False
               
-              Case "ring"
+              case "ring"
                 
-                  write_message "She blushes && puts it in her purse."
+                  write_message("She blushes && puts it in her purse."
                   ring_given = True
                   put_object "ring", False
             
             End Select
             if(candy_given && flowers_given && ring_given) {
               
-                write_message "She says: 'See you at the Marriage Center!!'"
+                write_message("She says: 'See you at the Marriage Center!!'"
                 put_object "girl", "c_marryc"
               }
         
@@ -1392,13 +1336,13 @@ Case "drop", "leave", "plant", "give"
                 bum_tells_story
                 put_object "knife", your_place
             
-            Else
-              write_message "The bum mutters 'That stuff made me puke!!  Get out of here!!!'"
+            else
+              write_message("The bum mutters 'That stuff made me puke!!  Get out of here!!!'"
             }
         else if(is_here("businessman") && (noun = "whiskey")) {
         if(object_place("control_unit", your_place) = False)) {
           
-            write_message "The guy gives me a TV controller!!"
+            write_message("The guy gives me a TV controller!!"
             put_object "control_unit", your_place
             put_object "whiskey", "nowhere"
         }
@@ -1413,342 +1357,342 @@ Case "drop", "leave", "plant", "give"
             write_long_message (20)
             apple_given = True
         
-        Else
+        else
           OK
       }
 }
 
 
-Case "look", "search", "examine", "read", "watch"
+case "look", "search", "examine", "read", "watch"
   
 
     if(no_object) {
       write_long_message (CInt(your_place) + 1)
 
     else if(noun = "all") {
-      write_message "That's too much, one item at a time, please!!"
+      write_message("That's too much, one item at a time, please!!"
 
     else if(noun = "inventory" || noun = "on" || noun = "off") {
       huh
 
-    else if((Not is_here(noun)) && (Not is_carried(noun))) {
+    else if((! is_here(noun)) && (! is_carried(noun))) {
       find_me_one
 
-    Else
+    else
       switch(noun
 
-      Case "desk"
+      case "desk"
         
           if(drawer_open) {
             I_see_something
             write_long_message 2
-          Else
-            write_message "It's drawer is shut"
+          else
+            write_message("It's drawer is shut"
         }
 
-      Case "washbasin"
+      case "washbasin"
          I_see_something
         put_object "ring", your_place
-      Case "graffiti"
+      case "graffiti"
         look_graffiti
 
-      Case "mirror"
-        write_message "There's a pervert looking back at me!!"
+      case "mirror"
+        write_message("There's a pervert looking back at me!!"
 
-      Case "toilet"
-        write_message "Hasn't been flushed in ages!  Stinks!!!"
+      case "toilet"
+        write_message("Hasn't been flushed in ages!  Stinks!!!"
 
-      Case "businessman"
-        write_message "He looks like a whiskey drinker to me!!"
+      case "businessman"
+        write_message("He looks like a whiskey drinker to me!!"
 
-      Case "button"
-        write_message "Says Push."
+      case "button"
+        write_message("Says Push."
 
-      Case "bartender"
-        write_message "He's waiting for me to buy something!"
+      case "bartender"
+        write_message("He's waiting for me to buy something!"
 
-      Case "pimp"
+      case "pimp"
         
-          write_message "He's wearing a button proclaiming -- Support your local Pimp, gimme $2000!!!"
+          write_message("He's wearing a button proclaiming -- Support your local Pimp, gimme $2000!!!"
 
-      Case "hooker"
+      case "hooker"
         write_long_message (1)
 
-      Case "billboard"
+      case "billboard"
         write_long_message (38)
 
-      Case "TV"
+      case "TV"
         
-         if(Not is_carried("control unit")) {
-           write_message "To watch TV, I need the remote control unit!!"
-         else if(Not hooker_fucked) {
-           write_message "The Pimp says I can't watch TV"
-         Else
+         if(! is_carried("control unit")) {
+           write_message("To watch TV, I need the remote control unit!!"
+         else if(! hooker_fucked) {
+           write_message("The Pimp says I can't watch TV"
+         else
            watch_TV (TV_channel)
         }
 
-      Case "slot_machines"
-        write_message "Playing them might be more fun...."
+      case "slot_machines"
+        write_message("Playing them might be more fun...."
 
-      Case "ashtray"
+      case "ashtray"
         I_see_something
         put_object "passcard", your_place
         
-      Case "blonde"
+      case "blonde"
       if(your_place = "c_htdesk") { write_long_message (10)
 
-      Case "bum"
-        write_message "He grumbles -- I'll tell you a story for a bottle of wine....."
+      case "bum"
+        write_message("He grumbles -- I'll tell you a story for a bottle of wine....."
 
-      Case "peephole"
+      case "peephole"
         if(hole_peeped) {
-          write_message "All windows at the hotel across the road have their curtains shut."
-        Else
+          write_message("All windows at the hotel across the road have their curtains shut."
+        else
           
             write_long_message (25)
               hole_peeped = True
           }
 
-      Case "door"
+      case "door"
         
           if(door_W_open) {
-            write_message "The door is open"
-          Else
+            write_message("The door is open"
+          else
             
-              write_message "The sign on the door says "
+              write_message("The sign on the door says "
               writeln ("'Entry by showing passcard - Club members && their guests only!'")
             }
  
-      Case "waitress"
-        write_message "She ignores you!"
+      case "waitress"
+        write_message("She ignores you!"
 
-      Case "telephone"
+      case "telephone"
         
           if(your_place = d_telbth) {
-            write_message "A number is there - Call 555-6969 for a good time!"
-          Else
+            write_message("A number is there - Call 555-6969 for a good time!"
+          else
             I_see_nothing_special
         }
 
-      Case "closet"
+      case "closet"
         
           if(closet_open) {
             I_see_something
             put_object "doll", your_place
-          Else
-            write_message "It's closed"
+          else
+            write_message("It's closed"
         }
 
-      Case "sink"
-        write_message "The sign over the sink says 'Water on or off to operate'"
+      case "sink"
+        write_message("The sign over the sink says 'Water on or off to operate'"
 
-      Case "elevator"
-        write_message "It's doors are closed"
+      case "elevator"
+        write_message("It's doors are closed"
 
-      Case "dealer"
-        write_message "He's waiting for me to play"
+      case "dealer"
+        write_message("He's waiting for me to play"
 
-      Case "cabinet"
+      case "cabinet"
         
           if(stool_climbed) {
             
               if(cabinet_open) {
                 I_see_something
                 put_object "pitcher", your_place
-              Else
-                write_message "It's closed"
+              else
+                write_message("It's closed"
             }
-          Else
+          else
             I_see_nothing_special
         }
 
-      Case "bushes"
-        write_message "Entering them would be kinky!!!!"
+      case "bushes"
+        write_message("Entering them would be kinky!!!!"
 
-      Case "tree"
+      case "tree"
         I_see_something
         put_object "apple", your_place
 
-      Case "sign"
-        write_message "It says 'Hail taxi here'"
+      case "sign"
+        write_message("It says 'Hail taxi here'"
 
-      Case "girl"
+      case "girl"
         
           if(your_place = p_jacuzi) {
             write_long_message (5)
           else if(your_place = "d_disco") || (your_place = "c_marryc")) {
             write_long_message (4)
-          Else
-            write_message "She slaps me && yells 'Pervert!!!!!'"
+          else
+            write_message("She slaps me && yells 'Pervert!!!!!'"
         }
 
-      Case "newspaper"
+      case "newspaper"
         
           if(is_carried("newspaper")) {
             write_long_message 2
-          Else
+          else
             I_dont_have_it
         }
 
-      Case "garbage"
+      case "garbage"
         I_see_something
         put_object "apple_core", your_place
 
-      Case "flowers"
-        write_message "They look beautiful!!!"
+      case "flowers"
+        write_message("They look beautiful!!!"
 
-      Case "apple_core"
+      case "apple_core"
         I_see_something
         put_object "seeds", your_place
 
-      Case "pills"
+      case "pills"
         
-          write_message "The label on the bottle says"
+          write_message("The label on the bottle says"
           writeln ("'Want to drive someone crazy with lust??  Try this!!!!'")
 
-      Case "plant"
+      case "plant"
         
           if(object_place("bushes", your_place) = False) {
             
-              write_message "There's a group of bushes behind it!!"
+              write_message("There's a group of bushes behind it!!"
               put_object "bushes", your_place
             }
             
             I_see_nothing_special
 
 
-      Case "radio"
-        write_message "Maybe I should listen..."
+      case "radio"
+        write_message("Maybe I should listen..."
 
-      Case "magazine"
+      case "magazine"
         
           if(is_carried("magazine")) {
             write_long_message (3)
-          Else
+          else
             I_dont_have_it
         }
 
-      Case "rubber"
+      case "rubber"
         
           if(is_carried("rubber")) {
-            write_message "It's " & rubber_color & ", " & rubber_flavor & "-flavored, " + rubber_lubricated & ", && " & rubber_ribbed
-          Else
+            write_message("It's " & rubber_color & ", " & rubber_flavor & "-flavored, " + rubber_lubricated & ", && " & rubber_ribbed
+          else
             I_dont_have_it
         }
 
-      Case "wallet"
+      case "wallet"
         
           if(cash > 0) {
             
               writeln ("")
               writeln ("It contains $" & cash & "00.")
           
-          Else
-            write_message "It's empty"
+          else
+            write_message("It's empty"
         }
 
-      Case "doll"
+      case "doll"
         
           if(doll_inflated) {
-            write_message "It's inflated"
-          Else
-            write_message "It's rolled up in a little ball"
+            write_message("It's inflated"
+          else
+            write_message("It's rolled up in a little ball"
         }
 
-      Case "pitcher"
+      case "pitcher"
         
           if(pitcher_full) {
-            write_message "It's full of water"
-          Else
-            write_message "It's empty"
+            write_message("It's full of water"
+          else
+            write_message("It's empty"
         }
 
-      Case "rack"
+      case "rack"
         I_see_something
         put_object "magazine", your_place
 
-      Case "curtain"
-        write_message "It's on the east wall"
+      case "curtain"
+        write_message("It's on the east wall"
 
-      Case Else
+      case else
         I_see_nothing_special
 
       End Select
 
 }
 
-Case "flush"
+case "flush"
   
 
-    if(Not is_here(noun)) {
+    if(! is_here(noun)) {
       find_me_one
 
     else if(noun = "toilet") {
       
         write_long_message (36)
         //sleep (300)
-        write_message "I'm dead from the germs!!"
+        write_message("I'm dead from the germs!!"
         purgatory
     
-    Else
+    else
       I_cant_do_that
 
 }
-Case "open", "pull"
+case "open", "pull"
   
 
-    if(Not is_here(noun)) {
+    if(! is_here(noun)) {
       find_me_one
 
-    Else
+    else
     switch(noun
 
-      Case "window"
-        write_message "Won't budge"
+      case "window"
+        write_message("Won't budge"
 
-      Case "desk"
-        if(Not is_here("newspaper")) { put_object "newspaper", "b_hallwy"
+      case "desk"
+        if(! is_here("newspaper")) { put_object "newspaper", "b_hallwy"
 
-      Case "door_west"
+      case "door_west"
         
           if(door_W_open) {
-            write_message "It's already open!!"
-          Else
+            write_message("It's already open!!"
+          else
             
-              write_message "A voice asks 'Passcard?'  I search in my pockets &&..."
+              write_message("A voice asks 'Passcard?'  I search in my pockets &&..."
               if(is_carried("passcard")) {
                 
                   writeln ("I have it!  The door opens!")
                   door_W_open = True
                   addexit your_place, " && West"
               
-              Else
+              else
                 writeln ("I don't have it!!")
             }
           }
-      Case "curtain"
-        write_message "It seems to be remotely controlled"
+      case "curtain"
+        write_message("It seems to be remotely controlled"
 
-      Case "elevator"
-        write_message "Push the button to open elevator"
+      case "elevator"
+        write_message("Push the button to open elevator"
 
-      Case "closet"
+      case "closet"
         xopen (closet_open)
 
-      Case "cabinet"
+      case "cabinet"
         if(stool_climbed) {
           xopen (cabinet_open)
-        Else
-          write_message "I can't reach it!!"
+        else
+          write_message("I can't reach it!!"
       }
-      Case Else
+      case else
         I_cant_do_that
 
 
   End Select
 }
 
-Case "inflate"
+case "inflate"
   
 
     if(noun = "doll") {
@@ -1756,24 +1700,24 @@ Case "inflate"
         if(is_carried("doll")) {
           
             if(doll_inflated) {
-              write_message "You've already inflated it, stupid!!"
-            Else
+              write_message("You've already inflated it, stupid!!"
+            else
               
                 OK
                 doll_inflated = True
              }
         else if(is_here("doll")) {
-          write_message "I can't unless I'm holding it close"
-        Else
+          write_message("I can't unless I'm holding it close"
+        else
           find_me_one
         }
 
-    Else
-      write_message "But the prime rate is already 257%!!"
+    else
+      write_message("But the prime rate is already 257%!!"
 }
 
 
-Case "play"
+case "play"
     if(noun = "slots") {
 
       
@@ -1781,13 +1725,13 @@ Case "play"
           
             if(cash > 0) && (is_carried("wallet"))) {
               play_slot (cash)
-            Else
+            else
               //sorry_no_cash
-              write_message "No Money!"
+              write_message("No Money!"
               purgatory
           }
-        Else
-          write_message "OK, show me your slot...."
+        else
+          write_message("OK, show me your slot...."
       }
 
     else if(noun = "cards" || noun = "21") {
@@ -1796,19 +1740,19 @@ Case "play"
           
             if(cash > 0) && (is_carried("wallet"))) {
               play_21 (cash)
-            Else
-              write_message "No Money!"
+            else
+              write_message("No Money!"
               purgatory
           }
-        Else
+        else
           not_yet_but_maybe_later
       }
 
-    Else
-      write_message "Playful bugger, eh??"
+    else
+      write_message("Playful bugger, eh??"
 }
 
-Case Else
+case else
     I_cant_do_that
 
 End Select
