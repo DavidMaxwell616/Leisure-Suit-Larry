@@ -385,10 +385,31 @@ switch (strVerb) {
               break;
                 }
               default:
-              write_message("cash can't buy everything!!!!"
+              write_message("cash can't buy everything!!!!");
             }
-      }
-              default:
+           break;
+      case "climb":
+    {     
+
+      if(noun == "stool") {
+        
+          if(is_here("stool")) {
+            
+              OK();
+              stool_climbed = true;
+          }
+          else
+            write_message("It's ! on the floor here!");
+        }
+      else if(is_here(noun) || is_carried(noun)) {
+       I_cant_do_that();
+      }  
+      else
+        find_me_one();
+  }
+  
+break;  
+        default:
         break;
 }
 //your_place = getlocationabbr(Worksheets("MAIN").Range("c5").Value)
@@ -398,27 +419,6 @@ switch (strVerb) {
 
 
   
-
-
-case "climb"
-  
-
-    if(noun = "stool") {
-      
-        if(is_here("stool")) {
-          
-            OK
-            stool_climbed = True
-        else
-          write_message("It's ! on the floor here!"
-      }
-
-    else if(is_here(noun) || is_carried(noun)) {
-     I_cant_do_that
-
-    else
-      find_me_one
-}
 
 
 case "water"
