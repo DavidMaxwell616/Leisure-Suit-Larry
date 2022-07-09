@@ -22,12 +22,7 @@ cash = 2400;
 // DoCmd.OpenQuery "update_visible_objects"
 // DoCmd.OpenQuery "update_exits"
 // DoCmd.SetWarnings true;
-your_place = "b_bar";
-max_carried = 7;
-objects_carried = 1;
-GetLocationDescription (your_place);
-take_inventory(your_place, cash);
-init_new_game();
+
 }
 
 function Submit_Click()
@@ -39,9 +34,22 @@ if(txtCommand == "")  return;
 strcommand = txtCommand;
 verb = strcommand.split(' ')[0].toLowerCase();
 noun = strcommand.split(' ')[1].toLowerCase();
-if(verb=="GO")
-  verb=noun;
- handle(verb, noun);
+// if(verb=="GO")
+//   verb=noun;
+//  handle(verb, noun);
+// }
+// GetLocationDescription (your_place)
+// take_inventory your_place, cash
+// Me.txtCommand.SetFocus
+
+}
+function Start_Game(){
+  your_place = "b_bar";
+max_carried = 7;
+objects_carried = 1;
+GetLocationDescription (your_place);
+take_inventory(your_place, cash);
+init_new_game();
 }
 
 function handleVerb(verb, noun)
@@ -339,7 +347,7 @@ function handleVerb(verb, noun)
         {
         switch(noun)
         {
-          case "WHISKEY", "BEER":
+          case "whiskey", "beer":
             {
               if(your_place != "b_bar") 
                 not_yet_but_maybe_later();
@@ -352,7 +360,7 @@ function handleVerb(verb, noun)
                       put_object(noun, your_place);
             }
           break;
-          case "WINE":
+          case "wine":
               if(your_place != "d_disco") 
                 not_yet_but_maybe_later();
               else if(object_place(noun, your_place)) 
@@ -368,7 +376,7 @@ function handleVerb(verb, noun)
                     }
           
           break;
-          case "RUBBER", "MAGAZINE":
+          case "rubber", "magazine":
             {
               if(your_place != "d_phrmcy") 
                 not_yet_but_maybe_later();
@@ -391,7 +399,7 @@ function handleVerb(verb, noun)
                 }
             break;                
   
-          case "HOOKER":
+          case "hooker":
             {             
               if(is_here("hooker")) 
                 write_message("You've already paid the pimp, stupid!!!!");
@@ -1039,7 +1047,7 @@ break;
     //if(noun = "inventory") {
       
     //    anything_carried = false
-    //    For noun = first_object To last_object
+    //    for(noun = first_object To last_object
     //      if(is_carried(noun)) {
             
     //          if(! anything_carried) {
@@ -1061,7 +1069,7 @@ break;
         write_message("You hog!!!");
         sleep (300);
         write_message ("");
-        //For noun = first_object To last_object
+        //for(noun = first_object To last_object
         //  if(is_here(noun)) {
             
         //      write_message (object_name(noun) & ": ")
@@ -1544,10 +1552,636 @@ break;
       I_cant_do_that();
       break;
 }
+}
 
-// GetLocationDescription (your_place)
-// take_inventory your_place, cash
-// Me.txtCommand.SetFocus
+function GetLocationDescription(your_place){
+  
+}
+
+function getlocationabbr(strloc)
+{
+  var i;
+i = 2;
+// Do Until Worksheets("Locations").Range("D" & i).Value = strloc
+// i = i + 1
+// Loop
+// strloc = Worksheets("Locations").Range("E" & i).Value
+}
+
+function newlines(lines)
+
+var i;
+
+  for(i = 1 To lines
+  write_message ""
+  Next
+} Function
+
+
+function I_cant_go_that_way()
+  write_message ("I can't go that way!")
+} Function
+
+
+function cant_do_that()
+var messg;
+
+  messg = Rnd(8) + 1
+  Select Case messg
+Case 1
+write_message ("Huh?")
+Case 2
+write_message ("Ummm......huh?")
+Case 3
+write_message ("You're nuts!")
+Case 4
+write_message ("You can't be serious!!")
+Case 5
+write_message ("Not bloody likely!!")
+Case 6
+write_message ("I don't know how to.")
+Case 7
+write_message ("An interesting idea....")
+Case 8
+write_message ("I can't do that.")
+  } Select
+} Function
+
+
+function huh()
+  write_message ("Huh?")
+} Function
+
+
+function I_cant_do_that()
+  write_message ("I can't do that!")
+} Function
+
+
+function I_dont_know_that_word()
+  write_message ("I don't know that word!")
+} Function
+
+
+function find_me_one()
+var messg;
+
+  messg = Rnd(4) + 1
+  write_message ("")
+  Select Case messg
+Case 1
+write_message ("Find me one!!")
+Case 2
+write_message ("I don't see it here!")
+Case 3
+write_message ("I can't find it here!")
+Case 4
+write_message ("You have to find it first!")
+  } Select
+} Function
+
+
+function I_dont_have_it()
+  write_message ("I don't have it!!")
+} Function
+
+
+function I_already_have_it()
+    write_message ("I already have it!!")
+} Function
+
+
+function I_see_nothing_special()
+  write_message ("I see nothing special")
+} Function
+
+
+function I_see_something()
+        
+          write_message ("I see something!!!")
+          'object_place object = your_place
+} Function
+
+
+function not_yet_but_maybe_later()
+  write_message ("Not yet but maybe later!")
+} Function
+
+
+Function is_here(obj As String) As Boolean
+if(InStr(1, Forms!frmmain!txtItems, obj) > 0) is_here = True
+} Function
+
+Function takeable_objects(obj As String) As Boolean
+var rs As DAO.Recordset
+if(obj = "control") obj = "control_unit"
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & obj & "'")
+rs.MoveFirst
+if(rs!TAKEABLE = True)
+takeable_objects = True
+else
+takeable_objects = False
+} If
+} Function
+
+function addexit(strloc As String, strexit As String)
+var rs As DAO.Recordset
+DoCmd.SetWarnings False
+DoCmd.RunSQL "UPDATE LOCATIONS SET OTHERFLAG = Yes WHERE abbr = '" & strloc & "'"
+DoCmd.SetWarnings True
+
+} Function
+Function is_carried(obj As String) As Boolean
+var objcount ;
+var objects As String
+if(InStr(1, Forms!frmmain!txtInventory, obj) > 0)
+is_carried = True
+else
+is_carried = False
+} If
+} Function
+function clrscr()
+Forms!frmmain.txtActions = ""
+Forms!frmmain.txtDescription = ""
+} Function
+function give_help()
+var msg As String
+var rs As DAO.Recordset
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM ACTIONS WHERE ActionID=30")
+msg = rs!Action
+MsgBox msg
+} Function
+function init_new_game()
+
+var yesno As String
+var place As String
+var direction As String
+var i;
+
+
+  clrscr
+  yesno = InputBox("Welcome to SOFTPORN ADVENTURE!!" & vbCrLf & "Do you need instructions? (y/n) ")
+  if(yesno = "Y")
+    give_help
+  else
+    newlines (2)
+  } If
+  
+      your_place = b_bar
+
+      objects_carried = 0
+      TV_channel = 0
+      money = 1000
+      score = 0
+
+      rope_in_use = False
+      window_broken = False
+      toilet_flushed = False
+      called_555_0987 = False
+      called_555_6969 = False
+      called_555_0439 = False
+      rubber_worn = False
+      hooker_fucked = False
+      door_W_open = False
+      radio_listened = False
+      wine_ordered = False
+      telephone_ringing = False
+      telephone_answered = False
+      hole_peeped = False
+      girl_2_fucked = False
+      tied_to_bed = False
+      drawer_open = False
+      closet_open = False
+      cabinet_open = False
+      doll_inflated = False
+      stool_climbed = False
+      water_on = False
+      pitcher_full = False
+      seeds_planted = False
+      seeds_watered = False
+      apple_given = False
+      candy_given = False
+      flowers_given = False
+      ring_given = False
+      
+      married_to_girl = False
+
+
+} Function
+
+function look_around()
+var objcount ;
+obj As objects
+    exits;
+    exitcount;
+    exit      As directions
+    anyexit   As Boolean
+    var i, j, hpos, namelen;
+
+
+  With game_position
+    
+      if(Not place_visited(your_place))
+        write_long_message (your_place + 1)
+      if((your_place = p_pntpch) And called_555_0439)
+        
+          if(Not telephone_answered And (Rnd(4) = 2))
+            telephone_ringing = True
+          if(telephone_ringing)
+            write_message ("The telephone rings")
+        }
+      place_visited your_place = True
+      newlines (2)
+
+      gotoXY 1, 1
+      clreol
+      write_message (place_name(your_place))
+
+      clreol
+      write_message ("Items in sight are:  ")
+      hpos = 23
+      objcount = 0
+      for(obj = first_object; obj<last_object;obj++)
+{        
+          if(is_here(obj))
+{            
+              if(objcount > 0)
+ {               
+                  write_message (", ");
+                  hpos += 2;
+ }
+              objcount ++;
+              namelen = Length(object_name(obj));
+              if((hpos + 3 + namelen) > 80)
+{                
+                  write_message("");
+                  clreol();
+                  write_message ("                     ");
+                  hpos = 23;
+}
+              write_message (object_name(obj));
+              hpos = hpos + namelen;
+            }
+        }
+      if(objcount = 0)
+        write_message ("Nothing interesting.");
+      else
+        write_message("");
+      clreol
+      write_message ("Other areas are:  ")
+      exitcount = 0
+      for(intexit = first_direction To last_direction
+        if(Path(your_place, intexit) <> nowhere)
+          exitcount = exitcount + 1
+      exits = exitcount
+      if(exits = 0)
+        write_message ("By magic!")
+      else
+        for(intexit = first_direction To last_direction
+          if(Path(your_place, intexit) <> nowhere)
+            
+              if(exitcount < exits)
+                
+                  if(exitcount > 1)
+                    write_message (", ")
+                  elseif(exits > 1)
+                    write_message (" and ")
+                }
+              exitcount = exitcount - 1
+              write_message (direction_name(intexit))
+            }
+
+      write_message
+      clreol
+      for(i = 1 To 79
+        write_message ("=")
+      write_message
+      clreol
+
+      cursor_next_to_bottom
+
+    Wend
 
 }
+
+function put_object(strobject,strloc)
+{
+var rs As DAO.Recordset
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & strobject & "'")
+rs.MoveFirst
+if(strloc = "youhaveit")
+DoCmd.SetWarnings False
+DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = No WHERE (OBJECTS.ABBR='" & strobject & "');"
+DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = Yes WHERE (OBJECTS.ABBR='" & strobject & "');"
+DoCmd.SetWarnings True
+elseif(strloc = "nowhere")
+DoCmd.SetWarnings False
+DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = No WHERE (OBJECTS.ABBR='" & strobject & "');"
+DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = No WHERE (OBJECTS.ABBR='" & strobject & "');"
+DoCmd.SetWarnings True
+else
+'if(rs!Visible = True) Stop
+DoCmd.SetWarnings False
+DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = No WHERE (OBJECTS.ABBR='" & strobject & "');"
+DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = Yes WHERE (OBJECTS.ABBR='" & strobject & "' AND OBJECTS.location = '" & strloc & "');"
+DoCmd.SetWarnings True
+} If
+} Function
+function list_objects(strloc As String)
+var objcount ;
+var objects As String
+var rs As DAO.Recordset
+Forms!frmmain.txtItems = ""
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE location = '" & strloc & "' and Visible = True")
+if(rs.RecordCount > 0)
+rs.MoveFirst
+Do Until rs.EOF
+if(Len(objects) > 0)
+objects = objects & ", " & rs!object
+else
+objects = objects & rs!object
+} If
+rs.MoveNext
+Loop
+Forms!frmmain.txtItems = objects
+} If
+} Function
+
+function object_place(nn As String, strloc As String) As Boolean
+var rs As DAO.Recordset
+'strloc = "d_street"
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & nn & "' and location = '" & strloc & "'")
+rs.MoveFirst
+if(rs!Visible = True)
+object_place = True
+else
+object_place = False
+} If
+} Function
+function take_inventory(strloc As String, cash;)
+var objcount ;
+var objects As String
+var thisitem As String
+var rs As DAO.Recordset
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE YOUHAVEIT = True")
+rs.MoveFirst
+Do Until rs.EOF
+thisitem = rs!object
+if(thisitem = "A Wallet") thisitem = "A Wallet with $" & cash
+if(Len(objects) > 0)
+objects = objects & ", " & thisitem
+else
+objects = objects & thisitem
+} If
+rs.MoveNext
+Loop
+Forms!frmmain.txtInventory = objects
+
+} Function
+
+function write_long_message(messg_no;)
+var i;
+var msg As String
+var rs As DAO.Recordset
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM ACTIONS WHERE ActionID=" & messg_no)
+msg = rs!Action
+Forms!frmmain.txtActions = msg
+} Function
+function game_end()
+Application.Quit
+} Function
+
+function write_message(msg As String)
+Forms!frmmain.txtActions = msg
+} Function
+function write_message(msg As String)
+Forms!frmmain.txtActions = Forms!frmmain.txtActions & vbCrLf & msg
+} Function
+
+function look_graffiti()
+var msg As String
+msg = "+-------------------------------------------------------------------+" & vbCrLf _
+& "|                                                                   |" & vbCrLf _
+& "|        At my PC is where I sit                                    |" & vbCrLf _
+& "|         when I feel like fondling it's bits!           I  h       |" & vbCrLf _
+& "|                                                        '  e       |" & vbCrLf _
+& "|       C                            The password is:    d  r       |" & vbCrLf _
+& "|        o       A       a                                          |" & vbCrLf _
+& "|         m        S       n           Bellybutton       l  f       |" & vbCrLf _
+& "|      P   p         C       d                           i  l       |" & vbCrLf _
+& "|       e   u          I             r                   k  o       |" & vbCrLf _
+& "|        e   t           I     y       e                 e  p       |" & vbCrLf _
+& "|     t   k   e                  e       c                  p       |" & vbCrLf _
+& "|      h       r                           e             t  i       |" & vbCrLf _
+& "|       e   b                      s         i           o  e       |" & vbCrLf _
+& "|        y   e   f                   h         e            s       |" & vbCrLf _
+& "|             f   r                    a         v       n          |" & vbCrLf _
+& "|          P   o   e                     l         e     i          |" & vbCrLf _
+& "|           o   r   a                      l             b          |" & vbCrLf _
+& "|            k   e   k                                   b          |" & vbCrLf _
+& "|             e       s                                  l          |" & vbCrLf _
+& "|                                                        e          |" & vbCrLf _
+& "|                                                                   |" & vbCrLf _
+& "+-------------------------------------------------------------------+"
+ 
+MsgBox msg
+} Function
+function purgatory()
+var choice, door;
+var cas As String
+
+  'sleep 'sleep_time
+  door = 0
+    if(door = 0)
+      write_long_message (65)
+    else
+      
+        write_message ("")
+        write_message ("You're still here!")
+        write_message ("")
+       
+      }
+    c = InputBox("Choose your dooras 1, 2 or 3??  ")
+    choice = c
+    door = (Int(Rnd(3)) + choice)
+    game_position.game_ended = door = 1
+} If
+} Function
+
+function bum_tells_story()
+var i, j;
+
+  'write_message
+  write_message ("He looks at me and starts to speakas")
+  'sleep 'sleep_time
+  write_long_message (9)
+  'write_message
+  'sleep 'sleep_time
+        write_message (" ")
+      write_message ("Like I did!!")
+    
+  'for(i = 1 To 5
+  '  write_message ("")
+  'sleep 'sleep_time
+  write_message ("He throws up and gives me back the bottle of wine.")
+} Function
+
+
+function watch_TV(TV_channel;)
+
+var ch As String
+jumpback:
+    ch = InputBox("Which channel? (1-9) ")
+    TV_channel = ch
+    write_long_message (10 + TV_channel)
+    ch = InputBox("Change the channel?  (y/n) ")
+if(ch = "y") GoTo jumpback
+} Function
+
+
+function wine_in_taxi()
+
+  write_long_message (58)
+  'sleep 'sleep_time
+  write_message ("")
+  write_message ("What shall I do? ")
+  'sleep 'sleep_time
+  write_message ("")
+  write_message ("")
+  write_message ("The idiot cab driver backs over me and kills me!!!!!!")
+  purgatory
+} Function
+
+
+function stab_someone()
+
+  write_message ("")
+  write_message ("OK - warmonger!")
+  'sleep 'sleep_time
+  write_message ("Parry!!")
+  'sleep 'sleep_time
+  write_message ("Thrust!!!")
+  'sleep 'sleep_time
+  write_message ("I just got myself!!")
+  purgatory
+} Function
+
+function add_to_inventory(object As String)
+var i;
+i = 6
+Do Until Worksheets("MAIN").Range("i" & i).Value = ""
+if(i > 17) write_long_message "You're carrying too much": Exit Function
+i = i + 1
+Loop
+Worksheets("MAIN").Range("i" & i).Value = object
+} Function
+function falling_down()
+var i;
+
+  for(i = 1 To 50
+    write_message ("Aaaaaeeeeeiiiiiiii!!!!!!!!")
+  'sleep 'sleep_time
+  write_message ("Splaaatttttt!!!!!")
+  if(game_position.Verb <> jump)
+    
+      'sleep 'sleep_time
+      write_message
+      write_message ("I should have used safety rope!!!!!!!!")
+    }
+  purgatory
+} Function
+
+
+function play_slot(money;)
+DoCmd.OpenForm "frmSlots", acNormal
+Forms!frmSLots!txtCash = money
+  if(money < 1)
+    
+      write_message ("I'm broke!!! -- that means death!!!!!!!")
+      purgatory
+    } If
+} Function
+function play_21(money;)
+DoCmd.OpenForm "frmSlots", acNormal
+Forms21!txtCash = money
+  if(money < 1)
+    
+      write_message ("I'm broke!!! -- that means death!!!!!!!")
+      purgatory
+    } If
+} Function
+
+
+function buy_rubber()
+var answer As String
+   var i;
+
+    
+      rubber_lubricated = "non-lubricated"
+      rubber_ribbed = "non-ribbed"
+      rubber_color = InputBox("The man leans over the counter and whispers 'What color?' ")
+      rubber_flavor = InputBox("And what flavor? ")
+      answer = InputBox("Lubricated or not? (y/n) ")
+      if(answer = "Y") rubber_lubricated = "lubricated"
+      answer = InputBox("Ribbed? (y/n) ")
+      if(answer = "Y") rubber_ribbed = "ribbed"
+      write_message ("He yells -- This pervert just bought a " & rubber_color & ", ")
+      write_message (rubber_flavor & "-flavored, " & rubber_lubricated & ", " & rubber_ribbed & " rubber!!!!")
+      write_message ("A lady walks by and looks at me in disgust!!!!")
+} Function
+
+
+function OK()
+
+  write_message ("OK")
+} Function
+
+function GetLocationDescription(strloc As String)
+var i;
+var strexits As String
+var rs As DAO.Recordset
+var strobjects As String
+
+Set rs = CurrentDb.OpenRecordset("SELECT * FROM Locations WHERE ABBR = '" & strloc & "'")
+'Worksheets("MAIN").Range("b9").Value = Worksheets("Locations").Range("b" & i).Value
+'Worksheets("MAIN").Range("c5").Value = Worksheets("Locations").Range("d" & i).Value
+'Worksheets("MAIN").Range("c7").Value = Worksheets("Locations").Range("c" & i).Value
+Forms!frmmain.txtLocation = rs!whereami
+if(rs!otherflag = False)
+Forms!frmmain.txtExits = rs!OTHERAREAS
+else
+Forms!frmmain.txtExits = rs!OTHERAREAS & " " & rs!OTHEREXITS
+} If
+Forms!frmmain.txtDescription = rs!Description
+list_objects strloc
+
+} Function
+function xopen(object_open As Boolean)
+
+
+  if(object_open)
+    write_message ("It's already open!!")
+  else
+    
+      OK
+      object_open = True
+    } If
+} Function
+
+
+function xclose(object_open As Boolean)
+
+
+  if(Not object_open)
+    write_message ("It's already closed!!")
+  else
+    
+      OK
+      object_open = False
+    }
+} Function
+
+
+
+
 

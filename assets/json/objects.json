@@ -1,0 +1,704 @@
+{
+    "objects": [
+    {
+        "OBJECT": "A Desk",
+        "LOCATION": "b_hallwy",
+        "ABBR": "desk",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Washbasin",
+        "LOCATION": "b_bathrm",
+        "ABBR": "washbasin",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "Graffiti",
+        "LOCATION": "b_bathrm",
+        "ABBR": "graffiti",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Mirror",
+        "LOCATION": "b_bathrm",
+        "ABBR": "mirror",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Toilet",
+        "LOCATION": "b_bathrm",
+        "ABBR": "toilet",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Businessman",
+        "LOCATION": "b_hallwy",
+        "ABBR": "businessman",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Button",
+        "LOCATION": "b_bar",
+        "ABBR": "button",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Button",
+        "LOCATION": "p_pntfoy",
+        "ABBR": "button",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "The Bartender",
+        "LOCATION": "b_bar",
+        "ABBR": "bartender",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Big Dude!",
+        "LOCATION": "b_backrm",
+        "ABBR": "pimp",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Funky Hooker",
+        "LOCATION": "b_bedrm",
+        "ABBR": "hooker",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Billboard",
+        "LOCATION": "b_balcny",
+        "ABBR": "billboard",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Preacher",
+        "LOCATION": "c_marryc",
+        "ABBR": "preacher",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A TV",
+        "LOCATION": "b_backrm",
+        "ABBR": "TV",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "Slot Machines",
+        "LOCATION": "c_casino",
+        "ABBR": "slotmachines",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "Cards",
+        "LOCATION": "c_21room",
+        "ABBR": "cards",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "An Ashtray",
+        "LOCATION": "c_hallwy",
+        "ABBR": "ashtray",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Voluptous Blonde",
+        "LOCATION": "c_htdesk",
+        "ABBR": "blonde",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Bed",
+        "LOCATION": "c_hmoons",
+        "ABBR": "bed",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Bum",
+        "LOCATION": "d_street",
+        "ABBR": "bum",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Peep Hole",
+        "LOCATION": "c_balcny",
+        "ABBR": "peephole",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Door to the West",
+        "LOCATION": "d_entrnc",
+        "ABBR": "doorwest",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Waitress",
+        "LOCATION": "d_disco",
+        "ABBR": "waitress",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Table",
+        "LOCATION": "d_disco",
+        "ABBR": "table",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Telephone",
+        "LOCATION": "d_telbth",
+        "ABBR": "telephone",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Closet",
+        "LOCATION": "c_hmoons",
+        "ABBR": "closet",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Sink",
+        "LOCATION": "p_kitchn",
+        "ABBR": "sink",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "An Elevator",
+        "LOCATION": "c_htdesk",
+        "ABBR": "elevator",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Dealer",
+        "LOCATION": "c_21room",
+        "ABBR": "dealer",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Cabinet",
+        "LOCATION": "p_kitchn",
+        "ABBR": "cabinet",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "Bushes",
+        "LOCATION": "c_lobby",
+        "ABBR": "bushes",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Tree",
+        "LOCATION": "p_garden",
+        "ABBR": "tree",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Window",
+        "LOCATION": "b_wledge",
+        "ABBR": "window",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Sign",
+        "LOCATION": "c_street",
+        "ABBR": "sign",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Sign",
+        "LOCATION": "b_balcny",
+        "ABBR": "sign",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Sign",
+        "LOCATION": "d_street",
+        "ABBR": "sign",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Girl",
+        "LOCATION": "c_marryc",
+        "ABBR": "girl",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Girl",
+        "LOCATION": "d_disco",
+        "ABBR": "girl",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Girl",
+        "LOCATION": "c_hmoons",
+        "ABBR": "girl",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Newspaper",
+        "LOCATION": "b_hallwy",
+        "ABBR": "newspaper",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Wedding Ring",
+        "LOCATION": "nowhere",
+        "ABBR": "ring",
+        "VISIBLE": false,
+        "YOUHAVEIT": true,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": true,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Shot of Whiskey",
+        "LOCATION": "b_bar",
+        "ABBR": "whiskey",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Beer",
+        "LOCATION": "b_bar",
+        "ABBR": "beer",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Hammer",
+        "LOCATION": "p_garden",
+        "ABBR": "hammer",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "Garbage",
+        "LOCATION": "b_g_dump",
+        "ABBR": "garbage",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "Flowers",
+        "LOCATION": "b_hallwy",
+        "ABBR": "flowers",
+        "VISIBLE": false,
+        "YOUHAVEIT": true,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": true,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "The Core of an Apple",
+        "LOCATION": "b_g_dump",
+        "ABBR": "applecore",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "Seeds",
+        "LOCATION": "b_g_dump",
+        "ABBR": "seeds",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "Candy",
+        "LOCATION": "b_bedrm",
+        "ABBR": "candy",
+        "VISIBLE": true,
+        "YOUHAVEIT": true,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": true,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "Pills",
+        "LOCATION": "b_backrm",
+        "ABBR": "pills",
+        "VISIBLE": false,
+        "YOUHAVEIT": true,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": true,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Plant",
+        "LOCATION": "c_lobby",
+        "ABBR": "plant",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Passcard",
+        "LOCATION": "c_hallwy",
+        "ABBR": "passcard",
+        "VISIBLE": false,
+        "YOUHAVEIT": true,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": true,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Radio",
+        "LOCATION": "c_balcny",
+        "ABBR": "radio",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Pocket Knife",
+        "LOCATION": "d_street",
+        "ABBR": "knife",
+        "VISIBLE": false,
+        "YOUHAVEIT": true,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": true,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "AdventureBoy Magazine",
+        "LOCATION": "d_phrmcy",
+        "ABBR": "magazine",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Rubber",
+        "LOCATION": "d_phrmcy",
+        "ABBR": "rubber",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Bottle of Wine",
+        "LOCATION": "d_disco",
+        "ABBR": "wine",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Wallet",
+        "LOCATION": "youhaveit",
+        "ABBR": "wallet",
+        "VISIBLE": false,
+        "YOUHAVEIT": true,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": true,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "An Inflatable Doll",
+        "LOCATION": "c_hmoons",
+        "ABBR": "doll",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "An Apple",
+        "LOCATION": "p_garden",
+        "ABBR": "apple",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Pitcher",
+        "LOCATION": "p_kitchn",
+        "ABBR": "pitcher",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Stool",
+        "LOCATION": "p_garden",
+        "ABBR": "stool",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Rope",
+        "LOCATION": "c_hmoons",
+        "ABBR": "rope",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Display Rack",
+        "LOCATION": "d_phrmcy",
+        "ABBR": "rack",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Mushroom",
+        "LOCATION": "p_garden",
+        "ABBR": "mushroom",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Remote Control Unit",
+        "LOCATION": "b_hallwy",
+        "ABBR": "control_unit",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "A Curtain",
+        "LOCATION": "b_bar",
+        "ABBR": "curtain",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": true
+    },
+    {
+        "OBJECT": "Water",
+        "LOCATION": "p_kitchn",
+        "ABBR": "water",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Taxi",
+        "LOCATION": "nowhere",
+        "ABBR": "taxi",
+        "VISIBLE": false,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": false,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    },
+    {
+        "OBJECT": "A Button",
+        "LOCATION": "c_htdesk",
+        "ABBR": "button",
+        "VISIBLE": true,
+        "YOUHAVEIT": false,
+        "STARTVISIBLE": true,
+        "STARTYOUHAVEIT": false,
+        "TAKEABLE": false
+    }
+]
+}

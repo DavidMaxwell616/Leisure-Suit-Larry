@@ -1,0 +1,275 @@
+{
+    "locations": [
+        {
+            "LOCATIONID": "1",
+            "Description": "I'm in a dimly lit hallway. The paint is peeling off the walls and the floor hasn't been cleaned in months. Cockroaches run across the floor- jumping as the loosely installed lightbulb crackles and flickers. An old desk sits pushed against the wall. A businessman sits on a broken chair. Seems kind of drunk!",
+            "OTHERAREAS": "North and East",
+            "WHEREAMI": "I'm in a Hallway",
+            "ABBR": "b_hallwy",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "2",
+            "Description": "I'm in a bathroom. The stench is unbelievable! Grafitti is all over the walls. Cockroaches don't seem to survive in this place, their dead bodies are strewn everywhere. The sink's faucets are broken- in fact the sink hangs from the wall by its rusty plumbing. A toilet sits in the corner. Looks dangerous!", 
+            "OTHERAREAS": "South",
+            "WHEREAMI": "I'm in a Bathroom",
+            "ABBR": "b_bathrm",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "3",
+            "Description": "I'm in a sleazy bar. Behind the bar sits the bartender. A sign hanging over him says 'BEER-$5 WHISKEY-$5'. The Place isn't furnished too well. A curtain hangs on one wall. There's a button on the wall next to it. A fan whirls slowly overhead moving the stagnant air around.", 
+            "OTHERAREAS": "North and West",
+            "WHEREAMI": "I'm in a Sleazy Bar",
+            "ABBR": "b_bar",
+            "OTHEREXITS": "and East",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "4",
+            "Description": "I'm on a sidewalk outside the bar. A couple of strange dogs wander around. A cat is crouched in the entrance watching the dogs. Some paper blows by from the overfilled garbage dumpster next to me. I just miss stepping on a dogs 'calling card'. The dogs look at me-I hope they dont think Im a fire hydrant! ",
+            "OTHERAREAS": "South and East",
+            "WHEREAMI": "I'm on a Street outside the Bar",
+            "ABBR": "b_street",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "5",
+            "Description": "I'm in the backroom of the bar. Theres this big dude in here with me. He's wearing a button. I can't see what it says, maybe I should take a close look at him. Stairs lead up to the second floor. There's a TV in the corner also. I get the feeling loitering is not encouraged here. ",
+            "OTHERAREAS": "West and Up",
+            "WHEREAMI": "I'm in the Backroom",
+            "ABBR": "b_backrm",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "6",
+            "Description": "There's a fire escape ladder above me which lowers automatically whenver weight is put on it. As a result I find myself in the garbage dumpster which some fool placed under it! The trash in this thing is foul! I'm sitting in a sea of coffee grinds and egg shells. Trash surrounds me. I think I may puke! ",
+            "OTHERAREAS": "West",
+            "WHEREAMI": "I'm in a Filthy Dumpster",
+            "ABBR": "b_g_dump",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "7",
+            "Description": "I'm in the room I broke into! The entrance on the far side of the room is locked shut. The plaster's falling off the wall-the usual. The only items around are a paper bag and a bright pink bathrobe. The wall has a centerfold taped to it. Thru the door's peephole I see people in the hallway. Bad exit!", 
+            "OTHERAREAS": "North",
+            "WHEREAMI": "I'm inside the room I broke into!",
+            "ABBR": "b_inroom",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "8",
+            "Description": "I'm on a window ledge. My safety rope leads back to the fire escape. While it helps some, I could still fall and kill myself SO BE CAREFUL! The window looks into a room-but I can't see to much from here. People down on the street below look up at me and scream something about 'Dont Jump'. What's their problem?", 
+            "OTHERAREAS": "West",
+            "WHEREAMI": "I'm on a Window Ledge",
+            "ABBR": "b_wledge",
+            "OTHEREXITS": "and South",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "9",
+            "Description": "I'm in a seedy bedroom. There's a hooker in here also. The bed's a mess and the hooker's the same! The room is painted bright pink & the ceiling is covered with mirrors! A sign says 'Take precautions! The clap could be fatal!' To the north is a sliding glass door- it leads to a balcony.", 
+            "OTHERAREAS": "North and Down",
+            "WHEREAMI": "I'm in a Hookers Bedroom",
+            "ABBR": "b_bedrm",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "10",
+            "Description": "I'm on a balcony. Off in the distance I see a brightly lit billboard. A fire escape ladder is at one end of the balcony. A sign says 'Use in extreme emergency! Looking towards the west end of the balcony I see a window ledge. It looks too dangerous to go there- I might fall! The place smells of garbage.",
+            "OTHERAREAS": "South and West and Down",
+            "WHEREAMI": "I'm on a Hookers Balcony",
+            "ABBR": "b_balcny",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "11",
+            "Description": "I'm on a downtown street. People from all walks of life are milling about. Cadillac limos & Mercedes sport cars drive up & down the street bringing gamb- lers to and from the casinos. To the north a sign says 'Use our services to enter into a blissful life!'", 
+            "OTHERAREAS": "North and East",
+            "WHEREAMI": "I'm on a Downtown Street",
+            "ABBR": "c_street",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "12",
+            "Description": "I'm in a quickie marriage center. A flashing neon sign says 'Why wait? Marry the girl of your dreams today! You provide the girl, we provide a legal marriage for only $1000!' A plaque on the wall proclaims 'Over 1 million served!' To the east is 'The Adventurers Hotel'. Seems like quite a classy place!", 
+            "OTHERAREAS": "South",
+            "WHEREAMI": "I'm in a Quickie Marriage Center",
+            "ABBR": "c_marryc",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "13",
+            "Description": "I'm in the main casino room. Row upon row of slot machines fill the room. The bells of the machines clamor as winnings are paid out to the winners. The police cart off the losers. Vagrancy is not tolerated here. Vagrants are exterminated...keeps the crime rate low! But everyone seems happy here.", 
+            "OTHERAREAS": "East and North and West",
+            "WHEREAMI": "I'm in the Main Casino Room",
+            "ABBR": "c_casino",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "14",
+            "Description": "I'm in the '21 room'. Tables for playing blackjack are everywhere. The noise of people winning & losing fortunes fills the room. A table stands in front of me- The dealer waits for me to join in. People gather. They want me to gamble my fortune away! A voice within me says 'Go for it- Fool!' ",
+            "OTHERAREAS": "South",
+            "WHEREAMI": "I'm in the 21 Room",
+            "ABBR": "c_21room",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "15",
+            "Description": "I'm in the main lobby. There's a stairway going up to the hotel desk. The only other exit leads back to the casino. Over in the corner is a flourishing plant which is sitting in a pot. Couches and tables are also in the room- as are other items one would find in a lobby. The lobby is empty. Everyones gambling!", 
+            "OTHERAREAS": "West and Up",
+            "WHEREAMI": "I'm in the Lobby of the Hotel",
+            "ABBR": "c_lobby",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "16",
+            "Description": "I'm in the honeymoon suite of the hotel. The decor is fabulous!  A giant heart shaped bed sits in the corner of the room. The floor is covered with a deep shag rug. A tiffany lamp provides just the right amount of light to complete the atmosphere. A breeze flows through the curtain on the east wall.", 
+            "OTHERAREAS": "North",
+            "WHEREAMI": "I'm in the Honeymoon Suite",
+            "ABBR": "c_hmoons",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "17",
+            "Description": "I'm in a hallway. Doors line each side- most have 'Do not disturb' hung on the doorknobs. Waiters from room service pass by bringing food and drink to the hotel guests. An ashtray stands next to the wall. South is the entrance to the honeymoon suite.", 
+            "OTHERAREAS": "South and East",
+            "WHEREAMI": "I'm in the Hotel Hallway",
+            "ABBR": "c_hallwy",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "18",
+            "Description": "I'm out on a porch. A high wooden fence surrounds the porch. There's a little hole in the fence. An arrow points at it- written next to it is a message- 'look here!' A sign says 'See the city from the comfort of your own porch!!' The sun is out- it's rays beat down on the porch making it very hot.", 
+            "OTHERAREAS": "East",
+            "WHEREAMI": "I'm on the Honeymooners Balcony",
+            "ABBR": "c_balcny",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "19",
+            "Description": "I'm at the registration counter of the hotel. A sign says 'No VACANCY'. There is an elevator next to the counter marked 'Penthouse- PRIVATE'. A button is next to the elevator. The smell of perfume fills the air! The sexiest blonde you have ever seen stands behind the counter!! I'd sure love to ride her!", 
+            "OTHERAREAS": "West and Down",
+            "WHEREAMI": "I'm at the Hotel Desk",
+            "ABBR": "c_htdesk",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "20",
+            "Description": "I'm in a telephone booth. The directory is all ripped up & piled on the floor. There's some numbers scribbled on the side of the phone. The only one's which are legible are '555-6969' & '555-0439'. It will not take money- but the operator comes on automatically when a call is made.", 
+            "OTHERAREAS": "North",
+            "WHEREAMI": "I'm in a Telephone Booth",
+            "ABBR": "d_telbth",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "21",
+            "Description": "I'm in the 'Swinging Singles Disco'. There's a crazy DJ playing the newest hits. The dance floor is filled with guys and gals doin' the best steps in town. The crowd is really getting into it- everybody's having fun. There's a table to stand at over by the dance floor. A sign at the table- 'Wine $100'.", 
+            "OTHERAREAS": "East and South",
+            "WHEREAMI": "I'm in the Disco",
+            "ABBR": "d_disco",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "22",
+            "Description": "I'm on a sidewalk. To the north is a fancy doorway- the entrance to the disco club. An old bum sits by the entrance- he's definately seen better days. The guy really looks tormented! To the east is the pharmacy. Apartment houses and homes line the rest of the street.", 
+            "OTHERAREAS": "North and East",
+            "WHEREAMI": "I'm on a Residential Street",
+            "ABBR": "d_street",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "23",
+            "Description": "I'm in the entrance to the disco. Pictures line the entrance way showing the happy singles who attend their club. Singles pass by me into the club. Couples wander out- kissing and making eyes at each other. A door is to the west. The door has a sign on it.", 
+            "OTHERAREAS": "South",
+            "WHEREAMI": "I'm in the Discos Entrance",
+            "ABBR": "d_entrnc",
+            "OTHEREXITS": "and West",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "24",
+            "Description": "I'm in a pharmacy. On one wall sits a magazine rack. A sign reads 'This is not a library- NO READING'. A pharmacist sits behind the counter. Kids stop and buy candy. Others buy newspapers/cigarettes etc. A mirror to protect against shoplifting is mounted in the corner.", 
+            "OTHERAREAS": "West",
+            "WHEREAMI": "I'm in the Pharmacy",
+            "ABBR": "d_phrmcy",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "25",
+            "Description": "I'm in the foyer of the penthouse. Over in the corner is a spiral staircase. Next to the elevator is a button. The place is nicely decorated- no expense spared. The kitchen is to the east.  Beautiful paintings from some centuries- old artist cover the walls.  This place is quite impressive! ",
+            "OTHERAREAS": "Up and East",
+            "WHEREAMI": "I'm in the Penthouse Foyer",
+            "ABBR": "p_pntfoy",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "26",
+            "Description": "I'm in the jacuzzi!!!! Oh boy- does this feel good!!!  Water swirls around me- It's warmth soaks into my body. The feeling of relaxation is almost numbing. Over on the other side is the most beautiful girl!!!! I hope she doesn't mind my being here!", 
+            "OTHERAREAS": "Down",
+            "WHEREAMI": "I'm in the Jacuzzi",
+            "ABBR": "p_jacuzi",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "27",
+            "Description": "I'm in the kitchen. There's a sink to one side. High over the sink is mounted a cabinet. There's no dishes in sight- The place is kept quite tidy- no dirty dishes or pans around here. There's a little sign over the sink.", 
+            "OTHERAREAS": "West",
+            "WHEREAMI": "I'm in the kitchen",
+            "ABBR": "p_kitchn",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "28",
+            "Description": "I'm in a lush garden!!! The air is filled with the aroma of all sorts of plants. Green ferns are everywhere. Roses and other flowers emit their wonder fragrances. If there was ever a garden of eden- this certainly has to be the place! The entrance has dissappeared as I walked in!! How do I get out?", 
+            "OTHERAREAS": "",
+            "WHEREAMI": "I'm in a lush garden.",
+            "ABBR": "p_garden",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "29",
+            "Description": "I'm in a living room. There's a closet on one wall.  Like the rest of the place- it is very well furnished. Nobody seems to be here but I think I hear a gurgling noise coming from somewhere.  A very nice place!", 
+            "OTHERAREAS": "North and Down",
+            "WHEREAMI": "I'm in a living room",
+            "ABBR": "p_livrom",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        },
+        {
+            "LOCATIONID": "30",
+            "Description": "I'm outside on a expansive rooftop.  The sun shines in amongst the plants and trees. Birds flutter about. There's a jacuzzi in the middle of the porch!! Well- there's the source of the gurgling noise!!  A wooden fence surrounds the entire area.",
+            "OTHERAREAS": "South",
+            "WHEREAMI": "I'm outside an expansive rooftop",
+            "ABBR": "p_pntpch",
+            "OTHEREXITS": "",
+            "OTHERFLAG": false
+        }
+    ]
+
+}
