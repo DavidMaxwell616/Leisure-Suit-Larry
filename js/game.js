@@ -1614,9 +1614,10 @@ document.getElementById("mainForm").reset();
       married_to_girl = false;
 }
 
-/*
+
 function I_cant_go_that_way()
-{  write_message ("I can't go that way!");
+{  
+  write_message ("I can't go that way!");
 }
 
 
@@ -1624,61 +1625,76 @@ function cant_do_that()
 {
   var messg;
 
-  messg = Rnd(8) + 1
-  Select case messg
-case 1
-write_message ("Huh?")
-case 2
-write_message ("Ummm......huh?")
-case 3
-write_message ("You're nuts!")
-case 4
-write_message ("You can't be serious!!")
-case 5
-write_message ("Not bloody likely!!")
-case 6
-write_message ("I don't know how to.")
-case 7
-write_message ("An interesting idea....")
-case 8
-write_message ("I can't do that.")
-  } Select
+  messg = Math.floor(Math.random() * 8) + 1;
+  switch (messg)
+  {
+    case 1:
+    write_message ("Huh?");
+    break;
+    case 2:
+    write_message ("Ummm......huh?");
+    break;
+    case 3:
+    write_message ("You're nuts!");
+    break;
+    case 4:
+    write_message ("You can't be serious!!");
+    break;
+    case 5:
+    write_message ("Not bloody likely!!");
+    break;
+    case 6:
+    write_message ("I don't know how to.");
+    break;
+    case 7:
+    write_message ("An interesting idea....");
+    break;
+    case 8:
+    write_message ("I can't do that.");
+    break;
+  }
 }
 
 
 function huh()
 {
-  write_message ("Huh?")
+  write_message ("Huh?");
 }
 
 
 function I_cant_do_that()
  {
- write_message ("I can't do that!")
+ write_message ("I can't do that!");
 }
 
 
 function I_dont_know_that_word()
 {
-  write_message ("I don't know that word!")
+  write_message ("I don't know that word!");
 }
 
 
 function find_me_one()
+{
 var messg;
 
-  messg = Rnd(4) + 1
-  write_message ("")
-  Select case messg
-case 1
-write_message ("Find me one!!")
-case 2
-write_message ("I don't see it here!")
-case 3
-write_message ("I can't find it here!")
-case 4
-write_message ("You have to find it first!")
-  } Select
+  messg = Math.floor(Math.random() * 4) + 1;
+  write_message ("");
+  switch(messg)
+  {
+case 1:
+write_message ("Find me one!!");
+break;
+case 2:
+write_message ("I don't see it here!");
+break;
+case 3:
+write_message ("I can't find it here!");
+break;
+case 4:
+write_message ("You have to find it first!");
+break;
+  } 
 }
 
 
@@ -1713,444 +1729,377 @@ function not_yet_but_maybe_later()
 
 
 function is_here(obj){
-if(InStr(1, Forms!frmmain!txtItems, obj) > 0) return true;
+ return document.getElementById("items").value.includes(obj);
 }
 
 function takeable_objects(obj){
-var rs As DAO.Recordset
-if(obj = "control") obj = "control_unit"
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & obj & "'")
-rs.MoveFirst
-if(rs!TAKEABLE = True)
-takeable_objects = True
+if(obj == "control") obj = "control_unit"
+let obj = objectData.objects.find(object => object.ABBR=obj);
+if(object.TAKEABLE)
+  takeable_objects = true;
 else
-takeable_objects = false
-} If
+  takeable_objects = false;
+
 }
 
 function addexit(strloc, strexit)
-var rs As DAO.Recordset
-DoCmd.SetWarnings false
-DoCmd.RunSQL "UPDATE LOCATIONS SET OTHERFLAG = Yes WHERE abbr = '" & strloc & "'"
-DoCmd.SetWarnings True
-
+{
+let loc = locationData.locations.find(location => object.ABBR=strloc);
+loc.OTHERFLAG = true;
 }
+
 function is_carried(obj){
 var objcount ;
 var objects;
-if(InStr(1, Forms!frmmain!txtInventory, obj) > 0)
-is_carried = True
+if(document.getElementById("inventory").value.includes(obj))
+return true;
 else
-is_carried = false
-} If
+return false;
 }
-function clrscr()
-Forms!frmmain.txtActions = ""
-Forms!frmmain.txtDescription = ""
-}
+
 function give_help()
-var msg;
-var rs As DAO.Recordset
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM ACTIONS WHERE ActionID=30")
-msg = rs!Action
-MsgBox msg
+{
+let action = actionData.actions.find(action => action.ACTIONID==30);
+alert(action.Description);
 }
 
 function look_around()
 {
-var objcount ;
-obj As objects
-    exits;
-    exitcount;
-    exit      As directions
-    anyexit  {
-    var i, j, hpos, namelen;
-
-
-  With game_position
-    
-      if(Not place_visited(your_place))
-        write_long_message (your_place + 1)
-      if((your_place = p_pntpch) And called_555_0439)
-        
-          if(Not telephone_answered And (Rnd(4) = 2))
-            telephone_ringing = True
+var objcount;
+      if(!place_visited(your_place))
+        write_long_message (your_place + 1);
+      if((your_place == "p_pntpch") && called_555_0439)
+      {        
+          if(!telephone_answered && Math.floor(Math.random() * 4) + 1 == 2)
+            telephone_ringing = true;
           if(telephone_ringing)
-            write_message ("The telephone rings")
+            write_message ("The telephone rings");
         }
-      place_visited your_place = True
-      newlines (2)
+      place_visited(your_place) = true;
+      newlines (2);
 
-      gotoXY 1, 1
-      clreol
-      write_message (place_name(your_place))
-
-      clreol
-      write_message ("Items in sight are:  ")
-      hpos = 23
-      objcount = 0
+      write_message (place_name(your_place));
+      write_message ("Items in sight are:  ");
       for(obj = first_object; obj<last_object;obj++)
 {        
           if(is_here(obj))
 {            
               if(objcount > 0)
- {               
                   write_message (", ");
-                  hpos += 2;
- }
               objcount ++;
-              namelen = Length(object_name(obj));
-              if((hpos + 3 + namelen) > 80)
-{                
+              namelen = object_name(obj).length;
                   write_message("");
-                  clreol();
                   write_message ("                     ");
-                  hpos = 23;
 }
               write_message (object_name(obj));
-              hpos = hpos + namelen;
-            }
         }
-      if(objcount = 0)
+      if(objcount == 0)
         write_message ("Nothing interesting.");
       else
         write_message("");
-      clreol
       write_message ("Other areas are:  ")
       exitcount = 0
-      for(intexit = first_direction To last_direction
-        if(Path(your_place, intexit) <> nowhere)
-          exitcount = exitcount + 1
+      for(exit = first_direction; exit<last_direction;exit++)
+      {
+      if(Path(your_place, intexit) != nowhere)
+          exitcount ++;
       exits = exitcount
-      if(exits = 0)
-        write_message ("By magic!")
+      if(exits == 0)
+        write_message ("By magic!");
       else
-        for(intexit = first_direction To last_direction
-          if(Path(your_place, intexit) <> nowhere)
-            
-              if(exitcount < exits)
-                
+      {
+        for(intexit = first_direction; intexit<last_direction;intexit++)
+        {
+          if(Path(your_place, intexit) != nowhere)
+          {
+                if(exitcount < exits)
+              {  
                   if(exitcount > 1)
                     write_message (", ")
                   elseif(exits > 1)
                     write_message (" and ")
-                }
+               }
+          }
               exitcount = exitcount - 1
               write_message (direction_name(intexit))
             }
+          }
 
-      write_message
-      clreol
-      for(i = 1 To 79
-        write_message ("=")
-      write_message
-      clreol
-
-      cursor_next_to_bottom
-
-    Wend
-
+      write_message("");
+      for(var i = 1; i< 79;i++)
+      {
+      write_message ("=");
+      write_message("");
+      }
 }
 
 function put_object(strobject,strloc)
 {
-var rs As DAO.Recordset
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & strobject & "'")
-rs.MoveFirst
-if(strloc = "youhaveit")
-DoCmd.SetWarnings false
-DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = No WHERE (OBJECTS.ABBR='" & strobject & "');"
-DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = Yes WHERE (OBJECTS.ABBR='" & strobject & "');"
-DoCmd.SetWarnings True
-elseif(strloc = "nowhere")
-DoCmd.SetWarnings false
-DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = No WHERE (OBJECTS.ABBR='" & strobject & "');"
-DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = No WHERE (OBJECTS.ABBR='" & strobject & "');"
-DoCmd.SetWarnings True
-else
-'if(rs!Visible = True) Stop
-DoCmd.SetWarnings false
-DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = No WHERE (OBJECTS.ABBR='" & strobject & "');"
-DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = Yes WHERE (OBJECTS.ABBR='" & strobject & "' AND OBJECTS.location = '" & strloc & "');"
-DoCmd.SetWarnings True
-} If
+  let obj = objectData.objects.find(object => object.ABBR=strobject);
+if(strloc == "youhaveit")
+{
+obj.VISIBLE = false;
+obj.YOUHAVEIT = true;
 }
-function list_objects(strloc;)
+else if(strloc == "nowhere")
+{
+obj.VISIBLE = false;
+obj.YOUHAVEIT;
+}
+else
+{
+obj.YOUHAVEIT = false;
+obj.VISIBLE = true;
+} 
+}
+
+function list_objects(strloc)
 var objcount ;
-var objects;
-var rs As DAO.Recordset
-Forms!frmmain.txtItems = ""
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE location = '" & strloc & "' and Visible = True")
-if(rs.RecordCount > 0)
-rs.MoveFirst
-Do Until rs.EOF
-if(Len(objects) > 0)
-objects = objects & ", " & rs!object
-else
-objects = objects & rs!object
-} If
-rs.MoveNext
-Loop
-Forms!frmmain.txtItems = objects
-} If
+let objects = objectData.objects.filter(object => object.LOCATION==strloc && object.VISIBLE);
+objects.forEach(object =>
+{  if(objects.length > 0)
+  objects += ", " + object;
+  else
+  objects += object;
+});
+document.getElementById("items").value=objects;
 }
 
-function object_place(nn;, strloc;){
-var rs As DAO.Recordset
-'strloc = "d_street"
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & nn & "' and location = '" & strloc & "'")
-rs.MoveFirst
-if(rs!Visible = True)
-object_place = True
-else
-object_place = false
-} If
-}
-*/
-/*
-function write_long_message(messg_no;)
-var i;
-var msg;
-var rs As DAO.Recordset
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM ACTIONS WHERE ActionID=" & messg_no)
-msg = rs!Action
-Forms!frmmain.txtActions = msg
-}
-function game_end()
-Application.Quit
-}
-
-function write_message(msg;)
-Forms!frmmain.txtActions = msg
-}
-function write_message(msg;)
-Forms!frmmain.txtActions = Forms!frmmain.txtActions & vbCrLf & msg
+function object_place(noun, strloc){
+  let object = objectData.objects.find(object => object.ABBR==noun && object.LOCATION==strloc);
+  if(object.VISIBLE)
+    return true;
+  else
+    return false;
 }
 
 function look_graffiti()
-var msg;
-msg = "+-------------------------------------------------------------------+" & vbCrLf _
-& "|                                                                   |" & vbCrLf _
-& "|        At my PC is where I sit                                    |" & vbCrLf _
-& "|         when I feel like fondling it's bits!           I  h       |" & vbCrLf _
-& "|                                                        '  e       |" & vbCrLf _
-& "|       C                            The password is:    d  r       |" & vbCrLf _
-& "|        o       A       a                                          |" & vbCrLf _
-& "|         m        S       n           Bellybutton       l  f       |" & vbCrLf _
-& "|      P   p         C       d                           i  l       |" & vbCrLf _
-& "|       e   u          I             r                   k  o       |" & vbCrLf _
-& "|        e   t           I     y       e                 e  p       |" & vbCrLf _
-& "|     t   k   e                  e       c                  p       |" & vbCrLf _
-& "|      h       r                           e             t  i       |" & vbCrLf _
-& "|       e   b                      s         i           o  e       |" & vbCrLf _
-& "|        y   e   f                   h         e            s       |" & vbCrLf _
-& "|             f   r                    a         v       n          |" & vbCrLf _
-& "|          P   o   e                     l         e     i          |" & vbCrLf _
-& "|           o   r   a                      l             b          |" & vbCrLf _
-& "|            k   e   k                                   b          |" & vbCrLf _
-& "|             e       s                                  l          |" & vbCrLf _
-& "|                                                        e          |" & vbCrLf _
-& "|                                                                   |" & vbCrLf _
-& "+-------------------------------------------------------------------+"
+{
+  var msg = `+-------------------------------------------------------------------+\n\r\
+ |                                                                   |\n\r\
+ |        At my PC is where I sit                                    |\n\r\ 
+ |         when I feel like fondling it's bits!           I  h       |\n\r\ 
+ |                                                        '  e       |\n\r\ 
+ |       C                            The password is:    d  r       |\n\r\ 
+ |        o       A       a                                          |\n\r\ 
+ |         m        S       n           Bellybutton       l  f       |\n\r\ 
+ |      P   p         C       d                           i  l       |\n\r\ 
+ |       e   u          I             r                   k  o       |\n\r\ 
+ |        e   t           I     y       e                 e  p       |\n\r\ 
+ |     t   k   e                  e       c                  p       |\n\r\ 
+ |      h       r                           e             t  i       |\n\r\ 
+ |       e   b                      s         i           o  e       |\n\r\ 
+ |        y   e   f                   h         e            s       |\n\r\ 
+ |             f   r                    a         v       n          |\n\r\ 
+ |          P   o   e                     l         e     i          |\n\r\ 
+ |           o   r   a                      l             b          |\n\r\ 
+ |            k   e   k                                   b          |\n\r\ 
+ |             e       s                                  l          |\n\r\ 
+ |                                                        e          |\n\r\ 
+ |                                                                   |\n\r\ 
+ +-------------------------------------------------------------------+`;
  
-MsgBox msg
+alert(msg);
 }
+
+function write_long_message(messg_no;)
+{
+  var i;
+let action = actionData.actions.find(action => action.ACTIONID==messg_no);
+var msg= action.Action;
+document.getElementById("actions").value =msg;
+}
+
+function game_end()
+{
+  //Application.Quit
+}
+
+function write_message(msg)
+{
+document.getElementById("actions").value+= msg;
+}
+
 function purgatory()
-var choice, door;
+{
+  var choice, door;
 var cas;
 
-  'sleep 'sleep_time
-  door = 0
-    if(door = 0)
-      write_long_message (65)
+  sleep(sleep_time);
+  door = 0;
+    if(door == 0)
+      write_long_message (65);
     else
-      
-        write_message ("")
-        write_message ("You're still here!")
-        write_message ("")
-       
-      }
-    c = InputBox("Choose your dooras 1, 2 or 3??  ")
-    choice = c
+{
+        write_message ("");
+        write_message ("You're still here!");
+        write_message ("");
+}    
+    c = InputBox("Choose your door as 1, 2 or 3??  ");
+    choice = c;
     door = (Int(Rnd(3)) + choice)
-    game_position.game_ended = door = 1
-} If
-}
+    game_position.game_ended = door = 1;
+} 
 
 function bum_tells_story()
-var i, j;
-
-  'write_message
-  write_message ("He looks at me and starts to speakas")
-  'sleep 'sleep_time
+{
+  var i, j;
+  write_message ("He looks at me and starts to speakas");
+  sleep(sleep_time);
   write_long_message (9)
-  'write_message
-  'sleep 'sleep_time
-        write_message (" ")
-      write_message ("Like I did!!")
-    
-  'for(i = 1 To 5
-  '  write_message ("")
-  'sleep 'sleep_time
-  write_message ("He throws up and gives me back the bottle of wine.")
+  write_message("");
+  sleep(sleep_time);
+  write_message (" ");
+  write_message ("Like I did!!");
+  sleep(sleep_time);
+  write_message ("He throws up and gives me back the bottle of wine.");
 }
 
-
-function watch_TV(TV_channel;)
-
-var ch;
-jumpback:
-    ch = InputBox("Which channel? (1-9) ")
-    TV_channel = ch
-    write_long_message (10 + TV_channel)
-    ch = InputBox("Change the channel?  (y/n) ")
-if(ch = "y") GoTo jumpback
+function watch_TV(TV_channel)
+{
+  var ch = InputBox("Which channel? (1-9) ");
+    TV_channel = ch;
+    write_long_message (10 + TV_channel);
+    ch = InputBox("Change the channel?  (y/n) ");
+if(ch = "y") watch_TV(TV_channel);
 }
 
 
 function wine_in_taxi()
-
-  write_long_message (58)
-  'sleep 'sleep_time
-  write_message ("")
-  write_message ("What shall I do? ")
-  'sleep 'sleep_time
-  write_message ("")
-  write_message ("")
-  write_message ("The idiot cab driver backs over me and kills me!!!!!!")
-  purgatory
+{
+  write_long_message (58);
+  sleep(sleep_time);
+  write_message ("");
+  write_message ("What shall I do? ");
+  sleep (sleep_time);
+  write_message ("");
+  write_message ("");
+  write_message ("The idiot cab driver backs over me and kills me!!!!!!");
+  purgatory();
 }
 
 
 function stab_someone()
-
-  write_message ("")
-  write_message ("OK - warmonger!")
-  'sleep 'sleep_time
-  write_message ("Parry!!")
-  'sleep 'sleep_time
-  write_message ("Thrust!!!")
-  'sleep 'sleep_time
-  write_message ("I just got myself!!")
-  purgatory
+{
+  write_message ("");
+  write_message ("OK - warmonger!");
+  sleep (sleep_time);
+  write_message ("Parry!!");
+  sleep (sleep_time);
+  write_message ("Thrust!!!");
+  sleep (sleep_time);
+  write_message ("I just got myself!!");
+  purgatory();
 }
 
 function add_to_inventory(object;)
-var i;
-i = 6
-Do Until Worksheets("MAIN").Range("i" & i).Value = ""
-if(i > 17) write_long_message "You're carrying too much": Exit function
-i = i + 1
-Loop
-Worksheets("MAIN").Range("i" & i).Value = object
+{
+if(objects_carried > 17) 
+{  
+  write_long_message("You're carrying too much");
+  return;
 }
+document.getElementById("inventory").value+= object;
+objects_carried.push(object);
+}
+
 function falling_down()
-var i;
-
-  for(i = 1 To 50
-    write_message ("Aaaaaeeeeeiiiiiiii!!!!!!!!")
-  'sleep 'sleep_time
-  write_message ("Splaaatttttt!!!!!")
-  if(game_position.Verb <> jump)
-    
-      'sleep 'sleep_time
-      write_message
-      write_message ("I should have used safety rope!!!!!!!!")
+{
+for(var i = 1;i<50;i++)
+    {
+    write_message ("Aaaaaeeeeeiiiiiiii!!!!!!!!");
+  }
+  sleep (sleep_time);
+    write_message ("Splaaatttttt!!!!!")
+  if(game_position.Verb != jump)
+    {    
+      sleep (sleep_time);
+      write_message();
+      write_message ("I should have used safety rope!!!!!!!!");
     }
-  purgatory
+  purgatory();
 }
 
 
-function play_slot(cash;)
-DoCmd.OpenForm "frmSlots", acNormal
-Forms!frmSLots!txtCash = cash
+function play_slot(cash)
+{
   if(cash < 1)
-    
+    {
       write_message ("I'm broke!!! -- that means death!!!!!!!")
-      purgatory
-    } If
+      purgatory();
+    }
 }
-function play_21(cash;)
-DoCmd.OpenForm "frmSlots", acNormal
-Forms21!txtCash = cash
+
+function play_21(cash)
+{
   if(cash < 1)
-    
-      write_message ("I'm broke!!! -- that means death!!!!!!!")
-      purgatory
-    } If
+  {    
+      write_message ("I'm broke!!! -- that means death!!!!!!!");
+      purgatory();
+    }
 }
 
 
 function buy_rubber()
+{
 var answer;
    var i;
-
-    
-      rubber_lubricated = "non-lubricated"
-      rubber_ribbed = "non-ribbed"
-      rubber_color = InputBox("The man leans over the counter and whispers 'What color?' ")
-      rubber_flavor = InputBox("And what flavor? ")
-      answer = InputBox("Lubricated or not? (y/n) ")
-      if(answer = "Y") rubber_lubricated = "lubricated"
-      answer = InputBox("Ribbed? (y/n) ")
-      if(answer = "Y") rubber_ribbed = "ribbed"
-      write_message ("He yells -- This pervert just bought a " & rubber_color & ", ")
-      write_message (rubber_flavor & "-flavored, " & rubber_lubricated & ", " & rubber_ribbed & " rubber!!!!")
-      write_message ("A lady walks by and looks at me in disgust!!!!")
+      rubber_lubricated = "non-lubricated";
+      rubber_ribbed = "non-ribbed";
+      rubber_color = InputBox("The man leans over the counter and whispers 'What color?' ");
+      rubber_flavor = InputBox("And what flavor? ");
+      answer = InputBox("Lubricated or not? (y/n) ");
+      if(answer == "Y") rubber_lubricated = "lubricated";
+      answer = InputBox("Ribbed? (y/n) ");
+      if(answer == "Y") rubber_ribbed = "ribbed";
+      write_message ("He yells -- This pervert just bought a " & rubber_color & ", ");
+      write_message (rubber_flavor & "-flavored, " & rubber_lubricated & ", " & rubber_ribbed & " rubber!!!!");
+      write_message ("A lady walks by and looks at me in disgust!!!!");
 }
 
 
 function OK()
-
-  write_message ("OK")
+{
+  write_message ("OK");
 }
 
-function GetLocationDescription(strloc;)
-var i;
+function GetLocationDescription(strloc)
+{
+  var i;
 var strexits;
-var rs As DAO.Recordset
 var strobjects;
-
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM Locations WHERE ABBR = '" & strloc & "'")
-'Worksheets("MAIN").Range("b9").Value = Worksheets("Locations").Range("b" & i).Value
-'Worksheets("MAIN").Range("c5").Value = Worksheets("Locations").Range("d" & i).Value
-'Worksheets("MAIN").Range("c7").Value = Worksheets("Locations").Range("c" & i).Value
-Forms!frmmain.txtLocation = rs!whereami
-if(rs!otherflag = false)
-Forms!frmmain.txtExits = rs!OTHERAREAS
+let location = locationData.locaions.find(location => locaion.ABBR == strloc);
+document.getElementById("location").value = location.WHEREAMI;
+if(!location.OTHERFLAG)
+  document.getElementById("exits").value = location.OTHERAREAS;
 else
-Forms!frmmain.txtExits = rs!OTHERAREAS & " " & rs!OTHEREXITS
-} If
-Forms!frmmain.txtDescription = rs!Description
-list_objects strloc
-
+  document.getElementById("exits").value = location.OTHERAREAS + " " + location.OTHEREXITS;
+document.getElementById("description").value = location.Description;
+list_objects(strloc);
 }
-function xopen(object_open{)
 
-
-  if(object_open)
-    write_message ("It's already open!!")
+function xopen(object_open)
+{
+    if(object_open)
+    write_message ("It's already open!!");
   else
-    
-      OK
-      object_open = True
-    } If
+  {  
+    OK();
+    object_open = true;
+  }
 }
 
 
-function xclose(object_open{)
+function xclose(object_open)
+{
 
-
-  if(Not object_open)
+  if(! object_open)
     write_message ("It's already closed!!")
   else
-    
-      OK
-      object_open = false
-    }
+  {
+       OK();
+      object_open = false;
+  }
 }
-
-*/
-
 
 
