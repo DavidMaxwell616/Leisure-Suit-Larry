@@ -1,11 +1,10 @@
 let inventory=[];
 let your_place;
 let new_place;
-let cash;
+let cash=0;
 let max_carried;
 let objects_carried ;
 let TV_channel;
-let money;
 let score;
 let rope_in_use = false;
 let window_broken = false;
@@ -37,4 +36,3 @@ let candy_given = false;
 let flowers_given = false;
 let ring_given = false;
 let married_to_girl = false;
-

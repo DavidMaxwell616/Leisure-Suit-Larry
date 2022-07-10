@@ -1,55 +1,29 @@
+import actionData from "../assets/json/actions.json" assert { type: "json" };;
+import objectData from "../assets/json/objects.json" assert { type: "json" };;
+import locationData from "../assets/json/locations.json" assert { type: "json" };;
 
-function Command2_Click(){
-// On Error GoTo Err_Command2_Click
+Start_Game();
 
-
-//     DoCmd.Quit
-
-// Exit_Command2_Click:
-//     return;
-
-// Err_Command2_Click:
-//     MsgBox Err.Description
-//     Resume Exit_Command2_Click
-    
-}
-function Form_Load()
-{
-cash = 2400;
-//INITIALIZE GAME
-// DoCmd.SetWarnings false
-// DoCmd.OpenQuery "update_carried_objects"
-// DoCmd.OpenQuery "update_visible_objects"
-// DoCmd.OpenQuery "update_exits"
-// DoCmd.SetWarnings true;
-
-}
-
-function Submit_Click()
-{
+function Submit_Click(){
+  console.log('clocl');
 let strcommand;
 let strexits;
 let verb, noun;
 if(txtCommand == "")  return;
 strcommand = txtCommand;
-verb = strcommand.split(' ')[0].toLowerCase();
-noun = strcommand.split(' ')[1].toLowerCase();
-// if(verb=="GO")
-//   verb=noun;
-//  handle(verb, noun);
-// }
-// GetLocationDescription (your_place)
-// take_inventory your_place, cash
-// Me.txtCommand.SetFocus
-
-}
-function Start_Game(){
-  your_place = "b_bar";
-max_carried = 7;
-objects_carried = 1;
+verb = strcommand.split(' ')[0].toLowercase();
+noun = strcommand.split(' ')[1].toLowercase();
+handleVerb(verb, noun);
 GetLocationDescription (your_place);
 take_inventory(your_place, cash);
+}
+
+function Start_Game(){
+max_carried = 7;
+objects_carried = 1;
 init_new_game();
+GetLocationDescription ();
+take_inventory();
 }
 
 function handleVerb(verb, noun)
@@ -235,7 +209,7 @@ function handleVerb(verb, noun)
             if(your_place == "b_bar") {
                     let text;
                     let password = prompt("A voice says  'What's the password?'  (one word) ", "");
-                    if(password.toUpperCase() == "BELLYBUTTON") {
+                    if(password.toUppercase() == "BELLYBUTTON") {
                         write_message("The curtain pulls back!!");
                         addexit(your_place, " and East");
                     }
@@ -775,11 +749,11 @@ break;
         your_object = InputBox("Finally, your favorite object?    ")
         write_message ("He hangs up!")
         called_555_6969 = true;
-          girl_name = LCase(girl_name)
-          girl_part = LCase(girl_part)
-          girl_do = LCase(girl_do)
-          your_part = LCase(your_part)
-          your_object = LCase(your_object)
+          girl_name = Lcase(girl_name)
+          girl_part = Lcase(girl_part)
+          girl_do = Lcase(girl_do)
+          your_part = Lcase(your_part)
+          your_object = Lcase(your_object)
     }
     else if((noun = "555-0439") && (! called_555_0439)) {
         write_long_message (34)
@@ -1554,73 +1528,145 @@ break;
 }
 }
 
-function GetLocationDescription(your_place){
-  
+function GetLocationDescription(){
+  let loc = locationData.locations.find(location => location.ABBR === your_place);
+  document.getElementById("location").value =loc.WHEREAMI;
+  document.getElementById("description").value =loc.Description;
+  document.getElementById("exits").value =loc.OTHERAREAS+' '+loc.OTHEREXITS;
+  let obj = objectData.objects.filter(object => object.LOCATION==your_place);
+  let objects="";
+  obj.forEach(object => {
+    if (objects.length==0)
+     objects+=object.OBJECT;
+     else  
+      objects+=', '+object.OBJECT;   
+  });
+  document.getElementById("items").value =objects;
+
 }
 
-function getlocationabbr(strloc)
+function take_inventory()
 {
-  var i;
-i = 2;
-// Do Until Worksheets("Locations").Range("D" & i).Value = strloc
-// i = i + 1
-// Loop
-// strloc = Worksheets("Locations").Range("E" & i).Value
+  var objcount ;
+var objects="";
+var thisitem;
+let obj = objectData.objects.filter(object => object.STARTYOUHAVEIT==true);
+obj.forEach(object => {
+thisitem = object.OBJECT;
+if(thisitem.includes("A Wallet")) 
+  thisitem = "A Wallet with $" + cash;
+if(objects.length > 0)
+  objects += ", " + thisitem;
+else
+  objects += thisitem;
+});
+document.getElementById("inventory").value =objects;
 }
 
-function newlines(lines)
 
+
+function init_new_game()
+{
+var yesno;
+var place;
+var direction;
 var i;
 
-  for(i = 1 To lines
-  write_message ""
-  Next
-} Function
+document.getElementById("mainForm").reset();
+// yesno = InputBox("Welcome to LEISURE SUIT LARRY!!\n\r\Do you need instructions? (y/n) ")
+//   if(yesno == "Y")
+//     give_help();
+//   else
+//     newlines (2)
+  
+      your_place = "b_bar";
 
+      objects_carried = 0;
+      TV_channel = 0;
+      cash = 1000;
+      score = 0;
 
+      rope_in_use = false;
+      window_broken = false;
+      toilet_flushed = false;
+      called_555_0987 = false;
+      called_555_6969 = false;
+      called_555_0439 = false;
+      rubber_worn = false;
+      hooker_fucked = false;
+      door_W_open = false;
+      radio_listened = false;
+      wine_ordered = false;
+      telephone_ringing = false;
+      telephone_answered = false;
+      hole_peeped = false;
+      girl_2_fucked = false;
+      tied_to_bed = false;
+      drawer_open = false;
+      closet_open = false;
+      cabinet_open = false;
+      doll_inflated = false;
+      stool_climbed = false;
+      water_on = false;
+      pitcher_full = false;
+      seeds_planted = false;
+      seeds_watered = false;
+      apple_given = false;
+      candy_given = false;
+      flowers_given = false;
+      ring_given = false;
+      
+      married_to_girl = false;
+}
+
+/*
 function I_cant_go_that_way()
-  write_message ("I can't go that way!")
-} Function
+{  write_message ("I can't go that way!");
+}
 
 
 function cant_do_that()
-var messg;
+{
+  var messg;
 
   messg = Rnd(8) + 1
-  Select Case messg
-Case 1
+  Select case messg
+case 1
 write_message ("Huh?")
-Case 2
+case 2
 write_message ("Ummm......huh?")
-Case 3
+case 3
 write_message ("You're nuts!")
-Case 4
+case 4
 write_message ("You can't be serious!!")
-Case 5
+case 5
 write_message ("Not bloody likely!!")
-Case 6
+case 6
 write_message ("I don't know how to.")
-Case 7
+case 7
 write_message ("An interesting idea....")
-Case 8
+case 8
 write_message ("I can't do that.")
   } Select
-} Function
+}
 
 
 function huh()
+{
   write_message ("Huh?")
-} Function
+}
 
 
 function I_cant_do_that()
-  write_message ("I can't do that!")
-} Function
+ {
+ write_message ("I can't do that!")
+}
 
 
 function I_dont_know_that_word()
+{
   write_message ("I don't know that word!")
-} Function
+}
 
 
 function find_me_one()
@@ -1628,51 +1674,54 @@ var messg;
 
   messg = Rnd(4) + 1
   write_message ("")
-  Select Case messg
-Case 1
+  Select case messg
+case 1
 write_message ("Find me one!!")
-Case 2
+case 2
 write_message ("I don't see it here!")
-Case 3
+case 3
 write_message ("I can't find it here!")
-Case 4
+case 4
 write_message ("You have to find it first!")
   } Select
-} Function
+}
 
 
 function I_dont_have_it()
-  write_message ("I don't have it!!")
-} Function
+{
+    write_message ("I don't have it!!");
+}
 
 
 function I_already_have_it()
-    write_message ("I already have it!!")
-} Function
+{
+    write_message ("I already have it!!");
+}
 
 
 function I_see_nothing_special()
-  write_message ("I see nothing special")
-} Function
+{
+  write_message ("I see nothing special");
+}
 
 
 function I_see_something()
-        
-          write_message ("I see something!!!")
-          'object_place object = your_place
-} Function
+{
+            write_message ("I see something!!!");
+          object_place(object = your_place);
+}
 
 
 function not_yet_but_maybe_later()
-  write_message ("Not yet but maybe later!")
-} Function
+{  write_message ("Not yet but maybe later!");
+}
 
 
-Function is_here(obj As String) As Boolean
-if(InStr(1, Forms!frmmain!txtItems, obj) > 0) is_here = True
-} Function
+function is_here(obj){
+if(InStr(1, Forms!frmmain!txtItems, obj) > 0) return true;
+}
 
-Function takeable_objects(obj As String) As Boolean
+function takeable_objects(obj){
 var rs As DAO.Recordset
 if(obj = "control") obj = "control_unit"
 Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & obj & "'")
@@ -1680,102 +1729,46 @@ rs.MoveFirst
 if(rs!TAKEABLE = True)
 takeable_objects = True
 else
-takeable_objects = False
+takeable_objects = false
 } If
-} Function
+}
 
-function addexit(strloc As String, strexit As String)
+function addexit(strloc, strexit)
 var rs As DAO.Recordset
-DoCmd.SetWarnings False
+DoCmd.SetWarnings false
 DoCmd.RunSQL "UPDATE LOCATIONS SET OTHERFLAG = Yes WHERE abbr = '" & strloc & "'"
 DoCmd.SetWarnings True
 
-} Function
-Function is_carried(obj As String) As Boolean
+}
+function is_carried(obj){
 var objcount ;
-var objects As String
+var objects;
 if(InStr(1, Forms!frmmain!txtInventory, obj) > 0)
 is_carried = True
 else
-is_carried = False
+is_carried = false
 } If
-} Function
+}
 function clrscr()
 Forms!frmmain.txtActions = ""
 Forms!frmmain.txtDescription = ""
-} Function
+}
 function give_help()
-var msg As String
+var msg;
 var rs As DAO.Recordset
 Set rs = CurrentDb.OpenRecordset("SELECT * FROM ACTIONS WHERE ActionID=30")
 msg = rs!Action
 MsgBox msg
-} Function
-function init_new_game()
-
-var yesno As String
-var place As String
-var direction As String
-var i;
-
-
-  clrscr
-  yesno = InputBox("Welcome to SOFTPORN ADVENTURE!!" & vbCrLf & "Do you need instructions? (y/n) ")
-  if(yesno = "Y")
-    give_help
-  else
-    newlines (2)
-  } If
-  
-      your_place = b_bar
-
-      objects_carried = 0
-      TV_channel = 0
-      money = 1000
-      score = 0
-
-      rope_in_use = False
-      window_broken = False
-      toilet_flushed = False
-      called_555_0987 = False
-      called_555_6969 = False
-      called_555_0439 = False
-      rubber_worn = False
-      hooker_fucked = False
-      door_W_open = False
-      radio_listened = False
-      wine_ordered = False
-      telephone_ringing = False
-      telephone_answered = False
-      hole_peeped = False
-      girl_2_fucked = False
-      tied_to_bed = False
-      drawer_open = False
-      closet_open = False
-      cabinet_open = False
-      doll_inflated = False
-      stool_climbed = False
-      water_on = False
-      pitcher_full = False
-      seeds_planted = False
-      seeds_watered = False
-      apple_given = False
-      candy_given = False
-      flowers_given = False
-      ring_given = False
-      
-      married_to_girl = False
-
-
-} Function
+}
 
 function look_around()
+{
 var objcount ;
 obj As objects
     exits;
     exitcount;
     exit      As directions
-    anyexit   As Boolean
+    anyexit  {
     var i, j, hpos, namelen;
 
 
@@ -1870,26 +1863,26 @@ var rs As DAO.Recordset
 Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & strobject & "'")
 rs.MoveFirst
 if(strloc = "youhaveit")
-DoCmd.SetWarnings False
+DoCmd.SetWarnings false
 DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = No WHERE (OBJECTS.ABBR='" & strobject & "');"
 DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = Yes WHERE (OBJECTS.ABBR='" & strobject & "');"
 DoCmd.SetWarnings True
 elseif(strloc = "nowhere")
-DoCmd.SetWarnings False
+DoCmd.SetWarnings false
 DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = No WHERE (OBJECTS.ABBR='" & strobject & "');"
 DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = No WHERE (OBJECTS.ABBR='" & strobject & "');"
 DoCmd.SetWarnings True
 else
 'if(rs!Visible = True) Stop
-DoCmd.SetWarnings False
+DoCmd.SetWarnings false
 DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.YOUHAVEIT = No WHERE (OBJECTS.ABBR='" & strobject & "');"
 DoCmd.RunSQL "UPDATE OBJECTS SET OBJECTS.VISIBLE = Yes WHERE (OBJECTS.ABBR='" & strobject & "' AND OBJECTS.location = '" & strloc & "');"
 DoCmd.SetWarnings True
 } If
-} Function
-function list_objects(strloc As String)
+}
+function list_objects(strloc;)
 var objcount ;
-var objects As String
+var objects;
 var rs As DAO.Recordset
 Forms!frmmain.txtItems = ""
 Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE location = '" & strloc & "' and Visible = True")
@@ -1905,9 +1898,9 @@ rs.MoveNext
 Loop
 Forms!frmmain.txtItems = objects
 } If
-} Function
+}
 
-function object_place(nn As String, strloc As String) As Boolean
+function object_place(nn;, strloc;){
 var rs As DAO.Recordset
 'strloc = "d_street"
 Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE abbr = '" & nn & "' and location = '" & strloc & "'")
@@ -1915,51 +1908,32 @@ rs.MoveFirst
 if(rs!Visible = True)
 object_place = True
 else
-object_place = False
+object_place = false
 } If
-} Function
-function take_inventory(strloc As String, cash;)
-var objcount ;
-var objects As String
-var thisitem As String
-var rs As DAO.Recordset
-Set rs = CurrentDb.OpenRecordset("SELECT * FROM OBJECTS WHERE YOUHAVEIT = True")
-rs.MoveFirst
-Do Until rs.EOF
-thisitem = rs!object
-if(thisitem = "A Wallet") thisitem = "A Wallet with $" & cash
-if(Len(objects) > 0)
-objects = objects & ", " & thisitem
-else
-objects = objects & thisitem
-} If
-rs.MoveNext
-Loop
-Forms!frmmain.txtInventory = objects
-
-} Function
-
+}
+*/
+/*
 function write_long_message(messg_no;)
 var i;
-var msg As String
+var msg;
 var rs As DAO.Recordset
 Set rs = CurrentDb.OpenRecordset("SELECT * FROM ACTIONS WHERE ActionID=" & messg_no)
 msg = rs!Action
 Forms!frmmain.txtActions = msg
-} Function
+}
 function game_end()
 Application.Quit
-} Function
+}
 
-function write_message(msg As String)
+function write_message(msg;)
 Forms!frmmain.txtActions = msg
-} Function
-function write_message(msg As String)
+}
+function write_message(msg;)
 Forms!frmmain.txtActions = Forms!frmmain.txtActions & vbCrLf & msg
-} Function
+}
 
 function look_graffiti()
-var msg As String
+var msg;
 msg = "+-------------------------------------------------------------------+" & vbCrLf _
 & "|                                                                   |" & vbCrLf _
 & "|        At my PC is where I sit                                    |" & vbCrLf _
@@ -1985,10 +1959,10 @@ msg = "+-------------------------------------------------------------------+" & 
 & "+-------------------------------------------------------------------+"
  
 MsgBox msg
-} Function
+}
 function purgatory()
 var choice, door;
-var cas As String
+var cas;
 
   'sleep 'sleep_time
   door = 0
@@ -2006,7 +1980,7 @@ var cas As String
     door = (Int(Rnd(3)) + choice)
     game_position.game_ended = door = 1
 } If
-} Function
+}
 
 function bum_tells_story()
 var i, j;
@@ -2024,19 +1998,19 @@ var i, j;
   '  write_message ("")
   'sleep 'sleep_time
   write_message ("He throws up and gives me back the bottle of wine.")
-} Function
+}
 
 
 function watch_TV(TV_channel;)
 
-var ch As String
+var ch;
 jumpback:
     ch = InputBox("Which channel? (1-9) ")
     TV_channel = ch
     write_long_message (10 + TV_channel)
     ch = InputBox("Change the channel?  (y/n) ")
 if(ch = "y") GoTo jumpback
-} Function
+}
 
 
 function wine_in_taxi()
@@ -2050,7 +2024,7 @@ function wine_in_taxi()
   write_message ("")
   write_message ("The idiot cab driver backs over me and kills me!!!!!!")
   purgatory
-} Function
+}
 
 
 function stab_someone()
@@ -2064,17 +2038,17 @@ function stab_someone()
   'sleep 'sleep_time
   write_message ("I just got myself!!")
   purgatory
-} Function
+}
 
-function add_to_inventory(object As String)
+function add_to_inventory(object;)
 var i;
 i = 6
 Do Until Worksheets("MAIN").Range("i" & i).Value = ""
-if(i > 17) write_long_message "You're carrying too much": Exit Function
+if(i > 17) write_long_message "You're carrying too much": Exit function
 i = i + 1
 Loop
 Worksheets("MAIN").Range("i" & i).Value = object
-} Function
+}
 function falling_down()
 var i;
 
@@ -2089,31 +2063,31 @@ var i;
       write_message ("I should have used safety rope!!!!!!!!")
     }
   purgatory
-} Function
+}
 
 
-function play_slot(money;)
+function play_slot(cash;)
 DoCmd.OpenForm "frmSlots", acNormal
-Forms!frmSLots!txtCash = money
-  if(money < 1)
+Forms!frmSLots!txtCash = cash
+  if(cash < 1)
     
       write_message ("I'm broke!!! -- that means death!!!!!!!")
       purgatory
     } If
-} Function
-function play_21(money;)
+}
+function play_21(cash;)
 DoCmd.OpenForm "frmSlots", acNormal
-Forms21!txtCash = money
-  if(money < 1)
+Forms21!txtCash = cash
+  if(cash < 1)
     
       write_message ("I'm broke!!! -- that means death!!!!!!!")
       purgatory
     } If
-} Function
+}
 
 
 function buy_rubber()
-var answer As String
+var answer;
    var i;
 
     
@@ -2128,26 +2102,26 @@ var answer As String
       write_message ("He yells -- This pervert just bought a " & rubber_color & ", ")
       write_message (rubber_flavor & "-flavored, " & rubber_lubricated & ", " & rubber_ribbed & " rubber!!!!")
       write_message ("A lady walks by and looks at me in disgust!!!!")
-} Function
+}
 
 
 function OK()
 
   write_message ("OK")
-} Function
+}
 
-function GetLocationDescription(strloc As String)
+function GetLocationDescription(strloc;)
 var i;
-var strexits As String
+var strexits;
 var rs As DAO.Recordset
-var strobjects As String
+var strobjects;
 
 Set rs = CurrentDb.OpenRecordset("SELECT * FROM Locations WHERE ABBR = '" & strloc & "'")
 'Worksheets("MAIN").Range("b9").Value = Worksheets("Locations").Range("b" & i).Value
 'Worksheets("MAIN").Range("c5").Value = Worksheets("Locations").Range("d" & i).Value
 'Worksheets("MAIN").Range("c7").Value = Worksheets("Locations").Range("c" & i).Value
 Forms!frmmain.txtLocation = rs!whereami
-if(rs!otherflag = False)
+if(rs!otherflag = false)
 Forms!frmmain.txtExits = rs!OTHERAREAS
 else
 Forms!frmmain.txtExits = rs!OTHERAREAS & " " & rs!OTHEREXITS
@@ -2155,8 +2129,8 @@ Forms!frmmain.txtExits = rs!OTHERAREAS & " " & rs!OTHEREXITS
 Forms!frmmain.txtDescription = rs!Description
 list_objects strloc
 
-} Function
-function xopen(object_open As Boolean)
+}
+function xopen(object_open{)
 
 
   if(object_open)
@@ -2166,10 +2140,10 @@ function xopen(object_open As Boolean)
       OK
       object_open = True
     } If
-} Function
+}
 
 
-function xclose(object_open As Boolean)
+function xclose(object_open{)
 
 
   if(Not object_open)
@@ -2177,11 +2151,11 @@ function xclose(object_open As Boolean)
   else
     
       OK
-      object_open = False
+      object_open = false
     }
-} Function
+}
 
-
+*/
 
 
 

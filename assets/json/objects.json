@@ -407,7 +407,7 @@
         "VISIBLE": false,
         "YOUHAVEIT": true,
         "STARTVISIBLE": false,
-        "STARTYOUHAVEIT": true,
+        "STARTYOUHAVEIT": false,
         "TAKEABLE": true
     },
     {
@@ -457,7 +457,7 @@
         "VISIBLE": false,
         "YOUHAVEIT": true,
         "STARTVISIBLE": false,
-        "STARTYOUHAVEIT": true,
+        "STARTYOUHAVEIT": false,
         "TAKEABLE": true
     },
     {
@@ -487,7 +487,7 @@
         "VISIBLE": true,
         "YOUHAVEIT": true,
         "STARTVISIBLE": true,
-        "STARTYOUHAVEIT": true,
+        "STARTYOUHAVEIT": false,
         "TAKEABLE": true
     },
     {
@@ -497,7 +497,7 @@
         "VISIBLE": false,
         "YOUHAVEIT": true,
         "STARTVISIBLE": false,
-        "STARTYOUHAVEIT": true,
+        "STARTYOUHAVEIT": false,
         "TAKEABLE": true
     },
     {
@@ -517,7 +517,7 @@
         "VISIBLE": false,
         "YOUHAVEIT": true,
         "STARTVISIBLE": false,
-        "STARTYOUHAVEIT": true,
+        "STARTYOUHAVEIT": false,
         "TAKEABLE": true
     },
     {
@@ -537,7 +537,7 @@
         "VISIBLE": false,
         "YOUHAVEIT": true,
         "STARTVISIBLE": false,
-        "STARTYOUHAVEIT": true,
+        "STARTYOUHAVEIT": false,
         "TAKEABLE": true
     },
     {

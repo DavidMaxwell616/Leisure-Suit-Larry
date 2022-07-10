@@ -2,29 +2,35 @@
 
 <head>
     <title>LEISURE SUIT LARRY</title>
-    <script src="js/boot.js"></script>
-    <script src="js/game.js"></script>
+      <script type="module"  src="js/game.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   </head>
 
 <body>
     <h1>LEISURE SUIT LARRY</h1>
-  <form>
+  <form id="mainForm" style='width:100%;'>
     <label for="location">Location:</label>
-    <input type="text" id="location" name="location"><p>
+    <input type="text" id="location" style='width:100%;'><p>
     <label for="items">Items in sight:</label>
-    <input type="text" id="items" name="items"><p>
+    <input type="text" id="items" style='width:100%;'><p>
     <label for="exits">Exits:</label>
-    <input type="text" id="exits" name="exits"><p>
+    <input type="text" id="exits" style='width:100%;'><p>
     <label for="description">Description:</label>
-    <input type="text" id="description" name="description"><p>
-    <label for="actions">Actions:</label>
-    <input type="text" id="actions" name="actions"><p>
+    <textarea type="text" id="description"  style='width:100%;height:100px' ></textarea><p>
+    <table style='width:100%; border: 1px solid black;'>
+    <tr>
+     <td style="text-align: left"> 
+      <label for="actions">Action:</label>
+    <input type="text" id="actions"  style='width:100%;' ><p>
+    <input type="button" value="Submit" onclick="Submit_Click();">
+    </td>
+    <td>
     <label for="inventory">Inventory:</label>
-    <input type="text" id="inventory" name="inventory"><p>
-    <input type="submit" value="Submit">
+      <textarea type="text" id="inventory"  style='width:100%;' name="inventory"></textarea><p>
+      </td>
+    </tr>
+  </table>
   </form>
-  <script>Start_Game();</script>
-</body>
+ </body>
 
 </html>
