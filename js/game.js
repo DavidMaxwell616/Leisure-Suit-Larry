@@ -1,18 +1,14 @@
-import actionData from "../assets/json/actions.json" assert { type: "json" };;
-import objectData from "../assets/json/objects.json" assert { type: "json" };;
-import locationData from "../assets/json/locations.json" assert { type: "json" };;
+import actionData from "../assets/json/actions.json" assert { type: "json" };
+import objectData from "../assets/json/objects.json" assert { type: "json" };
+import locationData from "../assets/json/locations.json" assert { type: "json" };
 
 Start_Game();
 
-function Submit_Click(){
-  console.log('clocl');
-let strcommand;
-let strexits;
-let verb, noun;
-if(txtCommand == "")  return;
-strcommand = txtCommand;
-verb = strcommand.split(' ')[0].toLowercase();
-noun = strcommand.split(' ')[1].toLowercase();
+window.Submit_Click = () => {
+let command=document.getElementById("action").value;
+if(command == "")  return;
+let verb = command.split(' ')[0].toLowerCase();
+let noun = command.split(' ')[1].toLowerCase();
 handleVerb(verb, noun);
 GetLocationDescription (your_place);
 take_inventory(your_place, cash);
@@ -1547,7 +1543,6 @@ function GetLocationDescription(){
 
 function take_inventory()
 {
-  var objcount ;
 var objects="";
 var thisitem;
 let obj = objectData.objects.filter(object => object.STARTYOUHAVEIT==true);
