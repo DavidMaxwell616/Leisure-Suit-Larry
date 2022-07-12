@@ -36,3 +36,4 @@ let candy_given = false;
 let flowers_given = false;
 let ring_given = false;
 let married_to_girl = false;
+const sleep_time=5000;

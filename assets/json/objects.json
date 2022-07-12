@@ -405,7 +405,7 @@
         "LOCATION": "nowhere",
         "ABBR": "ring",
         "VISIBLE": false,
-        "YOUHAVEIT": true,
+        "YOUHAVEIT": false,
         "STARTVISIBLE": false,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": true
@@ -455,7 +455,7 @@
         "LOCATION": "b_hallwy",
         "ABBR": "flowers",
         "VISIBLE": false,
-        "YOUHAVEIT": true,
+        "YOUHAVEIT": false,
         "STARTVISIBLE": false,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": true
@@ -485,7 +485,7 @@
         "LOCATION": "b_bedrm",
         "ABBR": "candy",
         "VISIBLE": true,
-        "YOUHAVEIT": true,
+        "YOUHAVEIT": false,
         "STARTVISIBLE": true,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": true
@@ -495,7 +495,7 @@
         "LOCATION": "b_backrm",
         "ABBR": "pills",
         "VISIBLE": false,
-        "YOUHAVEIT": true,
+        "YOUHAVEIT": false,
         "STARTVISIBLE": false,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": true
@@ -515,7 +515,7 @@
         "LOCATION": "c_hallwy",
         "ABBR": "passcard",
         "VISIBLE": false,
-        "YOUHAVEIT": true,
+        "YOUHAVEIT": false,
         "STARTVISIBLE": false,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": true
@@ -535,7 +535,7 @@
         "LOCATION": "d_street",
         "ABBR": "knife",
         "VISIBLE": false,
-        "YOUHAVEIT": true,
+        "YOUHAVEIT": false,
         "STARTVISIBLE": false,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": true
