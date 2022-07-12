@@ -1104,14 +1104,14 @@ break;
     else if((noun == "candy") && (your_place = "b_bedrm") && (! hooker_fucked)) 
         write_message("The Hooker says:  'Don't take it ... do me first!!'");
 
-    else if((noun = "rope") && rope_in_use) 
+    else if((noun == "rope") && rope_in_use) 
       write_message("It is tied to the balcony");
     else
       {
         OK();
         put_object(noun, "youhaveit");
         take_inventory();
-        show_items_visible();
+        show_visible_items();
         objects_carried ++;
         if(noun == "water")  pitcher_full = true;
         if(noun == "pitcher" && pitcher_full) 
@@ -1557,10 +1557,10 @@ function GetLocationDescription(){
   document.getElementById("location").value =loc.WHEREAMI;
   document.getElementById("description").value =loc.Description;
   document.getElementById("exits").value =loc.OTHERAREAS+' '+loc.OTHEREXITS;
-  show_items_visible();
+  show_visible_items();
 }
 
-function show_items_visible(){
+function show_visible_items(){
   let obj = objectData.objects.filter(object => object.LOCATION==your_place && object.VISIBLE);
   let objects="";
   obj.forEach(object => {
