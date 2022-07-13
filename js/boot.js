@@ -1,39 +1,41 @@
 let inventory=[];
-let your_place;
-let new_place;
-let cash=0;
-let max_carried;
-let objects_carried ;
-let TV_channel;
-let score;
-let rope_in_use = false;
-let window_broken = false;
-let toilet_flushed = false;
-let called_555_0987 = false;
-let called_555_6969 = false;
-let called_555_0439 = false;
-let rubber_worn = false;
-let hooker_fucked = false;
-let door_W_open = false;
-let radio_listened = false;
-let wine_ordered = false;
-let telephone_ringing = false;
-let telephone_answered = false;
-let hole_peeped = false;
-let girl_2_fucked = false;
-let tied_to_bed = false;
-let drawer_open = false;
-let closet_open = false;
-let cabinet_open = false;
-let doll_inflated = false;
-let stool_climbed = false;
-let water_on = false;
-let pitcher_full = false;
-let seeds_planted = false;
-let seeds_watered = false;
-let apple_given = false;
-let candy_given = false;
-let flowers_given = false;
-let ring_given = false;
-let married_to_girl = false;
+const max_carried = 17;
 const sleep_time=5000;
+
+let game = {
+your_place: "b_bar",
+objects_carried: 0,
+TV_channel: 0,
+cash: 1000,
+score: 0,
+rope_in_use: false,
+window_broken: false,
+toilet_flushed: false,
+called_555_0987: false,
+called_555_6969: false,
+called_555_0439: false,
+rubber_worn: false,
+hooker_fucked: false,
+door_W_open: false,
+radio_listened: false,
+wine_ordered: false,
+telephone_ringing: false,
+telephone_answered: false,
+hole_peeped: false,
+girl_2_fucked: false,
+tied_to_bed: false,
+drawer_open: false,
+closet_open: false,
+cabinet_open: false,
+doll_inflated: false,
+stool_climbed: false,
+water_on: false,
+pitcher_full: false,
+seeds_planted: false,
+seeds_watered: false,
+apple_given: false,
+candy_given: false,
+flowers_given: false,
+ring_given: false,
+married_to_girl: false
+};

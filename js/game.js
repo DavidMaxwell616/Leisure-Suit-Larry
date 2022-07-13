@@ -8,16 +8,17 @@ window.Submit_Click = () => {
 let command=document.getElementById("action").value;
 if(command == "")  return;
 let verb = command.split(' ')[0].toLowerCase();
-let noun = command.split(' ')[1].toLowerCase();
+let noun;
+if(command.split(' ').length>1)
+  noun = command.split(' ')[1].toLowerCase();
 handleVerb(verb, noun);
-GetLocationDescription (your_place);
-take_inventory(your_place, cash);
+GetLocationDescription (game.your_place);
+take_inventory(game.your_place, game.cash);
 document.getElementById("action").value = "";
 }
 
 function Start_Game(){
-max_carried = 7;
-objects_carried = 1;
+game.objects_carried = 1;
 init_new_game();
 GetLocationDescription ();
 take_inventory();
@@ -28,37 +29,37 @@ function handleVerb(verb, noun)
     switch (verb) {
     case "n":
     case "north":
-      if(exits.includes("North")) {
-        switch (your_place) {
+      if(exits.value.includes("North")) {
+        switch (game.your_place) {
           case "b_hallwy":
-            your_place = "b_bathrm";
+            game.your_place = "b_bathrm";
             break;
           case "b_bar":
-            your_place = "b_street";
+            game.your_place = "b_street";
             break;
           case "b_inroom":
-            your_place = "b_wledge";
+            game.your_place = "b_wledge";
             break;
           case "b_bedrm":
-            your_place = "b_balcny";
+            game.your_place = "b_balcny";
             break;
           case "c_casino":
-            your_place = "c_21room";
+            game.your_place = "c_21room";
             break;
           case "c_street":
-            your_place = "c_marryc";
+            game.your_place = "c_marryc";
             break;
           case "c_hmoons":
-            your_place = "c_hallwy";
+            game.your_place = "c_hallwy";
             break;
           case "d_street":
-            your_place = "d_entrnc";
+            game.your_place = "d_entrnc";
             break;
           case "d_telbth":
-            your_place = "d_disco";
+            game.your_place = "d_disco";
             break;
           case "p_livrom":
-            your_place = "p_pnpch";          
+            game.your_place = "p_pnpch";          
           default:
             break;
         }
@@ -66,143 +67,146 @@ function handleVerb(verb, noun)
         break;
     case "s":
     case "south":
-      if(exits.includes("South")) {
-        switch (your_place) {
+      if(exits.value.includes("South")) {
+        switch (game.your_place) {
           case "b_bathrm":
-            your_place = "b_hallwy";
+            game.your_place = "b_hallwy";
             break;
           case "b_street":
-            your_place = "b_bar";
+            game.your_place = "b_bar";
             break;
           case "b_balcny":
-            your_place = "b_bedrm";
+            game.your_place = "b_bedrm";
             break;
           case "c_marryc":
-            your_place = "c_street";
+            game.your_place = "c_street";
             break;
           case "c_21room":
-            your_place = "c_casino";
+            game.your_place = "c_casino";
             break;
           case "c_hallwy":
-            your_place = "c_hmoons";
+            game.your_place = "c_hmoons";
             break;
           case "d_disco":
-            your_place = "d_telbth";
+            game.your_place = "d_telbth";
             break;
           case "d_entrnc":
-            your_place = "d_street";
+            game.your_place = "d_street";
             break;
           case "d_telbth":
-            your_place = "d_disco";
+            game.your_place = "d_disco";
             break;
           case "p_pnpch":
-            your_place = "p_livrom";
+            game.your_place = "p_livrom";
             break;
       }
     }
     break;
     case "w":
     case "west":
-      if(exits.includes("West")) {
-        switch (your_place) {
-          case "b_backrm":
-            your_place = "b_hallwy";
+      if(exits.value.includes("West")) {
+        switch (game.your_place) {
+          case "b_bar":
+            game.your_place = "b_hallwy";
             break;
           case "b_backrm":
-            your_place = "b_bar";
+            game.your_place = "b_hallwy";
+            break;
+          case "b_backrm":
+            game.your_place = "b_bar";
             break;
           case "b_g_dump":
-            your_place = "b_street";
+            game.your_place = "b_street";
             break;
           case "b_balcny":
-            your_place = "b_wledge";
+            game.your_place = "b_wledge";
             break;
           case "d_entrnc":
-            your_place = "d_disco";
+            game.your_place = "d_disco";
             break;
           case "c_htdesk":
-            your_place = "c_hallwy";
+            game.your_place = "c_hallwy";
             break;
           case "c_casino":
-            your_place = "c_street";
+            game.your_place = "c_street";
             break;
           case "c_lobby":
-            your_place = "c_casino";
+            game.your_place = "c_casino";
             break;
           case "d_phrmcy":
-            your_place = "d_street";
+            game.your_place = "d_street";
             break;
           case "p_kitchn":
-            your_place = "p_pntfoy";
+            game.your_place = "p_pntfoy";
             break;
         }
       }   
       break;   
     case "e":
     case "east":
-      if(exits.includes("West")) {
-        switch (your_place) {
+      if(exits.value.includes("West")) {
+        switch (game.your_place) {
           case "b_bar":
-            your_place = "b_backrm";
+            game.your_place = "b_backrm";
             break;
           case "b_hallwy":
-            your_place = "b_bar";
+            game.your_place = "b_bar";
             break;
           case "b_street":
-            your_place = "b_g_dump";
+            game.your_place = "b_g_dump";
             break;
           case "c_street":
-            your_place = "c_casino";
+            game.your_place = "c_casino";
             break;
           case "c_casino":
-            your_place = "c_lobby";
+            game.your_place = "c_lobby";
             break;
           case "c_hallwy":
-            your_place = "c_htdesk";
+            game.your_place = "c_htdesk";
             break;
           case "d_disco":
-            your_place = "d_entrnc";
+            game.your_place = "d_entrnc";
             break;
           case "d_street":
-            your_place = "d_phrmcy";
+            game.your_place = "d_phrmcy";
             break;
           case "p_pntfoy":
-            your_place = "p_kitchn";
+            game.your_place = "p_kitchn";
             break;
           }
         }
         break;
     case "u":
     case "up":
-        if(exits.includes("Up")) {
-          switch (your_place) {
+        if(exits.value.includes("Up")) {
+          switch (game.your_place) {
             case "b_backrm":
-              your_place = "b_bedrm";
+              game.your_place = "b_bedrm";
               break;
             case "c_lobby":
-              your_place = "c_htdesk";
+              game.your_place = "c_htdesk";
               break;
             case "p_pntfoy":
-              your_place = "p_livrom";
+              game.your_place = "p_livrom";
               break;
           }
         }
         break;
     case "d":
     case "down":
-      if(exits.includes("Up")) {
-        switch (your_place) {
+      if(exits.value.includes("Up")) {
+        switch (game.your_place) {
           case "b_bedrm":
-            your_place = "b_backrm";
+            game.your_place = "b_backrm";
             break;
           case "b_balcny":
-            your_place == "b_g_dump";
+            game.your_place == "b_g_dump";
             break;
           case "c_htdesk":
-            your_place == "c_lobby";
+            game.your_place == "c_lobby";
             break;
           case "p_livrom":
-            your_place == "p_pntfoy";             
+            game.your_place == "p_pntfoy";             
             break;
         }
       }
@@ -210,17 +214,17 @@ function handleVerb(verb, noun)
     case "press":
     case "push":
         if(noun == "button") {
-            if(your_place == "b_bar") {
+            if(game.your_place == "b_bar") {
                     let text;
                     let password = prompt("A voice says  'What's the password?'  (one word) ", "");
                     if(password.toUppercase() == "BELLYBUTTON") {
                         write_message("The curtain pulls back!!");
-                        add_exit(your_place, " and East");
+                        add_exit(game.your_place, " and East");
                     }
                     else
                       write_message("Wrong!!");
             }
-            else if(your_place = "c_htdesk" || your_place == "p_pntfoy") {
+            else if(game.your_place = "c_htdesk" || game.your_place == "p_pntfoy") {
                 if(object_visible("blonde")) {
                     write_message("The blonde says 'You can't go there!'");
                 }
@@ -228,10 +232,10 @@ function handleVerb(verb, noun)
                 {    
                     write_long_message (7)
                 }
-                if(your_place = "c_htdesk") 
-                        your_place = "p_pntfoy"
+                if(game.your_place = "c_htdesk") 
+                        game.your_place = "p_pntfoy"
                     else
-                        your_place = "c_htdesk"
+                        game.your_place = "c_htdesk"
                 }
                 //else
                     //not_yet_but_maybe_later
@@ -244,15 +248,15 @@ function handleVerb(verb, noun)
     if(!object_visible("noun")) 
       find_me_one();
     else if(noun = "bushes") 
-      your_place = p_garden;
+      game.your_place = p_garden;
     else if(noun == "window") {
         if(window_broken) 
-          your_place = b_inroom;
+          game.your_place = b_inroom;
         else
           not_yet_but_maybe_later}
     else if(noun == "door_west") {
         if(door_W_open) 
-          your_place = d_disco;
+          game.your_place = d_disco;
         else
           write_message("The door is closed");
       }
@@ -272,9 +276,9 @@ function handleVerb(verb, noun)
       }
       else if(noun = "mushroom") {
           write_long_message (31);
-          your_place = Int(3 * Rnd) + 1;
+          game.your_place = Int(3 * Rnd) + 1;
           //sleep (600)
-          write_long_message (your_place) + 1;
+          write_long_message (game.your_place) + 1;
       }         
       else if(noun == "garbage" || noun == "apple_core") {
         write_message("Too moldy!");
@@ -311,15 +315,15 @@ function handleVerb(verb, noun)
           
           if(noun == "beer" || noun == "water") {
               //put_object noun = false
-              objects_carried--;
+              game.objects_carried--;
             }
         }
     break;
     case "buy":
     case "order":
-      if(cash < 1 || !is_carried("wallet")) {
+      if(game.cash < 1 || !is_carried("wallet")) {
           purgatory();
-          sorry_no_cash();
+          sorry_no_game.cash();
         }
         else
         {
@@ -327,22 +331,22 @@ function handleVerb(verb, noun)
         {
           case "whiskey":
           case "beer":
-               if(your_place != "b_bar") 
+               if(game.your_place != "b_bar") 
                 not_yet_but_maybe_later();
               else
               {
-                  if(object_place && object_visible(noun, your_place)) 
+                  if(object_place && object_visible(noun, game.your_place)) 
                     write_message("Sorry ... all out!");
-                  else if(object_place && !object_visible(noun, your_place))
+                  else if(object_place && !object_visible(noun, game.your_place))
                       write_message("I give the bartender $5 and he places it on the bar.");
-                      cash -=5;
-                      put_object(noun, your_place);
+                      game.cash -=5;
+                      put_object(noun, game.your_place);
               }
           break;
           case "wine":
-              if(your_place != "d_disco") 
+              if(game.your_place != "d_disco") 
                 not_yet_but_maybe_later();
-              else if(object_place(noun, your_place)) 
+              else if(object_place(noun, game.your_place)) 
                     write_message("All out!");
                 else
                     {
@@ -350,27 +354,27 @@ function handleVerb(verb, noun)
                       sleep(3000);
                       write_message("Poor service!!!");
                       sleep (2000);
-                      cash --;
-                      put_object(noun, your_place);
+                      game.cash --;
+                      put_object(noun, game.your_place);
                     }
           
           break;
           case "rubber":
           case "magazine":
             {
-              if(your_place != "d_phrmcy") 
+              if(game.your_place != "d_phrmcy") 
                 not_yet_but_maybe_later();
               else if(object_visible(noun)) {
           
                       if(noun = "RUBBER") {
                         buy_rubber();
                         put_object(noun, "youhaveit");
-                        objects_carried ++;
+                        game.objects_carried ++;
                       }
                       else
                     {
                         write_message("He takes $100 && gives me the magazine");
-                        cash--;
+                        game.cash--;
                         put_object(noun, "youhaveit");
                       }
                     }
@@ -389,7 +393,7 @@ function handleVerb(verb, noun)
           break;
             }
           default:
-          write_message("cash can't buy everything!!!!");
+          write_message("game.cash can't buy everything!!!!");
         }
         }
         break;
@@ -422,7 +426,7 @@ function handleVerb(verb, noun)
               water_on = noun = "on";
               if(water_on) {
                   write_message("Water is running in the sink");
-                  put_object("water", your_place);
+                  put_object("water", game.your_place);
                       }
                   else if(! pitcher_full) {
                   OK();
@@ -437,9 +441,9 @@ function handleVerb(verb, noun)
       else if(noun = "seeds") {
           put_object ("water", false);
           pitcher_full = false;
-          if(your_place = p_garden) {
+          if(game.your_place = p_garden) {
               write_message("A tree sprouts!!");
-              put_object ("tree", your_place);
+              put_object ("tree", game.your_place);
               put_object ("seeds", false);
           }
           else
@@ -476,11 +480,11 @@ function handleVerb(verb, noun)
       write_message("You have nothing to pour it with!");
     else if(!pitcher_full) 
       write_message("The pitcher is empty.");
-    else if(your_place != "p_garden" || !object_visible("seeds")) 
+    else if(game.your_place != "p_garden" || !object_visible("seeds")) 
       write_message("It pours into the ground.");
     else {
         write_message("A tree sprouts!!");
-        put_object ("tree", your_place);
+        put_object ("tree", game.your_place);
       }
 break;
     case "listen":
@@ -538,7 +542,7 @@ break;
               }
       break;              
     case "jump":
-      if(your_place == "b_balcny" || your_place == "b_wledge") 
+      if(game.your_place == "b_balcny" || game.your_place == "b_wledge") 
         falling_down();
       else
         write_message("Whoooopeeeee!!!");
@@ -548,10 +552,10 @@ break;
       write_message("No way, weirdo!!");
     else if(! object_visible("girl"))
       write_message("No girl!!");
-    else if(your_place != "c_marryc") 
+    else if(game.your_place != "c_marryc") 
       not_yet_but_maybe_later();
-    else if((cash < 30) || (! is_carried("wallet"))) {
-        if(cash < 20 || !is_carried("wallet")) {
+    else if((game.cash < 30) || (! is_carried("wallet"))) {
+        if(game.cash < 20 || !is_carried("wallet")) {
           write_message("The girl says 'But you'll need $2000 for the honeymoon suite!'");
         write_message("The preacher says 'I'll need $1000 too!!'");
       }
@@ -559,10 +563,10 @@ break;
     else
       {
         write_long_message (33);
-        cash -=30;
+        game.cash -=30;
         put_object ("girl", "c_hmoons");
         married_to_girl = true;
-        addexit (your_place, " && South");
+        addexit (game.your_place, " && South");
 
         //Path c_hallwy, south = c_hmoons
       }
@@ -594,7 +598,7 @@ break;
               if(doll_inflated) {
                   write_long_message (22);
                   put_object ("doll", false);
-                  objects_carried --;
+                  game.objects_carried --;
               }
               else
                 write_message("Inflate it first -- stupid!!!");
@@ -604,7 +608,7 @@ break;
       break;  
         case "girl":
 
-   switch(your_place)
+   switch(game.your_place)
    {
     case "c_hmoons":
       if(wine_ordered) {
@@ -613,7 +617,7 @@ break;
           score = score + 1;
           tied_to_bed = true;
           put_object ("girl", "p_jacuzzi");
-          put_object ("rope", your_place);
+          put_object ("rope", game.your_place);
       }
       else
         write_message("She says  'Get me wine!!!  I'm nervous!!'");
@@ -642,7 +646,7 @@ break;
     write_message("She says 'I'm working! Leave me alone!!'");
     break;
   case "pimp":
-    write_message("He says 'You'll never have enough cash for me - fool!'.  I guess he's gay!");
+    write_message("He says 'You'll never have enough game.cash for me - fool!'.  I guess he's gay!");
     break;
   case "bum":
     write_message("To do that I need vaseline!!");
@@ -680,8 +684,8 @@ break;
           write_message("No, I can't sleep!  Have to find me a girl!!!!");
       case "rope":
           if(is_carried("rope")) {
-              if(your_place = "b_balcny") {
-                  put_object ("rope", your_place);
+              if(game.your_place = "b_balcny") {
+                  put_object ("rope", game.your_place);
                   rope_in_use = true;
                   write_message("You tie the safety rope to the balcony");
               }
@@ -693,9 +697,9 @@ break;
         break;
       case "passcard":
           if(is_carried("passcard")) {
-              if(your_place = "d_entrnc") {
+              if(game.your_place = "d_entrnc") {
                   write_message("I show my passcard && the door opens");
-                addexit (your_place, " and West");
+                addexit (game.your_place, " and West");
               }
               else
                 not_yet_but_maybe_later();
@@ -745,7 +749,7 @@ break;
   break;
     case "call":
     case "dial":
-    if(your_place = p_pntpch) 
+    if(game.your_place = p_pntpch) 
       write_message("This only takes incoming calls!!");
     else if((noun = "555-6969") && (! called_555_6969)) {
         write_message ("")
@@ -786,7 +790,7 @@ break;
           sleep (400);
           if(is_carried("hammer")) {
               write_message("The window smashes to pieces");
-                  addexit (your_place, " and South");
+                  addexit (game.your_place, " and South");
               }
           else
             I_dont_have_it();
@@ -833,9 +837,9 @@ break;
     {
       case "pimp":
           if(hooker_fucked) 
-            write_message("He says 'I don't want your cash - stud!'");
+            write_message("He says 'I don't want your game.cash - stud!'");
           else
-            write_message("Try going up -- he'll take the cash)");
+            write_message("Try going up -- he'll take the game.cash)");
       case "hooker":
         write_message("You already paid the pimp, stupid!!");
         break;
@@ -844,13 +848,13 @@ break;
           purgatory();
           break;
       case "preacher":
-        write_message("Bring a girl here to marry -- he'll take the cash)");
+        write_message("Bring a girl here to marry -- he'll take the game.cash)");
         break;
       case "businessman":
         write_message("He's too drunk to do business right now!");
         break;
       case "bartender":
-        write_message("Buy something -- he'll take the cash) {");
+        write_message("Buy something -- he'll take the game.cash) {");
         break;
       case "dealer":
         write_message("Why ! play 21 instead?  You'll lose anyway, fool!");
@@ -871,9 +875,9 @@ break;
     case "show":
     if(noun == "passcard") {
         if(is_carried("passcard")) {
-            if(your_place = "d_entrnc") {
+            if(game.your_place = "d_entrnc") {
                 write_message("I show my passcard && the door opens");
-                addexit (your_place, " and West");
+                addexit (game.your_place, " and West");
             }
             else
               not_yet_but_maybe_later();
@@ -931,70 +935,41 @@ break;
       write_message ("Your score is '" & score & "' out of a possible '3'");
       break;
     case "save":
-    //p = pos(" ", objnam)
-    //if(p > 0) { objnam = Copy(objnam, 1, p - 1)
-    //assign( save_file, save_file_name(objnam) )
-    //rewrite (save_file)
-    //write( save_file, game_position )
-    //Close (save_file)
-    //write_messagesave_file_name (objnam) + " saved"
+      localStorage.setItem('saved_game', JSON.stringify(game));
       break;
     case "restore":
-        //p = pos(" ", objnam)
-        //if(p > 0) { objnam = Copy(objnam, 1, p - 1)
-        //write_message("Restoring from " + save_file_name(objnam)
-        //write_message
-        ////assign( save_file, save_file_name(objnam) )
-        //Reset (save_file)
-        //iores = Ioresult
-        //if(iores = 0) {
-          
-        //    read( save_file, game_position )
-        //    iores = Ioresult
-        //  }
-        //if(iores = 1) {
-        //  write_messagesave_file_name (objnam) + " never saved"
-        //else if((iores=$90) || (iores=$91)) {
-        //  write_messagesave_file_name (objnam) + " is bad"
-        //else if(iores <> 0) {
-          
-        //    write_message
-        ////    write_message( "I/O error ", iores )
-        //  }
-        //else
-      //   write_long_message( integer(your_place) + 1 )
-        //Close (save_file)
+      var obj = JSON.parse(localStorage.getItem('myStorage'));
       break;
     case "go":
       if(tied_to_bed)
           write_message("But I'm tied to the bed!!!!!");
         else if(! (no_direction)) {
-            if(your_place == "b_bedrm" && (direction == "north") && (! hooker_fucked)) 
+            if(game.your_place == "b_bedrm" && (direction == "north") && (! hooker_fucked)) 
               write_message("The Hooker says:  'Don't go there ... do me first!!'");
-            else if(your_place == "c_hallwy" && (direction == "south") && (! married_to_girl)) 
+            else if(game.your_place == "c_hallwy" && (direction == "south") && (! married_to_girl)) 
               write_message("The door is locked shut!");
-            else if(your_place == "d_entrnc" && (direction == west) && (! door_W_open)) 
+            else if(game.your_place == "d_entrnc" && (direction == west) && (! door_W_open)) 
               write_message("The door is closed!");
-            else if(your_place == b_backrm && (direction == up) && (TV_channel != 6)) {
-                if(cash < 20 || (! is_carried("wallet"))) 
+            else if(game.your_place == b_backrm && (direction == up) && (TV_channel != 6)) {
+                if(game.cash < 20 || (! is_carried("wallet"))) 
                   write_message("The Pimp says I can't until I get $2000");
                 else if(hooker_fucked) 
                   write_message("The Pimp says 'No -- the hooker can't take it anymore!'");
                 else
                   {
                     write_message("The Pimp takes $2000 && says OK");
-                    cash-= 20;
-                    your_place = "b_bedrm";
+                    game.cash-= 20;
+                    game.your_place = "b_bedrm";
                   }
                 }
-            else if(your_place == "b_balcny" && (direction == west) && (! rope_in_use)) {
+            else if(game.your_place == "b_balcny" && (direction == west) && (! rope_in_use)) {
               falling_down();
             }
             else
             { 
-                //new_place = Path(your_place, direction)
+                //new_place = Path(game.your_place, direction)
                 if(new_place != false) 
-                  your_place = new_place;
+                  game.your_place = new_place;
                 else
                   I_cant_go_that_way();
               }
@@ -1006,7 +981,7 @@ break;
     case "hail":
     if(noun != "taxi") 
       write_message("Who are you kidding?  You're pulling at straws, fool!!");
-    else if(your_place != "b_street" && your_place != "c_street" && your_place != "d_street")
+    else if(game.your_place != "b_street" && game.your_place != "c_street" && game.your_place != "d_street")
       write_message("I'm not in the street, fool!!");
     else {
         write_long_message (6);
@@ -1017,17 +992,17 @@ break;
           new_place = "c_street";
           if(taxi_destination.contains("BAR")) 
           new_place = "b_street";
-        else if(new_place = "your_place" || !new_place) 
+        else if(new_place = "game.your_place" || !new_place) 
           write_message("Huh? - Hail another!");
         else if(is_carried("wine")) {
             wine_in_taxi();
-            your_place = new_place;
+            game.your_place = new_place;
             put_object ("wine", false);
-            objects_carried --;
+            game.objects_carried --;
         }
       }
             write_message("We arrive && I get out.");
-            your_place = new_place;
+            game.your_place = new_place;
   break;
     case "take":
     case "get":
@@ -1042,8 +1017,8 @@ break;
     //            write_message("I//m carrying the following:"
     //          anything_carried = true;
     //          write_message (object_name(noun))
-    //          if(noun = "wallet") && (cash > 0)) {
-    //            write_message (" with $" & cash & "00")
+    //          if(noun = "wallet") && (game.cash > 0)) {
+    //            write_message (" with $" & game.cash & "00")
     //          else
     //            write_message
     //        }
@@ -1061,11 +1036,11 @@ break;
         //  if(object_visible(noun)) {
             
         //      write_message (object_name(noun) & ": ")
-        //      if(objects_carried >= max_carried) {
+        //      if(game.objects_carried >= max_carried) {
         //        write_message ("I//m carrying too much!!!")
         //      else if(noun = takeable_objects) {
                 
-        //          if(your_place = "d_phrmcy") && (noun = "magazine" || noun = "rubber")) {
+        //          if(game.your_place = "d_phrmcy") && (noun = "magazine" || noun = "rubber")) {
                     
         //              write_message ("The man says //Shoplifter!!// && shoots me")
         //              purgatory
@@ -1073,7 +1048,7 @@ break;
         //          else
                     
         //              put_object noun = youhavit
-        //              objects_carried = objects_carried + 1
+        //              game.objects_carried = game.objects_carried + 1
         //              if(noun = "water") { pitcher_full = true;
         //              if(noun = "pitcher") && pitcher_full) {
         //                put_object ("water" = youhavit
@@ -1089,19 +1064,19 @@ break;
       I_already_have_it();
     else if(! object_visible(noun)) 
       find_me_one();
-    else if(objects_carried >= max_carried) 
+    else if(game.objects_carried >= max_carried) 
       write_message("I'm carrying too much!!!");
 
     else if(! takeable_objects(noun)) 
       I_cant_do_that();
 
-    else if(your_place == "d_phrmcy" && (noun == "magazine" || noun == "rubber")) {
+    else if(game.your_place == "d_phrmcy" && (noun == "magazine" || noun == "rubber")) {
         write_message("The man says 'Shoplifter!!' and shoots me");
         purgatory();
     }
     else if((noun == "water") && (! is_carried("pitcher"))) 
       write_message("Get me the pitcher so I don't spill it!");
-    else if((noun == "candy") && (your_place = "b_bedrm") && (! hooker_fucked)) 
+    else if((noun == "candy") && (game.your_place = "b_bedrm") && (! hooker_fucked)) 
         write_message("The Hooker says:  'Don't take it ... do me first!!'");
 
     else if((noun == "rope") && rope_in_use) 
@@ -1112,7 +1087,7 @@ break;
         put_object(noun, "youhaveit");
         take_inventory();
         show_visible_items();
-        objects_carried ++;
+        game.objects_carried ++;
         if(noun == "water")  pitcher_full = true;
         if(noun == "pitcher" && pitcher_full) 
           put_object ("water", "youhaveit")
@@ -1133,8 +1108,8 @@ break;
             
              anything_carried = true;
              write_message (object_name(noun) & ": Dropped");
-             put_object(noun, your_place);
-             objects_carried --;
+             put_object(noun, game.your_place);
+             game.objects_carried --;
            }
        if(! anything_carried) {
          write_message ("I didn't carry anything!!");
@@ -1146,13 +1121,13 @@ break;
 
     else
       {
-        put_object(noun, your_place);
-        objects_carried --;
+        put_object(noun, game.your_place);
+        game.objects_carried --;
         if(noun == "pitcher" && pitcher_full) 
-          put_object ("water", your_place);
+          put_object ("water", game.your_place);
         else if(noun == "rubber") 
           rubber_worn = false;
-        else if(your_place == "d_disco" && (object_visible("girl")) && (noun == "candy" || noun == "flowers" || noun == "ring")) 
+        else if(game.your_place == "d_disco" && (object_visible("girl")) && (noun == "candy" || noun == "flowers" || noun == "ring")) 
         {
             switch(noun)
             {
@@ -1179,17 +1154,17 @@ break;
         
         else if(object_visible("bum") && (noun == "wine")) {
           
-            if(object_place("knife", your_place) = false) {
+            if(object_place("knife", game.your_place) = false) {
                 bum_tells_story();
-                put_object ("knife", your_place);
+                put_object ("knife", game.your_place);
             }            
             else
               write_message("The bum mutters 'That stuff made me puke!!  Get out of here!!!'");
             }
         else if(object_visible("businessman") && (noun == "whiskey")) {
-        if(object_place("control_unit", your_place) = false) {
+        if(object_place("control_unit", game.your_place) = false) {
             write_message("The guy gives me a TV controller!!");
-            put_object ("control_unit", your_place);
+            put_object ("control_unit", game.your_place);
             put_object ("whiskey", "nowhere");
         }
         else if(object_visible("blonde") && (noun == "pills")) {
@@ -1197,7 +1172,7 @@ break;
             put_object ("blonde", "nowhere");
             put_object ("pills", "nowhere");
         }
-        else if((noun == "apple") && (your_place == "p_jacuzzi") && object_visible("girl")) {
+        else if((noun == "apple") && (game.your_place == "p_jacuzzi") && object_visible("girl")) {
           
             write_long_message (20);
             apple_given = true;
@@ -1213,9 +1188,9 @@ break;
     case "examine":
     case "read":
     case "watch":
-    if(no_object) 
-      write_long_message (CInt(your_place) + 1);
-    else if(noun = "all") 
+    if(noun=="") 
+      write_long_message (game.your_place);
+    else if(noun == "all") 
       write_message("That's too much, one item at a time, please!!");
     else if(noun == "inventory" || noun == "on" || noun == "off") 
       huh();
@@ -1236,9 +1211,10 @@ break;
         break;
       case "washbasin":
          I_see_something();
-        put_object ("ring", your_place);
+        put_object ("ring", game.your_place);
         break;
       case "graffiti":
+        console.log('look graffiti');
         look_graffiti();
         break;
       case "mirror":
@@ -1278,10 +1254,10 @@ break;
         break;
       case "ashtray":
         I_see_something();
-        put_object ("passcard", your_place);
+        put_object ("passcard", game.your_place);
         break;
       case "blonde":
-      if(your_place = "c_htdesk")  write_long_message (10);
+      if(game.your_place == "c_htdesk")  write_long_message (10);
       case "bum":
         write_message("He grumbles -- I'll tell you a story for a bottle of wine.....");
         break;
@@ -1309,7 +1285,7 @@ break;
       break;
       case "telephone":
         
-          if(your_place == d_telbth) 
+          if(game.your_place == d_telbth) 
             write_message("A number is there - Call 555-6969 for a good time!");
           else
             I_see_nothing_special();
@@ -1317,7 +1293,7 @@ break;
       case "closet":
           if(closet_open) {
             I_see_something();
-            put_object ("doll", your_place);
+            put_object ("doll", game.your_place);
             }
             else
             write_message("It's closed");
@@ -1335,7 +1311,7 @@ break;
           if(stool_climbed) {
               if(cabinet_open) {
                 I_see_something();
-                put_object ("pitcher", your_place);
+                put_object ("pitcher", game.your_place);
                 }
               else
                 write_message("It's closed");
@@ -1348,15 +1324,15 @@ break;
         break;
       case "tree":
         I_see_something();
-        put_object ("apple", your_place);
+        put_object ("apple", game.your_place);
         break;
       case "sign":
         write_message("It says 'Hail taxi here'");
         break;
       case "girl":
-          if(your_place == p_jacuzzi) 
+          if(game.your_place == p_jacuzzi) 
             write_long_message (5);
-          else if(your_place == "d_disco" || (your_place == "c_marryc")) 
+          else if(game.your_place == "d_disco" || (game.your_place == "c_marryc")) 
             write_long_message (4);
           else
             write_message("She slaps me && yells 'Pervert!!!!!'");
@@ -1369,23 +1345,23 @@ break;
             break;
       case "garbage":
         I_see_something();
-        put_object ("apple_core", your_place);
+        put_object ("apple_core", game.your_place);
         break;
       case "flowers":
         write_message("They look beautiful!!!");
         break;
       case "apple_core":
         I_see_something();
-        put_object ("seeds", your_place);
+        put_object ("seeds", game.your_place);
         break;
       case "pills":
           write_message("The label on the bottle says");
           write_message ("'Want to drive someone crazy with lust??  Try this!!!!'");
           break;
       case "plant":
-          if(object_place("bushes", your_place) = false) {
+          if(object_place("bushes", game.your_place) = false) {
               write_message("There's a group of bushes behind it!!");
-              put_object ("bushes", your_place);
+              put_object ("bushes", game.your_place);
             }
             I_see_nothing_special();
             break;
@@ -1405,9 +1381,9 @@ break;
             I_dont_have_it();
             break;
       case "wallet":
-          if(cash > 0) {
+          if(game.cash > 0) {
               write_message ("");
-              write_message ("It contains $" & cash & "00.");
+              write_message ("It contains $" & game.cash & "00.");
           }          
           else
             write_message("It's empty");
@@ -1426,7 +1402,7 @@ break;
             break;
       case "rack":
         I_see_something
-        put_object ("magazine", your_place);
+        put_object ("magazine", game.your_place);
         break;
       case "curtain":
         write_message("It's on the east wall");
@@ -1439,7 +1415,7 @@ break;
     case "flush":
     if(! object_visible(noun)) 
       find_me_one();
-    else if(noun = "toilet") {
+    else if(noun == "toilet") {
         write_long_message (36);
         sleep (300);
         write_message("I'm dead from the germs!!");
@@ -1474,7 +1450,7 @@ break;
               if(is_carried("passcard")) {
                   write_message ("I have it!  The door opens!")
                   door_W_open = true;
-                  addexit(your_place, " and West");
+                  addexit(game.your_place, " and West");
               }              
               else
                 write_message ("I don't have it!!");
@@ -1520,10 +1496,10 @@ break;
       write_message("But the prime rate is already 257%!!");
 break;
     case "play":
-    if(noun = "slots") {
+    if(noun == "slots") {
         if(object_visible("slot")) {
-            if(cash > 0 && (is_carried("wallet"))) 
-              play_slot (cash);
+            if(game.cash > 0 && (is_carried("wallet"))) 
+              play_slot (game.cash);
             else{
               write_message("No Money!");
               purgatory();
@@ -1533,9 +1509,9 @@ break;
           write_message("OK, show me your slot....");
       }
     else if(noun == "cards" || noun == "21") {
-        if(your_place = "c_21room") {
-            if(cash > 0 && (is_carried("wallet"))) 
-              play_21 (cash);
+        if(game.your_place = "c_21room") {
+            if(game.cash > 0 && (is_carried("wallet"))) 
+              play_21 (game.cash);
             else
               write_message("No Money!");
               purgatory();
@@ -1553,7 +1529,7 @@ break;
 }
 
 function GetLocationDescription(){
-  let loc = locationData.locations.find(location => location.ABBR === your_place);
+  let loc = locationData.locations.find(location => location.ABBR === game.your_place);
   document.getElementById("location").value =loc.WHEREAMI;
   document.getElementById("description").value =loc.Description;
   document.getElementById("exits").value =loc.OTHERAREAS+' '+loc.OTHEREXITS;
@@ -1561,7 +1537,7 @@ function GetLocationDescription(){
 }
 
 function show_visible_items(){
-  let obj = objectData.objects.filter(object => object.LOCATION==your_place && object.VISIBLE);
+  let obj = objectData.objects.filter(object => object.LOCATION==game.your_place && object.VISIBLE);
   let objects="";
   obj.forEach(object => {
     if (objects.length==0)
@@ -1580,7 +1556,7 @@ let obj = objectData.objects.filter(object => object.YOUHAVEIT==true);
 obj.forEach(object => {
 thisitem = object.OBJECT;
 if(thisitem.includes("A Wallet")) 
-  thisitem = "A Wallet with $" + cash;
+  thisitem = "A Wallet with $" + game.cash;
 if(objects.length > 0)
   objects += ", " + thisitem;
 else
@@ -1589,15 +1565,8 @@ else
 document.getElementById("inventory").value =objects;
 }
 
-
-
 function init_new_game()
 {
-var yesno;
-var place;
-var direction;
-var i;
-
 document.getElementById("mainForm").reset();
 // yesno = InputBox("Welcome to LEISURE SUIT LARRY!!\n\r\Do you need instructions? (y/n) ")
 //   if(yesno == "Y")
@@ -1605,44 +1574,7 @@ document.getElementById("mainForm").reset();
 //   else
 //     newlines (2)
   
-      your_place = "b_bar";
 
-      objects_carried = 0;
-      TV_channel = 0;
-      cash = 1000;
-      score = 0;
-
-      rope_in_use = false;
-      window_broken = false;
-      toilet_flushed = false;
-      called_555_0987 = false;
-      called_555_6969 = false;
-      called_555_0439 = false;
-      rubber_worn = false;
-      hooker_fucked = false;
-      door_W_open = false;
-      radio_listened = false;
-      wine_ordered = false;
-      telephone_ringing = false;
-      telephone_answered = false;
-      hole_peeped = false;
-      girl_2_fucked = false;
-      tied_to_bed = false;
-      drawer_open = false;
-      closet_open = false;
-      cabinet_open = false;
-      doll_inflated = false;
-      stool_climbed = false;
-      water_on = false;
-      pitcher_full = false;
-      seeds_planted = false;
-      seeds_watered = false;
-      apple_given = false;
-      candy_given = false;
-      flowers_given = false;
-      ring_given = false;
-      
-      married_to_girl = false;
 }
 
 
@@ -1750,7 +1682,7 @@ function I_see_nothing_special()
 function I_see_something()
 {
   write_message ("I see something!!!");
-  object_place(object = your_place);
+  object_place(object = game.your_place);
 }
 
 
@@ -1785,19 +1717,19 @@ alert(action.Description);
 function look_around()
 {
 var objcount;
-      if(!place_visited(your_place))
-        write_long_message (your_place + 1);
-      if((your_place == "p_pntpch") && called_555_0439)
+      if(!place_visited(game.your_place))
+        write_long_message (game.your_place + 1);
+      if((game.your_place == "p_pntpch") && called_555_0439)
       {        
           if(!telephone_answered && Math.floor(Math.random() * 4) + 1 == 2)
             telephone_ringing = true;
           if(telephone_ringing)
             write_message ("The telephone rings");
         }
-      place_visited(your_place) = true;
+      place_visited(game.your_place) = true;
       newlines (2);
 
-      write_message (place_name(your_place));
+      write_message (place_name(game.your_place));
       write_message ("Items in sight are:  ");
       for(obj = first_object; obj<last_object;obj++)
 {        
@@ -1820,7 +1752,7 @@ var objcount;
       exitcount = 0
       for(exit = first_direction; exit<last_direction;exit++)
       {
-      if(Path(your_place, intexit) != nowhere)
+      if(Path(game.your_place, intexit) != nowhere)
           exitcount ++;
       exits = exitcount
       if(exits == 0)
@@ -1829,7 +1761,7 @@ var objcount;
       {
         for(intexit = first_direction; intexit<last_direction;intexit++)
         {
-          if(Path(your_place, intexit) != nowhere)
+          if(Path(game.your_place, intexit) != nowhere)
           {
                 if(exitcount < exits)
               {  
@@ -1886,7 +1818,7 @@ document.getElementById("items").value=objects;
 }
 
 function object_visible(noun){
-  let object = objectData.objects.find(object => object.ABBR==noun && object.LOCATION==your_place);
+  let object = objectData.objects.find(object => object.ABBR==noun && object.LOCATION==game.your_place);
   return object.VISIBLE;
 }
 
@@ -1926,7 +1858,6 @@ alert(msg);
 
 function write_long_message(messg_no)
 {
-  console.log(messg_no);
   let action = actionData.actions.find(action => action.ACTIONID==messg_no);
 var msg= action.Action;
 document.getElementById("actions").value =msg;
@@ -2016,13 +1947,13 @@ function stab_someone()
 
 function add_to_inventory(object)
 {
-if(objects_carried > 17) 
+if(game.objects_carried > 17) 
 {  
   write_long_message("You're carrying too much");
   return;
 }
 document.getElementById("inventory").value+= object;
-objects_carried.push(object);
+game.objects_carried.push(object);
 }
 
 function falling_down()
@@ -2043,18 +1974,18 @@ for(var i = 1;i<50;i++)
 }
 
 
-function play_slot(cash)
+function play_slot()
 {
-  if(cash < 1)
+  if(game.cash < 1)
     {
       write_message ("I'm broke!!! -- that means death!!!!!!!")
       purgatory();
     }
 }
 
-function play_21(cash)
+function play_21()
 {
-  if(cash < 1)
+  if(game.cash < 1)
   {    
       write_message ("I'm broke!!! -- that means death!!!!!!!");
       purgatory();
