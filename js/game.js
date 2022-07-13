@@ -26,6 +26,8 @@ take_inventory();
 
 function handleVerb(verb, noun)
 {
+    if(verb=="go" && (noun=="north" || noun=="south" || noun=="east" || noun=="west"))
+      verb = noun;
     switch (verb) {
     case "n":
     case "north":
@@ -144,7 +146,7 @@ function handleVerb(verb, noun)
       break;   
     case "e":
     case "east":
-      if(exits.value.includes("West")) {
+      if(exits.value.includes("East")) {
         switch (game.your_place) {
           case "b_bar":
             game.your_place = "b_backrm";
