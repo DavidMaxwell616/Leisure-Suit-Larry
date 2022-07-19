@@ -252,12 +252,12 @@ function handleVerb(verb, noun)
     else if(noun = "bushes") 
       game.your_place = p_garden;
     else if(noun == "window") {
-        if(window_broken) 
+        if(game.window_broken) 
           game.your_place = b_inroom;
         else
           not_yet_but_maybe_later}
     else if(noun == "door_west") {
-        if(door_W_open) 
+        if(game.door_W_open) 
           game.your_place = d_disco;
         else
           write_message("The door is closed");
@@ -425,12 +425,12 @@ function handleVerb(verb, noun)
           if(!object_visible("sink")) 
             write_message("Find a working sink!");
           else
-              water_on = noun = "on";
+            game.water_on = noun = "on";
               if(water_on) {
                   write_message("Water is running in the sink");
                   put_object("water", game.your_place);
                       }
-                  else if(! pitcher_full) {
+                  else if(! game.pitcher_full) {
                   OK();
                   put_object("water", false);
                   }
@@ -442,7 +442,7 @@ function handleVerb(verb, noun)
         find_me_one();
       else if(noun = "seeds") {
           put_object ("water", false);
-          pitcher_full = false;
+          game.pitcher_full = false;
           if(game.your_place = p_garden) {
               write_message("A tree sprouts!!");
               put_object ("tree", game.your_place);
@@ -456,7 +456,7 @@ function handleVerb(verb, noun)
         
           write_message("It pours into the ground.");
           put_object ("water", false);
-          pitcher_full = false;
+          game.pitcher_full = false;
         
       break;
     case "fill":
@@ -466,13 +466,13 @@ function handleVerb(verb, noun)
       write_message("I don't have it!");
     else if(! object_visible("sink")) 
       write_message("Find a working sink!!");
-    else if(! water_on) 
+    else if(! game.water_on) 
       write_message("No water!!");
-    else if(pitcher_full) 
+    else if(game.pitcher_full) 
       write_message("The pitcher is already full!");
     else  {
         OK();
-        pitcher_full = true;
+        game.pitcher_full = true;
       }
   break;
     case "pour":
@@ -480,7 +480,7 @@ function handleVerb(verb, noun)
       I_cant_do_that();
     else if(!is_carried("pitcher")) 
       write_message("You have nothing to pour it with!");
-    else if(!pitcher_full) 
+    else if(!game.pitcher_full) 
       write_message("The pitcher is empty.");
     else if(game.your_place != "p_garden" || !object_visible("seeds")) 
       write_message("It pours into the ground.");
@@ -494,12 +494,12 @@ break;
           find_me_one();
         else if(noun == "radio") {
             if(is_carried("radio")) {
-                if(radio_listened) {
+                if(game.radio_listened) {
                   write_message("Punk rock!!!!!");
                 }
                 else{
                     write_message("An advertisement says 'Call 555-0987 for all your liquor needs!!!!'");
-                    radio_listened = true;
+                    game.radio_listened = true;
                   }
                 }
             else
@@ -514,19 +514,19 @@ break;
         switch(noun)
           {
             case "desk":
-              Close(drawer_open);
+              Close(game.drawer_open);
               if(object_visible("newspaper")) {
                 put_object ("newspaper", false);
               }
               break;
           case "closet":
-              Close (closet_open);
+              Close (game.closet_open);
               if(object_visible("doll")) {
                 put_object ("doll", false);
               }
               break;
           case "cabinet":
-            if(stool_climbed) {
+            if(game.stool_climbed) {
                 Close ("cabinet_open");
                 if(object_visible("pitcher")) 
                   put_object ("pitcher", false);
@@ -535,7 +535,7 @@ break;
                 }
             break;
           case "door_west":
-              Close(door_W_open);
+              Close(game.door_W_open);
             // Path d_entrnc, west = false
           break;
           default:
@@ -581,12 +581,12 @@ break;
       switch(noun)
       {
          case "hooker":
-            if(hooker_fucked) 
+            if(game.hooker_fucked) 
               write_message("She can't take it any more!!!!");
             else
-                if(rubber_worn) {
-                    hooker_fucked = true;
-                    score ++;
+                if(game.rubber_worn) {
+                  game.hooker_fucked = true;
+                  game.score ++;
                     write_long_message (21);
                 }
                 else
@@ -597,7 +597,7 @@ break;
           break;
         case "doll":
             if(is_carried("doll")) {
-              if(doll_inflated) {
+              if(game.doll_inflated) {
                   write_long_message (22);
                   put_object ("doll", false);
                   game.objects_carried --;
@@ -613,11 +613,11 @@ break;
    switch(game.your_place)
    {
     case "c_hmoons":
-      if(wine_ordered) {
+      if(game.wine_ordered) {
           write_long_message (24);
-          girl_2_fucked = true;
-          score = score + 1;
-          tied_to_bed = true;
+          game.girl_2_fucked = true;
+          game.score++;
+          game.tied_to_bed = true;
           put_object ("girl", "p_jacuzzi");
           put_object ("rope", game.your_place);
       }
@@ -626,8 +626,8 @@ break;
     }
     break;
   case "p_jacuzzi":
-    if(apple_given) {
-        score ++;
+    if(game.apple_given) {
+      game.score ++;
         write_long_message (23);
         // game_}ed = true;
     }
@@ -674,7 +674,7 @@ break;
     {
       case "rubber":
         write_message("It tickles!!");
-        rubber_worn = true;
+        game.rubber_worn = true;
         put_object ("rubber", "youhaveit");
         break;
       case "toilet":
@@ -688,7 +688,7 @@ break;
           if(is_carried("rope")) {
               if(game.your_place = "b_balcny") {
                   put_object ("rope", game.your_place);
-                  rope_in_use = true;
+                  game.rope_in_use = true;
                   write_message("You tie the safety rope to the balcony");
               }
               else
@@ -713,9 +713,9 @@ break;
           write_message("Let me see if(I still have the knife!");
           sleep (600);
           if(is_carried("knife")) {
-              if(tied_to_bed) {
+              if(game.tied_to_bed) {
                   write_message("I do && it worked! Thanks!");
-                  tied_to_bed = false;
+                  game.tied_to_bed = false;
               }
               else
                   write_message("Samurai sex fi}!!!!!!!!!!!!!!!!!!!");
@@ -736,15 +736,15 @@ break;
       find_me_one();
     else if(noun != "telephone") 
       I_cant_do_that();
-    else if(telephone_ringing) {
+    else if(game.telephone_ringing) {
         write_message ("");
         write_message ("A girl says  'Hi honey!  This is " & girl_name & ". Dear, why");
         write_message ("don't you forget this game && " & girl_do & " with me????");
         write_message ("After all, your " & your_part & " has always turned me on!!!!");
         write_message ("So bring a " & your_object & " && come play with my " & girl_part & "!'");
         write_message ("She hangs up!");
-        telephone_ringing = false;
-        telephone_answered = true;
+        game.telephone_ringing = false;
+        game.telephone_answered = true;
     }
     else
       write_message("It's not ringing!");
@@ -753,7 +753,7 @@ break;
     case "dial":
     if(game.your_place = p_pntpch) 
       write_message("This only takes incoming calls!!");
-    else if((noun = "555-6969") && (! called_555_6969)) {
+    else if((noun = "555-6969") && (! game.called_555_6969)) {
         write_message ("")
         write_message ("A voice says 'Hello, please answer the questions with one word answers")
         girl_name = InputBox("What's your favorite girls name?  ")
@@ -762,21 +762,21 @@ break;
         your_part = InputBox("&& the best part of your body?   ")
         your_object = InputBox("Finally, your favorite object?    ")
         write_message ("He hangs up!")
-        called_555_6969 = true;
+        game.called_555_6969 = true;
           girl_name = Lcase(girl_name)
           girl_part = Lcase(girl_part)
           girl_do = Lcase(girl_do)
           your_part = Lcase(your_part)
           your_object = Lcase(your_object)
     }
-    else if((noun = "555-0439") && (! called_555_0439)) {
+    else if((noun = "555-0439") && (! game.called_555_0439)) {
         write_long_message (34)
-        called_555_0439 = true;
+        game.called_555_0439 = true;
     }
-    else if((noun = "555-0987") && married_to_girl && (! called_555_0987)) {
+    else if((noun = "555-0987") && game.married_to_girl && (! game.called_555_0987)) {
         write_long_message (35)
-        wine_ordered = true;
-        called_555_0987 = true;
+        game.wine_ordered = true;
+        game.called_555_0987 = true;
         put_object ("wine", "c_hmoons");
     }
     else
@@ -804,9 +804,9 @@ break;
       write_message("Let me see if(I still have the knife!");
       sleep (600);
       if(is_carried("knife")) {
-          if(noun == "rope" && tied_to_bed) {
-              write_message("I do && it worked! Thanks!");
-              tied_to_bed = false;
+          if(noun == "rope" && game.tied_to_bed) {
+              write_message("I do and it worked! Thanks!");
+              game.tied_to_bed = false;
           }
           else
               write_message("Samurai sex fiend!!!!!!!!!!!!!!!!!!!");
@@ -838,7 +838,7 @@ break;
     switch(noun)
     {
       case "pimp":
-          if(hooker_fucked) 
+          if(game.hooker_fucked) 
             write_message("He says 'I don't want your game.cash - stud!'");
           else
             write_message("Try going up -- he'll take the game.cash)");
@@ -934,7 +934,7 @@ break;
       break;
     case "score":
       write_message ("");
-      write_message ("Your score is '" & score & "' out of a possible '3'");
+      write_message ("Your score is '" & game.score & "' out of a possible '3'");
       break;
     case "save":
       localStorage.setItem('saved_game', JSON.stringify(game));
@@ -946,16 +946,16 @@ break;
       if(tied_to_bed)
           write_message("But I'm tied to the bed!!!!!");
         else if(! (no_direction)) {
-            if(game.your_place == "b_bedrm" && (direction == "north") && (! hooker_fucked)) 
+            if(game.your_place == "b_bedrm" && (direction == "north") && (! game.hooker_fucked)) 
               write_message("The Hooker says:  'Don't go there ... do me first!!'");
-            else if(game.your_place == "c_hallwy" && (direction == "south") && (! married_to_girl)) 
+            else if(game.your_place == "c_hallwy" && (direction == "south") && (! game.married_to_girl)) 
               write_message("The door is locked shut!");
-            else if(game.your_place == "d_entrnc" && (direction == west) && (! door_W_open)) 
+            else if(game.your_place == "d_entrnc" && (direction == west) && (! game.door_W_open)) 
               write_message("The door is closed!");
-            else if(game.your_place == b_backrm && (direction == up) && (TV_channel != 6)) {
+            else if(game.your_place == b_backrm && (direction == up) && (game.TV_channel != 6)) {
                 if(game.cash < 20 || (! is_carried("wallet"))) 
                   write_message("The Pimp says I can't until I get $2000");
-                else if(hooker_fucked) 
+                else if(game.hooker_fucked) 
                   write_message("The Pimp says 'No -- the hooker can't take it anymore!'");
                 else
                   {
@@ -964,7 +964,7 @@ break;
                     game.your_place = "b_bedrm";
                   }
                 }
-            else if(game.your_place == "b_balcny" && (direction == west) && (! rope_in_use)) {
+            else if(game.your_place == "b_balcny" && (direction == west) && (! game.rope_in_use)) {
               falling_down();
             }
             else
@@ -1078,10 +1078,10 @@ break;
     }
     else if((noun == "water") && (! is_carried("pitcher"))) 
       write_message("Get me the pitcher so I don't spill it!");
-    else if((noun == "candy") && (game.your_place = "b_bedrm") && (! hooker_fucked)) 
+    else if((noun == "candy") && (game.your_place = "b_bedrm") && (! game.hooker_fucked)) 
         write_message("The Hooker says:  'Don't take it ... do me first!!'");
 
-    else if((noun == "rope") && rope_in_use) 
+    else if((noun == "rope") && game.rope_in_use) 
       write_message("It is tied to the balcony");
     else
       {
@@ -1090,8 +1090,8 @@ break;
         take_inventory();
         show_visible_items();
         game.objects_carried ++;
-        if(noun == "water")  pitcher_full = true;
-        if(noun == "pitcher" && pitcher_full) 
+        if(noun == "water")  game.pitcher_full = true;
+        if(noun == "pitcher" && game.pitcher_full) 
           put_object ("water", "youhaveit")
       }
 break;
