@@ -937,10 +937,13 @@ break;
       write_message ("Your score is '" & game.score & "' out of a possible '3'");
       break;
     case "save":
-      localStorage.setItem('saved_game', JSON.stringify(game));
+      localStorage.setItem('lsl_saved_game', JSON.stringify(game));
       break;
     case "restore":
-      var obj = JSON.parse(localStorage.getItem('myStorage'));
+      var obj = JSON.parse(localStorage.getItem('lsl_saved_game'));
+      game = obj;
+      GetLocationDescription ();
+      take_inventory();
       break;
     case "go":
       if(tied_to_bed)
