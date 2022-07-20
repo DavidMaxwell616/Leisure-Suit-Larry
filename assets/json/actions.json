@@ -118,7 +118,7 @@
         },
         {
             "ACTIONID": "30",
-            "ACTION": "The object of LEISURE SUIT LARRY is to find -- and seduce -- three different\r\n girls.  They have very different personalities, so tricks that work on one\r\ngirl usually won't work on another girl.\r\nThe game has three different areas -- Disco, Casino and Bar.  You start off\r\nin the Bar with $1000.  You'll need more money than that, so you'll have to\r\nmake more money during the game.If you're stuck, try looking at everything in sight, object by object. This\r\nwill usually help you find missing objects and/or clues etc.\r\nThe 'Help' command will repeat this message.\r\nSeveral commands can be entered on the same line, but must then be separated\r\nby commas or periods.\r\n========= ******** GOOD LUCK !!! ******** ========"
+            "ACTION": "The object of LEISURE SUIT LARRY is to find -- and seduce -- three different girls.\r\nThey have very different personalities, so tricks that work on one girl usually won't work on another girl.\r\nThe game has three different areas -- Disco, Casino and Bar.\r\nYou start off in the Bar with $1,000.\r\nYou'll need more money than that, so you'll have to make more money during the game.\r\nIf you're stuck, try looking at everything in sight, object by object. This will usually help you find missing objects and/or clues etc.\r\nThe 'Help' command will repeat this message.\r\nSeveral commands can be entered on the same line, but must then be separated by commas or periods.\r\n========= ******** GOOD LUCK !!! ******** ========"
         },
         {
             "ACTIONID": "31",

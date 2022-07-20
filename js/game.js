@@ -1712,8 +1712,7 @@ return x.includes(obj);
 
 function give_help()
 {
-let action = actionData.actions.find(action => action.ACTIONID==30);
-alert(action.Description);
+write_long_message(30);
 }
 
 function look_around()
@@ -1860,9 +1859,8 @@ alert(msg);
 
 function write_long_message(messg_no)
 {
-  let action = actionData.actions.find(action => action.ACTIONID==messg_no);
-var msg= action.Action;
-document.getElementById("actions").value =msg;
+  let action = actionData.actions.find(action => action.ACTIONID==messg_no).ACTION;
+  document.getElementById("actions").value =action;
 }
 
 function game_end()
