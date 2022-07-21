@@ -1012,58 +1012,12 @@ break;
     case "take":
     case "get":
     case "grab":
-    //if(noun = "inventory") {
-      
-    //    anything_carried = false
-    //    for(noun = first_object To last_object
-    //      if(is_carried(noun)) {
-            
-    //          if(! anything_carried) {
-    //            write_message("I//m carrying the following:"
-    //          anything_carried = true;
-    //          write_message (object_name(noun))
-    //          if(noun = "wallet") && (game.cash > 0)) {
-    //            write_message (" with $" & game.cash & "00")
-    //          else
-    //            write_message
-    //        }
-    //    if(! anything_carried) {
-    //      write_message("I//m ! carrying anything!!"
-    //  }
-
     if(noun == "off") 
       write_message("You're not a bird, fool!!");
     else if(noun == "all") {
         write_message("You hog!!!");
         sleep (300);
         write_message ("");
-        //for(noun = first_object To last_object
-        //  if(object_visible(noun)) {
-            
-        //      write_message (object_name(noun) & ": ")
-        //      if(game.objects_carried >= max_carried) {
-        //        write_message ("I//m carrying too much!!!")
-        //      else if(noun = takeable_objects) {
-                
-        //          if(game.your_place = "d_phrmcy") && (noun = "magazine" || noun = "rubber")) {
-                    
-        //              write_message ("The man says //Shoplifter!!// && shoots me")
-        //              purgatory
-        //            }
-        //          else
-                    
-        //              put_object noun = youhavit
-        //              game.objects_carried = game.objects_carried + 1
-        //              if(noun = "water") { pitcher_full = true;
-        //              if(noun = "pitcher") && pitcher_full) {
-        //                put_object ("water" = youhavit
-        //              write_message ("Taken")
-        //            }
-        //        }
-        //      else
-        //        cant_do_that
-        //    }
-        //}
     }
     else if(is_carried(noun)) 
       I_already_have_it();
@@ -1072,7 +1026,7 @@ break;
     else if(game.objects_carried >= max_carried) 
       write_message("I'm carrying too much!!!");
 
-    else if(! takeable_objects(noun)) 
+    else if(!takeable_object(noun)) 
       I_cant_do_that();
 
     else if(game.your_place == "d_phrmcy" && (noun == "magazine" || noun == "rubber")) {
@@ -1573,13 +1527,6 @@ document.getElementById("inventory").value =objects;
 function init_new_game()
 {
 document.getElementById("mainForm").reset();
-// yesno = InputBox("Welcome to LEISURE SUIT LARRY!!\n\r\Do you need instructions? (y/n) ")
-//   if(yesno == "Y")
-//     give_help();
-//   else
-//     newlines (2)
-  
-
 }
 
 
@@ -1632,7 +1579,7 @@ function huh()
 
 function I_cant_do_that()
  {
- write_message ("I can't do that!");
+  cant_do_that();
 }
 
 
@@ -1696,10 +1643,9 @@ function not_yet_but_maybe_later()
   write_message ("Not yet but maybe later!");
 }
 
-function takeable_objects(obj){
+function takeable_object(obj){
 if(obj == "control") obj = "control_unit"
-let object = objectData.objects.find(object => object.ABBR==obj);
-return object.TAKEABLE;
+return objectData.objects.find(object => object.ABBR==obj).TAKEABLE;
 }
 
 function add_exit(strloc, strexit)
