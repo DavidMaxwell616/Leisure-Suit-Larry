@@ -1,8 +1,5 @@
-import actionData from "../assets/json/actions.json" assert { type: "json" };
-import objectData from "../assets/json/objects.json" assert { type: "json" };
-import locationData from "../assets/json/locations.json" assert { type: "json" };
-
 import * as functions from "./functions.js";
+import * as game_functions from "./game.js";
 
 export default function handleVerb(verb, noun)
 {
@@ -207,7 +204,7 @@ export default function handleVerb(verb, noun)
                      functions.write_message("Wrong!!");
             }
             else if(game.your_place = "c_htdesk" || game.your_place == "p_pntfoy") {
-                if(object_visible("blonde")) {
+                if(functions.object_visible("blonde")) {
                    functions.write_message("The blonde says 'You can't go there!'");
                 }
                 else
@@ -227,7 +224,7 @@ export default function handleVerb(verb, noun)
             }
           break;
     case "enter":
-    if(!object_visible("noun")) 
+    if(!functions.object_visible("noun")) 
      functions.find_me_one();
     else if(noun = "bushes") 
       game.your_place = p_garden;
@@ -249,12 +246,12 @@ export default function handleVerb(verb, noun)
       I_cant_do_that();
         break;
     case "eat":
-      if(!object_visible(noun) && (!is_carried(noun))){ 
+      if(!functions.object_visible(noun) && (!is_carried(noun))){ 
        functions.find_me_one();
         }
       else if(noun == "blonde" || noun =="waitress" || noun == "hooker" || noun == "girl") {
            functions.write_long_message (8);
-          purgatory();
+          functions.purgatory();
       }
       else if(noun = "mushroom") {
            functions.write_long_message (31);
@@ -271,14 +268,14 @@ export default function handleVerb(verb, noun)
       else if(noun = "pills") {
         
            functions.write_long_message (26);
-          purgatory();
+          functions.purgatory();
       }
       else
        functions.write_message("Tastes awful!");
     break;
     case "drink":
       if(!is_carried(noun)) {
-        I_dont_have_it();
+         functions.I_dont_have_it();
         }
         else{
           switch(noun)
@@ -303,13 +300,13 @@ export default function handleVerb(verb, noun)
     break;
     case "buy":
     case "order":
-         if(game.cash < 1 || !functions.is_carried("wallet")) {
-          purgatory();
-          sorry_no_game.cash();
-        }
-        else
-        {
-          switch(noun)
+      if(game.cash < 1 || !functions.is_carried("wallet")) {
+        functions.sorry_no_cash();
+        functions.purgatory();
+       }
+      else
+       {
+    switch(noun)
         {
           case "whiskey":
           case "beer":
@@ -346,7 +343,7 @@ export default function handleVerb(verb, noun)
             {
               if(game.your_place != "d_phrmcy") 
                 not_yet_but_maybe_later();
-              else if(object_visible(noun)) {
+              else if(functions.object_visible(noun)) {
           
                       if(noun = "RUBBER") {
                         buy_rubber();
@@ -367,7 +364,7 @@ export default function handleVerb(verb, noun)
   
           case "hooker":
             {             
-              if(object_visible("hooker")) 
+              if(functions.object_visible("hooker")) 
                functions.write_message("You've already paid the pimp, stupid!!!!");
               else
                functions.find_me_one();
@@ -383,15 +380,15 @@ export default function handleVerb(verb, noun)
     {     
       if(noun == "STOOL") {
         
-          if(object_visible("stool")) {
+          if(functions.object_visible("stool")) {
             
-              OK();
+              functions.OK();
               stool_climbed = true;
           }
           else
            functions.write_message("It's on the floor here!");
         }
-      else if(object_visible(noun) || is_carried(noun)) {
+      else if(functions.object_visible(noun) || is_carried(noun)) {
        I_cant_do_that();
       }  
       else
@@ -402,7 +399,7 @@ export default function handleVerb(verb, noun)
     case "water":
       if(noun == "on" || noun == "off") {
         
-          if(!object_visible("sink")) 
+          if(!functions.object_visible("sink")) 
            functions.write_message("Find a working sink!");
           else
             game.water_on = noun = "on";
@@ -411,14 +408,14 @@ export default function handleVerb(verb, noun)
                   functions.put_object("water", game.your_place);
                       }
                   else if(! game.pitcher_full) {
-                  OK();
+                  functions.OK();
                   functions.put_object("water", false);
                   }
             }
   
       else if(!is_carried("water")) 
        functions.write_message("I have no water!");
-      else if(! object_visible(noun)) 
+      else if(! functions.object_visible(noun)) 
        functions.find_me_one();
       else if(noun = "seeds") {
           functions.put_object ("water", false);
@@ -444,14 +441,14 @@ export default function handleVerb(verb, noun)
       I_cant_do_that();
     else if(!is_carried("pitcher")) 
      functions.write_message("I don't have it!");
-    else if(! object_visible("sink")) 
+    else if(! functions.object_visible("sink")) 
      functions.write_message("Find a working sink!!");
     else if(! game.water_on) 
      functions.write_message("No water!!");
     else if(game.pitcher_full) 
      functions.write_message("The pitcher is already full!");
     else  {
-        OK();
+        functions.OK();
         game.pitcher_full = true;
       }
   break;
@@ -462,7 +459,7 @@ export default function handleVerb(verb, noun)
      functions.write_message("You have nothing to pour it with!");
     else if(!game.pitcher_full) 
      functions.write_message("The pitcher is empty.");
-    else if(game.your_place != "p_garden" || !object_visible("seeds")) 
+    else if(game.your_place != "p_garden" || !functions.object_visible("seeds")) 
      functions.write_message("It pours into the ground.");
     else {
        functions.write_message("A tree sprouts!!");
@@ -470,7 +467,7 @@ export default function handleVerb(verb, noun)
       }
 break;
     case "listen":
-        if(!object_visible(noun) && !is_carried(noun)) 
+        if(!functions.object_visible(noun) && !is_carried(noun)) 
          functions.find_me_one();
         else if(noun == "radio") {
             if(functions.is_carried("radio")) {
@@ -489,26 +486,26 @@ break;
          functions.write_message("Quiet as a mouse in heat!");
   break;
     case "close":
-        if(!object_visible(noun)) 
+        if(!functions.object_visible(noun)) 
          functions.find_me_one();
         switch(noun)
           {
             case "desk":
               Close(game.drawer_open);
-              if(object_visible("newspaper")) {
+              if(functions.object_visible("newspaper")) {
                 functions.put_object ("newspaper", false);
               }
               break;
           case "closet":
               Close (game.closet_open);
-              if(object_visible("doll")) {
+              if(functions.object_visible("doll")) {
                 functions.put_object ("doll", false);
               }
               break;
           case "cabinet":
             if(game.stool_climbed) {
                 Close ("cabinet_open");
-                if(object_visible("pitcher")) 
+                if(functions.object_visible("pitcher")) 
                   functions.put_object ("pitcher", false);
                 else
                  functions.write_message("I can't reach it!");
@@ -532,7 +529,7 @@ break;
     case "marry":
     if(noun != "girl") 
      functions.write_message("No way, weirdo!!");
-    else if(! object_visible("girl"))
+    else if(! functions.object_visible("girl"))
      functions.write_message("No girl!!");
     else if(game.your_place != "c_marryc") 
       not_yet_but_maybe_later();
@@ -554,7 +551,7 @@ break;
       }
       break;
     case "fuck":
-      if(! object_visible(noun) && (!is_carried(noun)) && (noun != "you")) 
+      if(! functions.object_visible(noun) && (!is_carried(noun)) && (noun != "you")) 
        functions.find_me_one();
       else
       {
@@ -572,7 +569,7 @@ break;
                 else
                     {                  
                    functions.write_message("Oh no!!! I've got the dreaded atomic clap!!! I'm dead!!");
-                    purgatory();
+                    functions.purgatory();
                   }
           break;
         case "doll":
@@ -616,7 +613,7 @@ break;
     break;
   case "bartender":
    functions.write_message("He jumps over the bar and kills me!!");
-    purgatory();
+    functions.purgatory();
     break;
   case "you":
    functions.write_message("Not tonight -- I have a headache!!");
@@ -647,7 +644,7 @@ break;
 break;
     case "wear":
     case "use":
-      if(! object_visible(noun) && (!is_carried(noun)) && (noun != "knife")) 
+      if(! functions.object_visible(noun) && (!is_carried(noun)) && (noun != "knife")) 
        functions.find_me_one();
     else
     switch(noun)
@@ -675,7 +672,7 @@ break;
                 not_yet_but_maybe_later();
               }
           else
-            I_dont_have_it();
+             functions.I_dont_have_it();
         break;
       case "passcard":
           if(functions.is_carried("passcard")) {
@@ -687,7 +684,7 @@ break;
                 not_yet_but_maybe_later();
           }
           else
-            I_dont_have_it();
+             functions.I_dont_have_it();
         break;
       case "knife":
          functions.write_message("Let me see if(I still have the knife!");
@@ -701,10 +698,10 @@ break;
                  functions.write_message("Samurai sex fi}!!!!!!!!!!!!!!!!!!!");
                   sleep (600);
                  functions.write_message ("I stab myself in extacy!");
-                  purgatory();
+                  functions.purgatory();
               }
           else
-            I_dont_have_it();
+             functions.I_dont_have_it();
         break;
       default:
           I_cant_do_that();
@@ -712,7 +709,7 @@ break;
     }
     break;
     case "answer":
-    if(! object_visible(noun))
+    if(! functions.object_visible(noun))
      functions.find_me_one();
     else if(noun != "telephone") 
       I_cant_do_that();
@@ -765,7 +762,7 @@ break;
   break;
     case "break":
     case "smash":
-      if(! object_visible(noun)) 
+      if(! functions.object_visible(noun)) 
        functions.find_me_one();
       else if(noun == "window") {
          functions.write_message("Let me see if(I have a hammer");
@@ -775,7 +772,7 @@ break;
                   addexit (game.your_place, " and South");
               }
           else
-            I_dont_have_it();
+             functions.I_dont_have_it();
         }
       else
         I_cant_do_that();
@@ -792,10 +789,10 @@ break;
              functions.write_message("Samurai sex fiend!!!!!!!!!!!!!!!!!!!");
               sleep (600);
              functions.write_message ("I stab myself in extacy!");
-              purgatory();
+              functions.purgatory();
           }
       else
-        I_dont_have_it();
+         functions.I_dont_have_it();
     break;
     case "dance":
      functions.write_message ("");
@@ -811,7 +808,7 @@ break;
     case "kill":
      functions.write_message("Try using a knife!!!");
     case "pay":
-    if(! object_visible(noun)) 
+    if(! functions.object_visible(noun)) 
      functions.find_me_one();
     else
     {
@@ -827,7 +824,7 @@ break;
         break;
       case "blonde", "waitress", "girl":
          functions.write_message("She yells 'I'm ! a whore!!!' && kills me!");
-          purgatory();
+          functions.purgatory();
           break;
       case "preacher":
        functions.write_message("Bring a girl here to marry -- he'll take the game.cash)");
@@ -849,7 +846,7 @@ break;
     case "smoke":
     if(noun == "plant") {
        functions.write_message("A cop beats me over the head!!!!");
-        purgatory();
+        functions.purgatory();
         }
     else
       I_cant_do_that();
@@ -865,13 +862,13 @@ break;
               not_yet_but_maybe_later();
           }
         else
-          I_dont_have_it();
+           functions.I_dont_have_it();
       }
     else
       I_cant_do_that();
   break;
     case "smell":
-    if(! object_visible(noun) && (! is_carried(noun))) 
+    if(! functions.object_visible(noun) && (! is_carried(noun))) 
      functions.find_me_one();
     else
     switch(noun){
@@ -1001,17 +998,17 @@ break;
     }
     else if(functions.is_carried(noun)) 
      functions.I_already_have_it();
-    else if(! object_visible(noun)) 
+    else if(! functions.object_visible(noun)) 
      functions.find_me_one();
     else if(game.objects_carried >= max_carried) 
      functions.write_message("I'm carrying too much!!!");
 
-    else if(!takeable_object(noun)) 
-      I_cant_do_that();
+    else if(!functions.takeable_object(noun)) 
+      functions.I_cant_do_that();
 
     else if(game.your_place == "d_phrmcy" && (noun == "magazine" || noun == "rubber")) {
        functions.write_message("The man says 'Shoplifter!!' and shoots me");
-        purgatory();
+        functions.purgatory();
     }
     else if((noun == "water") && (! is_carried("pitcher"))) 
      functions.write_message("Get me the pitcher so I don't spill it!");
@@ -1022,10 +1019,10 @@ break;
      functions.write_message("It is tied to the balcony");
     else
       {
-        OK();
+        functions.OK();
         functions.put_object(noun, "youhaveit");
-        take_inventory();
-        show_visible_items();
+        game_functions.take_inventory();
+        game_functions.show_visible_items();
         game.objects_carried ++;
         if(noun == "water")  game.pitcher_full = true;
         if(noun == "pitcher" && game.pitcher_full) 
@@ -1056,7 +1053,7 @@ break;
     }
   }
    else if(! is_carried(noun)) 
-     I_dont_have_it();
+      functions.I_dont_have_it();
 
     else
       {
@@ -1066,7 +1063,7 @@ break;
           functions.put_object ("water", game.your_place);
         else if(noun == "rubber") 
           rubber_worn = false;
-        else if(game.your_place == "d_disco" && (object_visible("girl")) && (noun == "candy" || noun == "flowers" || noun == "ring")) 
+        else if(game.your_place == "d_disco" && (functions.object_visible("girl")) && (noun == "candy" || noun == "flowers" || noun == "ring")) 
         {
             switch(noun)
             {
@@ -1091,7 +1088,7 @@ break;
                 functions.put_object ("girl", "c_marryc");
               }
         
-        else if(object_visible("bum") && (noun == "wine")) {
+        else if(functions.object_visible("bum") && (noun == "wine")) {
           
             if(object_place("knife", game.your_place) = false) {
                 bum_tells_story();
@@ -1100,24 +1097,24 @@ break;
             else
              functions.write_message("The bum mutters 'That stuff made me puke!!  Get out of here!!!'");
             }
-        else if(object_visible("businessman") && (noun == "whiskey")) {
+        else if(functions.object_visible("businessman") && (noun == "whiskey")) {
         if(object_place("control_unit", game.your_place) = false) {
            functions.write_message("The guy gives me a TV controller!!");
             functions.put_object ("control_unit", game.your_place);
             functions.put_object ("whiskey", "nowhere");
         }
-        else if(object_visible("blonde") && (noun == "pills")) {
+        else if(functions.object_visible("blonde") && (noun == "pills")) {
              functions.write_long_message (27);
             functions.put_object ("blonde", "nowhere");
             functions.put_object ("pills", "nowhere");
         }
-        else if((noun == "apple") && (game.your_place == "p_jacuzzi") && object_visible("girl")) {
+        else if((noun == "apple") && (game.your_place == "p_jacuzzi") && functions.object_visible("girl")) {
           
              functions.write_long_message (20);
             apple_given = true;
         }  
         else
-          OK();
+          functions.OK();
       }
        }
       }
@@ -1133,7 +1130,7 @@ break;
      functions.write_message("That's too much, one item at a time, please!!");
     else if(noun == "inventory" || noun == "on" || noun == "off") 
       huh();
-    else if((! object_visible(noun)) && (! is_carried(noun))) 
+    else if((! functions.object_visible(noun)) && (! is_carried(noun))) 
      functions.find_me_one();
     else
       switch(noun)
@@ -1280,7 +1277,7 @@ break;
           if(functions.is_carried("newspaper")) 
              functions.write_long_message(2);
           else
-            I_dont_have_it();
+             functions.I_dont_have_it();
             break;
       case "garbage":
         functions.I_see_something();
@@ -1311,13 +1308,13 @@ break;
           if(functions.is_carried("magazine")) 
              functions.write_long_message (3);
           else
-            I_dont_have_it();
+             functions.I_dont_have_it();
         break;
       case "rubber":
           if(functions.is_carried("rubber")) 
            functions.write_message("It's " & rubber_color & ", " & rubber_flavor & "-flavored, " + rubber_lubricated & ", && " & rubber_ribbed);
           else
-            I_dont_have_it();
+             functions.I_dont_have_it();
             break;
       case "wallet":
           if(game.cash > 0) {
@@ -1352,20 +1349,20 @@ break;
         }
         break;
     case "flush":
-    if(! object_visible(noun)) 
+    if(! functions.object_visible(noun)) 
      functions.find_me_one();
     else if(noun == "toilet") {
          functions.write_long_message (36);
         sleep (300);
        functions.write_message("I'm dead from the germs!!");
-        purgatory();
+        functions.purgatory();
         }
       else
       I_cant_do_that();
     break;
     case "open":
     case "pull":
-    if(! object_visible(noun)) 
+    if(! functions.object_visible(noun)) 
      functions.find_me_one();
     else
     {
@@ -1375,7 +1372,7 @@ break;
        functions.write_message("Won't budge");
         break;
       case "desk":
-        if(! object_visible("newspaper")) 
+        if(! functions.object_visible("newspaper")) 
         { 
           functions.put_object ("newspaper", "b_hallwy");
         }
@@ -1422,11 +1419,11 @@ break;
              functions.write_message("You've already inflated it, stupid!!");
             else
             {
-                OK();
+                functions.OK();
                 doll_inflated = true;
              }
             }
-          else if(object_visible("doll")) 
+          else if(functions.object_visible("doll")) 
          functions.write_message("I can't unless I'm holding it close");
         else
          functions.find_me_one();
@@ -1436,12 +1433,12 @@ break;
 break;
     case "play":
     if(noun == "slots") {
-        if(object_visible("slot")) {
+        if(functions.object_visible("slot")) {
             if(game.cash > 0 && (functions.is_carried("wallet"))) 
               play_slot (game.cash);
             else{
              functions.write_message("No Money!");
-              purgatory();
+              functions.purgatory();
             }
         }
         else
@@ -1453,7 +1450,7 @@ break;
               play_21 (game.cash);
             else
              functions.write_message("No Money!");
-              purgatory();
+              functions.purgatory();
           }
         else
           not_yet_but_maybe_later();

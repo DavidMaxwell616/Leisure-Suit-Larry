@@ -7,10 +7,10 @@ export {is_carried, I_cant_go_that_way,
     I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit,
     object_visible,object_place,write_message,OK,cant_do_that,
     find_me_one,I_see_something,takeable_object,look_around,
-    put_object,list_objects,look_graffiti
+    put_object,list_objects,look_graffiti,purgatory,
 };
 
-let is_carried = (obj) => objectData.objects.filter(object => object.ABBR==obj);
+let is_carried = (obj) => objectData.objects.find(object => object.ABBR==obj).YOUHAVEIT;
 let I_cant_go_that_way= () => write_message ("I can't go that way!");
 let huh = () => write_message ("Huh?");
 let I_cant_do_that = () => cant_do_that();
@@ -246,7 +246,7 @@ function purgatory()
     var choice, door;
     sleep(sleep_time);
     door = 0;
-    c = InputBox("Choose your door as 1, 2 or 3??  ");
+    c = write_message("Choose your door as 1, 2 or 3??  ");
     choice = c;
     door = (Math.floor(Math.random() * 3) + 1 + choice);
     if(door == 0)

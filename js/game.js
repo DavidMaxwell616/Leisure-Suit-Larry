@@ -3,6 +3,8 @@ import objectData from "../assets/json/objects.json" assert { type: "json" };
 import locationData from "../assets/json/locations.json" assert { type: "json" };
 import handleVerb from "./handleVerbs.js"; 
 
+export {take_inventory,show_visible_items};
+
 Start_Game();
 
 window.Submit_Click = () => {
@@ -47,19 +49,19 @@ function show_visible_items(){
 
 function take_inventory()
 {
-var objects="";
-var thisitem;
-let obj = objectData.objects.filter(object => object.YOUHAVEIT==true);
-obj.forEach(object => {
-thisitem = object.OBJECT;
-if(thisitem.includes("A Wallet")) 
-  thisitem = "A Wallet with $" + game.cash;
-if(objects.length > 0)
-  objects += ", " + thisitem;
-else
-  objects += thisitem;
-});
-document.getElementById("inventory").value =objects;
+  var objects="";
+  var thisitem;
+  let obj = objectData.objects.filter(object => object.YOUHAVEIT==true);
+  obj.forEach(object => {
+  thisitem = object.OBJECT;
+  if(thisitem.includes("A Wallet")) 
+    thisitem = "A Wallet with $" + game.cash;
+  if(objects.length > 0)
+    objects += ", " + thisitem;
+  else
+    objects += thisitem;
+  });
+  document.getElementById("inventory").value =objects;
 }
 
 function init_new_game()
