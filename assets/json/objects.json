@@ -11,9 +11,9 @@
         "TAKEABLE": false
     },
     {
-        "OBJECT": "A Washbasin",
+        "OBJECT": "A Sink",
         "LOCATION": "b_bathrm",
-        "ABBR": "washbasin",
+        "ABBR": "sink",
         "VISIBLE": true,
         "YOUHAVEIT": false,
         "STARTVISIBLE": true,
@@ -653,7 +653,7 @@
     {
         "OBJECT": "A Remote Control Unit",
         "LOCATION": "b_hallwy",
-        "ABBR": "control_unit",
+        "ABBR": "remote",
         "VISIBLE": false,
         "YOUHAVEIT": false,
         "STARTVISIBLE": false,

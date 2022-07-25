@@ -325,7 +325,7 @@ export default function handleVerb(verb, noun)
           case "wine":
               if(game.your_place != "d_disco") 
                 not_yet_but_maybe_later();
-              else if(object_place(noun, game.your_place)) 
+              else if(functions.object_place(noun, game.your_place)) 
                    functions.write_message("All out!");
                 else
                     {
@@ -919,8 +919,8 @@ break;
     case "restore":
       var obj = JSON.parse(localStorage.getItem('lsl_saved_game'));
       game = obj;
-      GetLocationDescription ();
-      take_inventory();
+      game_functions.GetLocationDescription ();
+      game_functions.take_inventory();
       break;
     case "go":
       if(tied_to_bed)
@@ -1052,12 +1052,12 @@ break;
      }
     }
   }
-   else if(! is_carried(noun)) 
+   else if(! functions.is_carried(noun)) 
       functions.I_dont_have_it();
 
     else
       {
-        functions.put_object(noun, game.your_place);
+        //functions.put_object(noun, game.your_place);
         game.objects_carried --;
         if(noun == "pitcher" && pitcher_full) 
           functions.put_object ("water", game.your_place);
@@ -1087,21 +1087,22 @@ break;
                functions.write_message("She says: 'See you at the Marriage Center!!'");
                 functions.put_object ("girl", "c_marryc");
               }
-        
-        else if(functions.object_visible("bum") && (noun == "wine")) {
+        }
+        else if(game.your_place =="d_street" && functions.object_visible("bum") && (noun == "wine")) {
           
-            if(object_place("knife", game.your_place) = false) {
+            if(functions.object_place("knife", game.your_place) = false) {
                 bum_tells_story();
                 functions.put_object ("knife", game.your_place);
             }            
             else
              functions.write_message("The bum mutters 'That stuff made me puke!!  Get out of here!!!'");
-            }
+       }
         else if(functions.object_visible("businessman") && (noun == "whiskey")) {
-        if(object_place("control_unit", game.your_place) = false) {
-           functions.write_message("The guy gives me a TV controller!!");
-            functions.put_object ("control_unit", game.your_place);
-            functions.put_object ("whiskey", "nowhere");
+          if(!functions.object_visible("remote")) {
+              functions.write_message("The guy gives me a TV controller!!");
+              functions.put_object ("remote", game.your_place);
+              functions.put_object ("whiskey", "nowhere");
+          }
         }
         else if(functions.object_visible("blonde") && (noun == "pills")) {
              functions.write_long_message (27);
@@ -1115,8 +1116,6 @@ break;
         }  
         else
           functions.OK();
-      }
-       }
       }
     break;
     case "look":
@@ -1137,7 +1136,7 @@ break;
       {
       case "desk":
         {
-          if(drawer_open) {
+          if(functions.drawer_open) {
             functions.I_see_something();
              functions.write_long_message(2);
           }
@@ -1145,7 +1144,7 @@ break;
            functions.write_message("It's drawer is shut");
         }
         break;
-      case "washbasin":
+      case "sink":
          functions.I_see_something();
         functions.put_object ("ring", game.your_place);
         break;
@@ -1178,7 +1177,7 @@ break;
          functions.write_long_message (38);
         break;
       case "TV":
-         if(! is_carried("control unit")) 
+         if(! is_carried("remote")) 
           functions.write_message("To watch TV, I need the remote control unit!!");
          else if(! hooker_fucked) 
           functions.write_message("The Pimp says I can't watch TV");
@@ -1295,7 +1294,7 @@ break;
          functions.write_message ("'Want to drive someone crazy with lust??  Try this!!!!'");
           break;
       case "plant":
-          if(object_place("bushes", game.your_place) = false) {
+          if(functions.object_place("bushes", game.your_place) = false) {
              functions.write_message("There's a group of bushes behind it!!");
               functions.put_object ("bushes", game.your_place);
             }
@@ -1375,6 +1374,7 @@ break;
         if(! functions.object_visible("newspaper")) 
         { 
           functions.put_object ("newspaper", "b_hallwy");
+          functions.put_object ("flowers", "b_hallwy");
         }
         break;
       case "door_west":

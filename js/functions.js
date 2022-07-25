@@ -24,6 +24,7 @@ let add_exit = (strloc) => locationData.locations.find(location => object.ABBR=s
 let object_visible = (noun) => objectData.objects.find(object => object.ABBR==noun && object.LOCATION==game.your_place).VISIBLE;
 let object_place = (noun, strloc) => objectData.objects.find(object => object.ABBR==noun && object.LOCATION==strloc).object==null;
 let write_message = (msg) => document.getElementById("actions").value= msg;
+let I_see_something = () => write_message ("I see something!!!");
 let OK = () => write_message ("OK");
 
 function cant_do_that()
@@ -83,11 +84,6 @@ break;
   } 
 }
 
-function I_see_something()
-{
-  write_message ("I see something!!!");
-  object_place(object = game.your_place);
-}
 
 function takeable_object(obj){
 if(obj == "control") obj = "control_unit"
@@ -169,20 +165,22 @@ function put_object(strobject,strloc)
 {
   let obj = objectData.objects.find(object => object.ABBR==strobject);
   if(strloc == "youhaveit")
-{
+  {
+    obj.VISIBLE = false;
+    obj.YOUHAVEIT = true;
+  }
+  else if(strloc == "nowhere")
+  {
   obj.VISIBLE = false;
-  obj.YOUHAVEIT = true;
-}
-else if(strloc == "nowhere")
-{
-obj.VISIBLE = false;
-obj.YOUHAVEIT;
-}
-else
-{
-obj.YOUHAVEIT = false;
-obj.VISIBLE = true;
-} 
+  obj.YOUHAVEIT;
+  }
+  else
+  {
+  obj.YOUHAVEIT = false;
+  obj.VISIBLE = true;
+  obj.LOCATION = game.your_place;
+  } 
+ 
 }
 
 function list_objects(strloc)

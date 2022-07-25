@@ -3,7 +3,7 @@ import objectData from "../assets/json/objects.json" assert { type: "json" };
 import locationData from "../assets/json/locations.json" assert { type: "json" };
 import handleVerb from "./handleVerbs.js"; 
 
-export {take_inventory,show_visible_items};
+export {take_inventory,show_visible_items,GetLocationDescription};
 
 Start_Game();
 
