@@ -1,8 +1,9 @@
 import actionData from "../assets/json/actions.json" assert { type: "json" };
 import objectData from "../assets/json/objects.json" assert { type: "json" };
 import locationData from "../assets/json/locations.json" assert { type: "json" };
+import * as game_functions from "./game.js";
 
-export {is_carried, I_cant_go_that_way,
+export {is_carried, I_cant_go_that_way, take_inventory,
     huh,I_cant_do_that,I_dont_know_that_word,I_dont_have_it,I_already_have_it,
     I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit,
     object_visible,object_place,write_message,OK,cant_do_that,
@@ -20,7 +21,7 @@ let I_already_have_it = () => write_message ("I already have it!!");
 let I_see_nothing_special = () => write_message ("I see nothing special");
 let give_help = () => write_long_message(30);
 let not_yet_but_maybe_later = () => write_message ("Not yet but maybe later!");
-let add_exit = (strloc) => locationData.locations.find(location => object.ABBR=strloc).OTHERFLAG = true;
+let add_exit = (strloc) => locationData.locations.find(location => location.ABBR=strloc).OTHERFLAG = true;
 let object_visible = (noun) => objectData.objects.find(object => object.ABBR==noun && object.LOCATION==game.your_place).VISIBLE;
 let object_place = (noun, strloc) => objectData.objects.find(object => object.ABBR==noun && object.LOCATION==strloc).object==null;
 let write_message = (msg) => document.getElementById("actions").value= msg;
@@ -395,3 +396,18 @@ function xclose(object_open)
   }
 }
 
+function take_inventory(){
+var objects="";
+var thisitem;
+let obj = objectData.objects.filter(object => object.YOUHAVEIT==true);
+obj.forEach(object => {
+thisitem = object.OBJECT;
+if(thisitem.includes("A Wallet")) 
+  thisitem = "A Wallet with $" + game.cash;
+if(objects.length > 0)
+  objects += ", " + thisitem;
+else
+  objects += thisitem;
+});
+return objects;
+}

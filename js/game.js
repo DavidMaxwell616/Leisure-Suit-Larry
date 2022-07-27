@@ -2,8 +2,9 @@ import actionData from "../assets/json/actions.json" assert { type: "json" };
 import objectData from "../assets/json/objects.json" assert { type: "json" };
 import locationData from "../assets/json/locations.json" assert { type: "json" };
 import handleVerb from "./handleVerbs.js"; 
+import * as functions from "./functions.js";
 
-export {take_inventory,show_visible_items,GetLocationDescription};
+export {show_inventory,show_visible_items,GetLocationDescription};
 
 Start_Game();
 
@@ -16,7 +17,7 @@ if(command.split(' ').length>1)
   noun = command.split(' ')[1].toLowerCase();
 handleVerb(verb, noun);
 GetLocationDescription (game.your_place);
-take_inventory(game.your_place, game.cash);
+show_inventory(game.your_place, game.cash);
 document.getElementById("action").value = "";
 }
 
@@ -24,14 +25,15 @@ function Start_Game(){
 game.objects_carried = 1;
 init_new_game();
 GetLocationDescription ();
-take_inventory();
+functions.take_inventory();
 }
 
 function GetLocationDescription(){
   let loc = locationData.locations.find(location => location.ABBR === game.your_place);
   document.getElementById("location").value =loc.WHEREAMI;
   document.getElementById("description").value =loc.Description;
-  document.getElementById("exits").value =loc.OTHERAREAS+' '+loc.OTHEREXITS;
+  const otherExits = loc.OTHERFLAG ? loc.OTHEREXITS : '';
+  document.getElementById("exits").value =loc.OTHERAREAS+' '+otherExits;
   show_visible_items();
 }
 
@@ -47,20 +49,8 @@ function show_visible_items(){
   document.getElementById("items").value =objects;
 }
 
-function take_inventory()
+function show_inventory()
 {
-  var objects="";
-  var thisitem;
-  let obj = objectData.objects.filter(object => object.YOUHAVEIT==true);
-  obj.forEach(object => {
-  thisitem = object.OBJECT;
-  if(thisitem.includes("A Wallet")) 
-    thisitem = "A Wallet with $" + game.cash;
-  if(objects.length > 0)
-    objects += ", " + thisitem;
-  else
-    objects += thisitem;
-  });
   document.getElementById("inventory").value =objects;
 }
 

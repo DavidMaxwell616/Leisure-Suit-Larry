@@ -196,9 +196,9 @@ export default function handleVerb(verb, noun)
             if(game.your_place == "b_bar") {
                     let text;
                     let password = prompt("A voice says  'What's the password?'  (one word) ", "");
-                    if(password.toUppercase() == "BELLYBUTTON") {
+                    if(password.toUpperCase() == "BELLYBUTTON") {
                        functions.write_message("The curtain pulls back!!");
-                        add_exit(game.your_place, " and East");
+                        functions.add_exit(game.your_place, " and East");
                     }
                     else
                      functions.write_message("Wrong!!");
@@ -733,11 +733,11 @@ break;
     else if((noun = "555-6969") && (! game.called_555_6969)) {
        functions.write_message ("")
        functions.write_message ("A voice says 'Hello, please answer the questions with one word answers")
-        girl_name = InputBox("What's your favorite girls name?  ")
-        girl_part = InputBox("Name a nice part of her anatomy!  ")
-        girl_do = InputBox("What do you like to do with her?  ")
-        your_part = InputBox("&& the best part of your body?   ")
-        your_object = InputBox("Finally, your favorite object?    ")
+        girl_name = prompt("What's your favorite girls name?  ")
+        girl_part = prompt("Name a nice part of her anatomy!  ")
+        girl_do = prompt("What do you like to do with her?  ")
+        your_part = prompt("&& the best part of your body?   ")
+        your_object = prompt("Finally, your favorite object?    ")
        functions.write_message ("He hangs up!")
         game.called_555_6969 = true;
           girl_name = Lcase(girl_name)
@@ -918,6 +918,7 @@ break;
       break;
     case "restore":
       var obj = JSON.parse(localStorage.getItem('lsl_saved_game'));
+      console.log(obj);
       game = obj;
       game_functions.GetLocationDescription ();
       game_functions.take_inventory();
@@ -967,7 +968,7 @@ break;
      functions.write_message("I'm not in the street, fool!!");
     else {
          functions.write_long_message (6);
-        taxi_destination = InputBox("WHERE TO?");
+        taxi_destination = prompt("WHERE TO?");
         if(taxi_destination.contains("DISCO")) 
           new_place = "d_street";
           if(taxi_destination.contains("CASINO")) 
@@ -1021,7 +1022,8 @@ break;
       {
         functions.OK();
         functions.put_object(noun, "youhaveit");
-        game_functions.take_inventory();
+        var stuff = functions.take_inventory();
+        game_functions.show_inventory(stuff);
         game_functions.show_visible_items();
         game.objects_carried ++;
         if(noun == "water")  game.pitcher_full = true;
