@@ -16,8 +16,8 @@ let noun;
 if(command.split(' ').length>1)
   noun = command.split(' ')[1].toLowerCase();
 handleVerb(verb, noun);
-GetLocationDescription (game.your_place);
-show_inventory(game.your_place, game.cash);
+GetLocationDescription ();
+show_inventory();
 document.getElementById("action").value = "";
 }
 
@@ -25,7 +25,7 @@ function Start_Game(){
 game.objects_carried = 1;
 init_new_game();
 GetLocationDescription ();
-functions.take_inventory();
+show_inventory();
 }
 
 function GetLocationDescription(){
@@ -51,6 +51,8 @@ function show_visible_items(){
 
 function show_inventory()
 {
+  var objects = functions.take_inventory();
+  console.log(objects);
   document.getElementById("inventory").value =objects;
 }
 
