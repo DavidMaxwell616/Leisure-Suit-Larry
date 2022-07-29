@@ -8,6 +8,19 @@ export {show_inventory,show_visible_items,GetLocationDescription};
 
 Start_Game();
 
+var input = document.getElementById("action");
+
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("submit").click();
+  }
+});
+
 window.Submit_Click = () => {
 let command=document.getElementById("action").value;
 if(command == "")  return;
@@ -52,7 +65,6 @@ function show_visible_items(){
 function show_inventory()
 {
   var objects = functions.take_inventory();
-  console.log(objects);
   document.getElementById("inventory").value =objects;
 }
 

@@ -914,6 +914,7 @@ break;
      functions.write_message ("Your score is '" & game.score & "' out of a possible '3'");
       break;
     case "save":
+      console.log(game);
       localStorage.setItem('lsl_saved_game', JSON.stringify(game));
       break;
     case "restore":

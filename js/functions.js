@@ -93,73 +93,73 @@ return objectData.objects.find(object => object.ABBR==obj).TAKEABLE;
 
 function look_around()
 {
-var objcount;
-      if(!place_visited(game.your_place))
-        write_long_message (game.your_place + 1);
-      if((game.your_place == "p_pntpch") && called_555_0439)
-      {        
-          if(!telephone_answered && Math.floor(Math.random() * 4) + 1 == 2)
-            telephone_ringing = true;
-          if(telephone_ringing)
-            write_message ("The telephone rings");
-        }
-      place_visited(game.your_place) = true;
-      newlines (2);
+  var objcount;
+  if(!place_visited(game.your_place))
+    write_long_message (game.your_place + 1);
+  if((game.your_place == "p_pntpch") && called_555_0439)
+  {        
+      if(!telephone_answered && Math.floor(Math.random() * 4) + 1 == 2)
+        telephone_ringing = true;
+      if(telephone_ringing)
+        write_message ("The telephone rings");
+    }
+  place_visited(game.your_place) = true;
+  newlines (2);
 
-      write_message (place_name(game.your_place));
-      write_message ("Items in sight are:  ");
-      for(obj = first_object; obj<last_object;obj++)
-{        
-          if(object_visible(obj))
-{            
-              if(objcount > 0)
-                  write_message (", ");
-              objcount ++;
-              namelen = object_name(obj).length;
-                  write_message("");
-                  write_message ("                     ");
-}
-              write_message (object_name(obj));
-        }
-      if(objcount == 0)
-        write_message ("Nothing interesting.");
-      else
-        write_message("");
-      write_message ("Other areas are:  ")
-      exitcount = 0
-      for(exit = first_direction; exit<last_direction;exit++)
-      {
+  write_message (place_name(game.your_place));
+  write_message ("Items in sight are:  ");
+  for(obj = first_object; obj<last_object;obj++)
+  {        
+    if(object_visible(obj))
+  {            
+    if(objcount > 0)
+        write_message (", ");
+    objcount ++;
+    namelen = object_name(obj).length;
+    write_message("");
+    write_message ("                     ");
+  }
+    write_message (object_name(obj));
+  }
+  if(objcount == 0)
+    write_message ("Nothing interesting.");
+  else
+    write_message("");
+  write_message ("Other areas are:  ")
+  exitcount = 0
+  for(exit = first_direction; exit<last_direction;exit++)
+  {
+  if(Path(game.your_place, intexit) != nowhere)
+      exitcount ++;
+  exits = exitcount
+  if(exits == 0)
+    write_message ("By magic!");
+  else
+  {
+    for(intexit = first_direction; intexit<last_direction;intexit++)
+    {
       if(Path(game.your_place, intexit) != nowhere)
-          exitcount ++;
-      exits = exitcount
-      if(exits == 0)
-        write_message ("By magic!");
-      else
       {
-        for(intexit = first_direction; intexit<last_direction;intexit++)
-        {
-          if(Path(game.your_place, intexit) != nowhere)
-          {
-                if(exitcount < exits)
-              {  
-                  if(exitcount > 1)
-                    write_message (", ")
-                  elseif(exits > 1)
-                    write_message (" and ")
-               }
-          }
-              exitcount = exitcount - 1
-              write_message (direction_name(intexit))
+            if(exitcount < exits)
+          {  
+              if(exitcount > 1)
+                write_message (", ")
+              else if(exits > 1)
+                write_message (" and ")
             }
-          }
-
-      write_message("");
-      for(var i = 1; i< 79;i++)
-      {
-      write_message ("=");
-      write_message("");
       }
-}
+          exitcount = exitcount - 1
+          write_message (direction_name(intexit))
+        }
+      }
+
+  write_message("");
+  for(var i = 1; i< 79;i++)
+  {
+  write_message ("=");
+  write_message("");
+  }
+  }
 }
 
 function put_object(strobject,strloc)
@@ -173,7 +173,7 @@ function put_object(strobject,strloc)
   else if(strloc == "nowhere")
   {
   obj.VISIBLE = false;
-  obj.YOUHAVEIT;
+  obj.YOUHAVEIT = false;
   }
   else
   {
