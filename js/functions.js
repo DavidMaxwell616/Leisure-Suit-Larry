@@ -8,11 +8,11 @@ export {is_carried, I_cant_go_that_way, take_inventory,
     I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit,
     object_visible,object_place,write_message,OK,cant_do_that,
     find_me_one,I_see_something,takeable_object,look_around,
-    put_object,list_objects,look_graffiti,purgatory,
+    put_object,list_objects,look_graffiti,purgatory, drop_object,restore_inventory
 };
 
 let is_carried = (obj) => objectData.objects.find(object => object.ABBR==obj).YOUHAVEIT;
-let I_cant_go_that_way= () => write_message ("I can't go that way!");
+let I_cant_go_that_way = () => write_message ("I can't go that way!");
 let huh = () => write_message ("Huh?");
 let I_cant_do_that = () => cant_do_that();
 let I_dont_know_that_word = () => write_message ("I don't know that word!");
@@ -21,7 +21,7 @@ let I_already_have_it = () => write_message ("I already have it!!");
 let I_see_nothing_special = () => write_message ("I see nothing special");
 let give_help = () => write_long_message(30);
 let not_yet_but_maybe_later = () => write_message ("Not yet but maybe later!");
-let add_exit = (strloc) => locationData.locations.find(location => location.ABBR=strloc).OTHERFLAG = true;
+let add_exit = (strloc) => locationData.locations.find(location => location.ABBR==strloc).OTHERFLAG = true;
 let object_visible = (noun) => objectData.objects.find(object => object.ABBR==noun && object.LOCATION==game.your_place).VISIBLE;
 let object_place = (noun, strloc) => objectData.objects.find(object => object.ABBR==noun && object.LOCATION==strloc).object==null;
 let write_message = (msg) => document.getElementById("actions").value= msg;
@@ -85,7 +85,10 @@ break;
   } 
 }
 
-
+function drop_object(obj){
+  var object = objectData.objects.find(object => object.ABBR==obj);
+  game.objects_carried.splice(object);
+}
 function takeable_object(obj){
 if(obj == "control") obj = "control_unit"
 return objectData.objects.find(object => object.ABBR==obj).TAKEABLE;
@@ -309,7 +312,7 @@ function stab_someone()
 
 function add_to_inventory(object)
 {
-if(game.objects_carried > 17) 
+if(game.objects_carried.length > 17) 
 {  
   write_long_message("You're carrying too much");
   return;
@@ -411,3 +414,8 @@ else
 });
 return objects;
 }
+function restore_inventory(items){
+  items.forEach(item => {
+    objectData.objects.find(object => object.ABBR==item[0].ABBR).YOUHAVEIT = true;
+  });
+  }

@@ -133,7 +133,7 @@
     {
         "OBJECT": "A TV",
         "LOCATION": "b_backrm",
-        "ABBR": "TV",
+        "ABBR": "tv",
         "VISIBLE": true,
         "YOUHAVEIT": false,
         "STARTVISIBLE": true,

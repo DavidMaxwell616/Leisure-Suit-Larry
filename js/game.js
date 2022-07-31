@@ -10,13 +10,9 @@ Start_Game();
 
 var input = document.getElementById("action");
 
-// Execute a function when the user presses a key on the keyboard
 input.addEventListener("keypress", function(event) {
-  // If the user presses the "Enter" key on the keyboard
   if (event.key === "Enter") {
-    // Cancel the default action, if needed
     event.preventDefault();
-    // Trigger the button element with a click
     document.getElementById("submit").click();
   }
 });
@@ -35,7 +31,9 @@ document.getElementById("action").value = "";
 }
 
 function Start_Game(){
-game.objects_carried = 1;
+var wallet = objectData.objects.filter(object => object.ABBR=="wallet");
+game.objects_carried.push(wallet);
+game.cash=1000;
 init_new_game();
 GetLocationDescription ();
 show_inventory();
