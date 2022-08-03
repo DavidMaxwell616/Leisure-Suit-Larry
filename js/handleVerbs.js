@@ -1048,13 +1048,12 @@ break;
     else if(noun == "all") {
        anything_carried = false;
       functions.write_message ("");
-       for (var i = 0; i<5; i++){//noun = first_object; To last_object
+       for (var i = 0; i<game.objects_carried.lrngth; i++){
          if(functions.is_carried(noun)) {
             
              anything_carried = true;
             functions.write_message (object_name(noun) & ": Dropped");
              functions.put_object(noun, game.your_place);
-             //game.objects_carried --;
            }
        if(! anything_carried) {
         functions.write_message ("I didn't carry anything!!");
@@ -1066,8 +1065,6 @@ break;
 
     else
       {
-        //functions.put_object(noun, game.your_place);
-       // game.objects_carried --;
         if(noun == "pitcher" && pitcher_full) 
           functions.put_object ("water", game.your_place);
         else if(noun == "rubber") 
@@ -1125,6 +1122,7 @@ break;
         }  
         else
           functions.OK();
+          functions.put_object(noun, game.your_place);
       }
     break;
     case "look":
@@ -1186,12 +1184,13 @@ break;
          functions.write_long_message (38);
         break;
       case "TV":
-         if(! is_carried("remote")) 
+      case "tv":
+         if(! functions.is_carried("remote")) 
           functions.write_message("To watch TV, I need the remote control unit!!");
-         else if(! game.hooker_fucked) 
+         else if(game.hooker_fucked) 
           functions.write_message("The Pimp says I can't watch TV");
          else
-           functions.watch_TV (TV_channel);
+           functions.watch_TV(game.TV_channel);
         break;
       case "slot_machines":
        functions.write_message("Playing them might be more fun....");
