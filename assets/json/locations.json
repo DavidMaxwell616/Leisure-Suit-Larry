@@ -39,10 +39,10 @@
         {
             "LOCATIONID": "5",
             "Description": "I'm in the backroom of the bar. Theres this big dude in here with me. He's wearing a button. I can't see what it says, maybe I should take a close look at him. Stairs lead up to the second floor. There's a TV in the corner also. I get the feeling loitering is not encouraged here. ",
-            "OTHERAREAS": "West and Up",
+            "OTHERAREAS": "West",
             "WHEREAMI": "I'm in the Backroom",
             "ABBR": "b_backrm",
-            "OTHEREXITS": "",
+            "OTHEREXITS": " and Up",
             "OTHERFLAG": false
         },
         {

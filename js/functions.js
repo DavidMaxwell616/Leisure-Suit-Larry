@@ -6,8 +6,8 @@ import * as game_functions from "./game.js";
 export {is_carried, I_cant_go_that_way, take_inventory,
     huh,I_cant_do_that,I_dont_know_that_word,I_dont_have_it,I_already_have_it,
     I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit,
-    object_visible,object_place,write_message,OK,cant_do_that,
-    find_me_one,I_see_something,takeable_object,look_around,watch_TV,
+    object_visible,object_place,write_message,OK,cant_do_that, write_long_message,
+    find_me_one,I_see_something,takeable_object,look_around,watch_TV,sorry_no_cash,
     put_object,list_objects,look_graffiti,purgatory, drop_object,restore_inventory
 };
 
@@ -255,7 +255,7 @@ function purgatory()
     var choice, door;
     sleep(sleep_time);
     door = 0;
-    c = write_message("Choose your door as 1, 2 or 3??  ");
+    var c = write_message("Choose your door as 1, 2 or 3??  ");
     choice = c;
     door = (Math.floor(Math.random() * 3) + 1 + choice);
     if(door == 0)
@@ -285,10 +285,13 @@ function bum_tells_story()
 function watch_TV(TV_channel)
 {
   var ch = prompt("Which channel? (1-9) ");
-    TV_channel = Number(ch);
-    write_long_message (10 + TV_channel);
-    ch = prompt("Change the channel?  (y/n) ");
-    if(ch = "y") watch_TV(TV_channel);
+    game.TV_channel = Number(ch);
+    write_long_message (10 + game.TV_channel);
+    var yn = prompt("Change the channel?  (y/n) ");
+    if(yn == "y") 
+      watch_TV(game.TV_channel);
+    else
+      add_exit("b_backrm");
 }
 
 function wine_in_taxi()
@@ -345,6 +348,10 @@ for(var i = 1;i<50;i++)
   purgatory();
 }
 
+function sorry_no_cash(){
+  write_message ("I'm broke!!! -- that means death!!!!!!!")
+  purgatory();
+}
 
 function play_slot()
 {

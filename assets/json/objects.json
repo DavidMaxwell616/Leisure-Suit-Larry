@@ -444,7 +444,7 @@
         "OBJECT": "Garbage",
         "LOCATION": "b_g_dump",
         "ABBR": "garbage",
-        "VISIBLE": false,
+        "VISIBLE": true,
         "YOUHAVEIT": false,
         "STARTVISIBLE": false,
         "STARTYOUHAVEIT": false,
@@ -463,7 +463,7 @@
     {
         "OBJECT": "The Core of an Apple",
         "LOCATION": "b_g_dump",
-        "ABBR": "applecore",
+        "ABBR": "apple_core",
         "VISIBLE": false,
         "YOUHAVEIT": false,
         "STARTVISIBLE": false,

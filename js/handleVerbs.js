@@ -6,7 +6,8 @@ export default function handleVerb(verb, noun)
 {
     if(verb=="go" && (noun=="north" || noun=="south" || noun=="east" || noun=="west"))
       verb = noun;
-
+    if(noun=="apple")
+      noun= "apple_core";
     switch (verb) {
     case "n":
     case "north":
@@ -175,19 +176,19 @@ export default function handleVerb(verb, noun)
         break;
     case "d":
     case "down":
-      if(exits.value.includes("Up")) {
+      if(exits.value.includes("Down")) {
         switch (game.your_place) {
           case "b_bedrm":
             game.your_place = "b_backrm";
             break;
           case "b_balcny":
-            game.your_place == "b_g_dump";
+            game.your_place = "b_g_dump";
             break;
           case "c_htdesk":
-            game.your_place == "c_lobby";
+            game.your_place = "c_lobby";
             break;
           case "p_livrom":
-            game.your_place == "p_pntfoy";             
+            game.your_place = "p_pntfoy";             
             break;
         }
       }
@@ -347,9 +348,8 @@ export default function handleVerb(verb, noun)
               if(game.your_place != "d_phrmcy") 
                 functions.not_yet_but_maybe_later();
               else if(functions.object_visible(noun)) {
-          
-                      if(noun = "RUBBER") {
-                        buy_rubber();
+                      if(noun == "RUBBER") {
+                        functions.buy_rubber();
                         functions.put_object(noun, "youhaveit");
                         functions.drop_object(noun);
                       }
@@ -420,10 +420,10 @@ export default function handleVerb(verb, noun)
        functions.write_message("I have no water!");
       else if(! functions.object_visible(noun)) 
        functions.find_me_one();
-      else if(noun = "seeds") {
+      else if(noun == "seeds") {
           functions.put_object ("water", false);
           game.pitcher_full = false;
-          if(game.your_place = p_garden) {
+          if(game.your_place == p_garden) {
              functions.write_message("A tree sprouts!!");
               functions.put_object ("tree", game.your_place);
               functions.put_object ("seeds", false);
@@ -442,7 +442,7 @@ export default function handleVerb(verb, noun)
     case "fill":
     if(noun != "pitcher") 
       functions.I_cant_do_that();
-    else if(!is_carried("pitcher")) 
+    else if(!functions.is_carried("pitcher")) 
      functions.write_message("I don't have it!");
     else if(! functions.object_visible("sink")) 
      functions.write_message("Find a working sink!!");
@@ -458,7 +458,7 @@ export default function handleVerb(verb, noun)
     case "pour":
     if(noun != "water") 
       functions.I_cant_do_that();
-    else if(!is_carried("pitcher")) 
+    else if(!functions.is_carried("pitcher")) 
      functions.write_message("You have nothing to pour it with!");
     else if(!game.pitcher_full) 
      functions.write_message("The pitcher is empty.");
@@ -470,7 +470,7 @@ export default function handleVerb(verb, noun)
       }
     break;
     case "listen":
-        if(!functions.object_visible(noun) && !is_carried(noun)) 
+        if(!functions.object_visible(noun) && !functions.is_carried(noun)) 
          functions.find_me_one();
         else if(noun == "radio") {
             if(functions.is_carried("radio")) {
@@ -536,8 +536,8 @@ export default function handleVerb(verb, noun)
      functions.write_message("No girl!!");
     else if(game.your_place != "c_marryc") 
       functions.not_yet_but_maybe_later();
-    else if((game.cash < 30) || (! is_carried("wallet"))) {
-        if(game.cash < 20 || !is_carried("wallet")) {
+    else if((game.cash < 30) || (! functions.is_carried("wallet"))) {
+        if(game.cash < 20 || !functions.is_carried("wallet")) {
          functions.write_message("The girl says 'But you'll need $2000 for the honeymoon suite!'");
        functions.write_message("The preacher says 'I'll need $1000 too!!'");
       }
@@ -554,7 +554,7 @@ export default function handleVerb(verb, noun)
       }
       break;
     case "fuck":
-      if(! functions.object_visible(noun) && (!is_carried(noun)) && (noun != "you")) 
+      if(! functions.object_visible(noun) && (!functions.is_carried(noun)) && (noun != "you")) 
        functions.find_me_one();
       else
       {
@@ -647,7 +647,7 @@ export default function handleVerb(verb, noun)
 break;
     case "wear":
     case "use":
-      if(! functions.object_visible(noun) && (!is_carried(noun)) && (noun != "knife")) 
+      if(! functions.object_visible(noun) && (!functions.is_carried(noun)) && (noun != "knife")) 
        functions.find_me_one();
     else
     switch(noun)
@@ -973,25 +973,33 @@ break;
     else if(game.your_place != "b_street" && game.your_place != "c_street" && game.your_place != "d_street")
      functions.write_message("I'm not in the street, fool!!");
     else {
-         functions.write_long_message (6);
-        taxi_destination = prompt("WHERE TO?");
-        if(taxi_destination.contains("DISCO")) 
-          new_place = "d_street";
-          if(taxi_destination.contains("CASINO")) 
-          new_place = "c_street";
-          if(taxi_destination.contains("BAR")) 
-          new_place = "b_street";
-        else if(new_place = "game.your_place" || !new_place) 
-         functions.write_message("Huh? - Hail another!");
-        else if(functions.is_carried("wine")) {
-            wine_in_taxi();
-            game.your_place = new_place;
-            functions.put_object ("wine", false);
-            game.remove_object(noun);
+         functions.write_long_message(6);
+        var taxi_destination = prompt("WHERE TO?");
+        var new_place;
+        switch (taxi_destination.toLowerCase()) {
+          case "disco":
+            new_place = "d_street";
+          break;
+          case "casino":
+            new_place = "c_street";
+          break;
+          case "bar":
+            new_place = "b_street";
+          break;
+          default:
+            functions.write_message("Huh? - Hail another!");
+            return;
         }
       }
-           functions.write_message("We arrive && I get out.");
-            game.your_place = new_place;
+      if(functions.is_carried("wine")) {
+        wine_in_taxi();
+        game.your_place = new_place;
+        functions.put_object ("wine", false);
+        game.remove_object(noun);
+    }
+      functions.write_message("We arrive && I get out.");
+      game.cash-=5;
+      game.your_place = new_place;
   break;
     case "take":
     case "get":
@@ -1136,7 +1144,7 @@ break;
      functions.write_message("That's too much, one item at a time, please!!");
     else if(noun == "inventory" || noun == "on" || noun == "off") 
       huh();
-    else if((! functions.object_visible(noun)) && (! is_carried(noun))) 
+    else if((! functions.object_visible(noun)) && (! functions.is_carried(noun))) 
      functions.find_me_one();
     else
       switch(noun)
