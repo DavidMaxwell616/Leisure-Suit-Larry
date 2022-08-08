@@ -333,7 +333,7 @@ export default function handleVerb(verb, noun)
                    functions.write_message("All out!");
                 else
                     {
-                     functions.write_message("The waitress takes $100 && says she'll return");
+                     functions.write_message("The waitress takes $100 and says she'll return");
                       sleep(3000);
                      functions.write_message("Poor service!!!");
                       sleep (2000);
@@ -355,7 +355,7 @@ export default function handleVerb(verb, noun)
                       }
                       else
                     {
-                       functions.write_message("He takes $100 && gives me the magazine");
+                       functions.write_message("He takes $100 and gives me the magazine");
                         game.cash--;
                         functions.put_object(noun, "youhaveit");
                       }
@@ -548,7 +548,7 @@ export default function handleVerb(verb, noun)
         game.cash -=30;
         functions.put_object ("girl", "c_hmoons");
         married_to_girl = true;
-        addexit (game.your_place, " && South");
+        addexit (game.your_place, " and South");
 
         //Path c_hallwy, south = c_hmoons
       }
@@ -622,7 +622,7 @@ export default function handleVerb(verb, noun)
    functions.write_message("Not tonight -- I have a headache!!");
     break;
   case "waitress":
-   functions.write_message("She kicks me in the groin && says 'Wise up - Buster!!'");
+   functions.write_message("She kicks me in the groin and says 'Wise up - Buster!!'");
     break;
   case "blonde":
    functions.write_message("She says 'I'm working! Leave me alone!!'");
@@ -643,6 +643,7 @@ export default function handleVerb(verb, noun)
    functions.write_message("Pervert!");
     break;
   }
+
 }
 break;
     case "wear":
@@ -680,7 +681,7 @@ break;
       case "passcard":
           if(functions.is_carried("passcard")) {
               if(game.your_place = "d_entrnc") {
-                 functions.write_message("I show my passcard && the door opens");
+                 functions.write_message("I show my passcard and the door opens");
                 addexit (game.your_place, " and West");
               }
               else
@@ -694,7 +695,7 @@ break;
           sleep (600);
           if(functions.is_carried("knife")) {
               if(game.tied_to_bed) {
-                 functions.write_message("I do && it worked! Thanks!");
+                 functions.write_message("I do and it worked! Thanks!");
                   game.tied_to_bed = false;
               }
               else
@@ -719,9 +720,9 @@ break;
     else if(game.telephone_ringing) {
        functions.write_message ("");
        functions.write_message ("A girl says  'Hi honey!  This is " & girl_name & ". Dear, why");
-       functions.write_message ("don't you forget this game && " & girl_do & " with me????");
+       functions.write_message ("don't you forget this game and " & girl_do & " with me????");
        functions.write_message ("After all, your " & your_part & " has always turned me on!!!!");
-       functions.write_message ("So bring a " & your_object & " && come play with my " & girl_part & "!'");
+       functions.write_message ("So bring a " & your_object & " and come play with my " & girl_part & "!'");
        functions.write_message ("She hangs up!");
         game.telephone_ringing = false;
         game.telephone_answered = true;
@@ -739,7 +740,7 @@ break;
         girl_name = prompt("What's your favorite girls name?  ")
         girl_part = prompt("Name a nice part of her anatomy!  ")
         girl_do = prompt("What do you like to do with her?  ")
-        your_part = prompt("&& the best part of your body?   ")
+        your_part = prompt("and the best part of your body?   ")
         your_object = prompt("Finally, your favorite object?    ")
        functions.write_message ("He hangs up!")
         game.called_555_6969 = true;
@@ -828,7 +829,7 @@ break;
        functions.write_message("You already paid the pimp, stupid!!");
         break;
       case "blonde", "waitress", "girl":
-         functions.write_message("She yells 'I'm ! a whore!!!' && kills me!");
+         functions.write_message("She yells 'I'm ! a whore!!!' and kills me!");
           functions.purgatory();
           break;
       case "preacher":
@@ -860,7 +861,7 @@ break;
     if(noun == "passcard") {
         if(functions.is_carried("passcard")) {
             if(game.your_place = "d_entrnc") {
-               functions.write_message("I show my passcard && the door opens");
+               functions.write_message("I show my passcard and the door opens");
                 addexit (game.your_place, " and West");
             }
             else
@@ -946,7 +947,7 @@ break;
                  functions.write_message("The Pimp says 'No -- the hooker can't take it anymore!'");
                 else
                   {
-                   functions.write_message("The Pimp takes $2000 && says OK");
+                   functions.write_message("The Pimp takes $2000 and says OK");
                     game.cash-= 20;
                     game.your_place = "b_bedrm";
                   }
@@ -997,7 +998,7 @@ break;
         functions.put_object ("wine", false);
         game.remove_object(noun);
     }
-      functions.write_message("We arrive && I get out.");
+      functions.write_message("We arrive and I get out.");
       game.cash-=5;
       game.your_place = new_place;
   break;
@@ -1082,16 +1083,16 @@ break;
             switch(noun)
             {
               case "candy":
-                 functions.write_message("She smiles && eats a couple!!");
+                 functions.write_message("She smiles and eats a couple!!");
                   candy_given = true;
                   break;
               case "flowers":
-               functions.write_message("She blushes profusely && puts them in her hair!");
+               functions.write_message("She blushes profusely and puts them in her hair!");
                   flowers_given = true;
                   functions.put_object ("flowers", false);
                 break;              
               case "ring":
-                 functions.write_message("She blushes && puts it in her purse.");
+                 functions.write_message("She blushes and puts it in her purse.");
                   ring_given = true;
                   functions.put_object ("ring", false);
                   break;
@@ -1228,7 +1229,7 @@ break;
             else
              {
              functions.write_message("The sign on the door says ");
-             functions.write_message ("'Entry by showing passcard - Club members && their guests only!'");
+             functions.write_message ("'Entry by showing passcard - Club members and their guests only!'");
             }
         break; 
       case "waitress":
@@ -1286,7 +1287,7 @@ break;
           else if(game.your_place == "d_disco" || (game.your_place == "c_marryc")) 
              functions.write_long_message (4);
           else
-           functions.write_message("She slaps me && yells 'Pervert!!!!!'");
+           functions.write_message("She slaps me and yells 'Pervert!!!!!'");
           break;
       case "newspaper":
           if(functions.is_carried("newspaper")) 
@@ -1327,7 +1328,7 @@ break;
         break;
       case "rubber":
           if(functions.is_carried("rubber")) 
-           functions.write_message("It's " & rubber_color & ", " & rubber_flavor & "-flavored, " + rubber_lubricated & ", && " & rubber_ribbed);
+           functions.write_message("It's " & rubber_color & ", " & rubber_flavor & "-flavored, " + rubber_lubricated & ", and " & rubber_ribbed);
           else
              functions.I_dont_have_it();
             break;
@@ -1398,7 +1399,7 @@ break;
            functions.write_message("It's already open!!");
           else
           {            
-             functions.write_message("A voice asks 'Passcard?'  I search in my pockets &&...");
+             functions.write_message("A voice asks 'Passcard?'  I search in my pockets and...");
               if(functions.is_carried("passcard")) {
                  functions.write_message ("I have it!  The door opens!")
                   door_W_open = true;
