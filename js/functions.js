@@ -5,7 +5,7 @@ import * as game_functions from "./game.js";
 
 export {is_carried, I_cant_go_that_way, take_inventory,
     huh,I_cant_do_that,I_dont_know_that_word,I_dont_have_it,I_already_have_it,
-    I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit,
+    I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit, buy_rubber,
     object_visible,object_place,write_message,OK,cant_do_that, write_long_message,
     find_me_one,I_see_something,takeable_object,look_around,watch_TV,sorry_no_cash,
     put_object,list_objects,look_graffiti,purgatory, drop_object,restore_inventory
@@ -376,17 +376,18 @@ function buy_rubber()
 {
 var answer;
    var i;
-      rubber_lubricated = "non-lubricated";
-      rubber_ribbed = "non-ribbed";
-      rubber_color = InputBox("The man leans over the counter and whispers 'What color?' ");
-      rubber_flavor = InputBox("And what flavor? ");
-      answer = InputBox("Lubricated or not? (y/n) ");
-      if(answer == "Y") rubber_lubricated = "lubricated";
-      answer = InputBox("Ribbed? (y/n) ");
-      if(answer == "Y") rubber_ribbed = "ribbed";
-      write_message ("He yells -- This pervert just bought a " & rubber_color & ", ");
-      write_message (rubber_flavor & "-flavored, " & rubber_lubricated & ", " & rubber_ribbed & " rubber!!!!");
-      write_message ("A lady walks by and looks at me in disgust!!!!");
+      game.rubber_lubricated = "non-lubricated";
+      game.rubber_ribbed = "non-ribbed";
+      game.rubber_color = prompt("The man leans over the counter and whispers 'What color?' ");
+      game.rubber_flavor = prompt("And what flavor? ");
+      var answer = prompt("Lubricated or not? (y/n) ");
+      game.rubber_lubricated = answer == "y" ? "lubricated": "";
+      answer = prompt("Ribbed? (y/n) ");
+      game.rubber_ribbed = answer=="y" ? "ribbed": "";
+      var msg = "He yells -- This pervert just bought a " + game.rubber_color + ", " + 
+      game.rubber_flavor + " flavored, " + game.rubber_lubricated + ", " +
+      game.rubber_ribbed + " rubber!!!!\nA lady walks by and looks at me in disgust!!!!";
+      write_message (msg);
 }
 
 

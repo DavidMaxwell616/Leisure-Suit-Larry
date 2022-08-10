@@ -348,7 +348,7 @@ export default function handleVerb(verb, noun)
               if(game.your_place != "d_phrmcy") 
                 functions.not_yet_but_maybe_later();
               else if(functions.object_visible(noun)) {
-                      if(noun == "RUBBER") {
+                      if(noun == "rubber") {
                         functions.buy_rubber();
                         functions.put_object(noun, "youhaveit");
                         functions.drop_object(noun);
@@ -548,7 +548,7 @@ export default function handleVerb(verb, noun)
         game.cash -=30;
         functions.put_object ("girl", "c_hmoons");
         married_to_girl = true;
-        addexit (game.your_place, " and South");
+        functions.add_exit (game.your_place, " and South");
 
         //Path c_hallwy, south = c_hmoons
       }
@@ -682,7 +682,7 @@ break;
           if(functions.is_carried("passcard")) {
               if(game.your_place = "d_entrnc") {
                  functions.write_message("I show my passcard and the door opens");
-                addexit (game.your_place, " and West");
+                 functions.add_exit (game.your_place, " and West");
               }
               else
                 functions.not_yet_but_maybe_later();
@@ -773,7 +773,7 @@ break;
           sleep (400);
           if(functions.is_carried("hammer")) {
              functions.write_message("The window smashes to pieces");
-                  addexit (game.your_place, " and South");
+             functions.add_exit (game.your_place, " and South");
               }
           else
              functions.I_dont_have_it();
@@ -862,7 +862,7 @@ break;
         if(functions.is_carried("passcard")) {
             if(game.your_place = "d_entrnc") {
                functions.write_message("I show my passcard and the door opens");
-                addexit (game.your_place, " and West");
+               functions.add_exit (game.your_place, " and West");
             }
             else
               functions.not_yet_but_maybe_later();
@@ -1328,7 +1328,7 @@ break;
         break;
       case "rubber":
           if(functions.is_carried("rubber")) 
-           functions.write_message("It's " & rubber_color & ", " & rubber_flavor & "-flavored, " + rubber_lubricated & ", and " & rubber_ribbed);
+           functions.write_message("It's " & functions.rubber_color & ", " & functions.rubber_flavor & " flavored, " + functions.rubber_lubricated & ", and " & functions.rubber_ribbed);
           else
              functions.I_dont_have_it();
             break;
@@ -1403,7 +1403,7 @@ break;
               if(functions.is_carried("passcard")) {
                  functions.write_message ("I have it!  The door opens!")
                   door_W_open = true;
-                  addexit(game.your_place, " and West");
+                  functions.add_exit(game.your_place, " and West");
               }              
               else
                functions.write_message ("I don't have it!!");

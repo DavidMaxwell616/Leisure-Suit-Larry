@@ -191,7 +191,7 @@
         },
         {
             "LOCATIONID": "22",
-            "Description": "I'm on a sidewalk. To the north is a fancy doorway- the entrance to the disco club. An old bum sits by the entrance- he's definately seen better days. The guy really looks tormented! To the east is the pharmacy. Apartment houses and homes line the rest of the street.", 
+            "Description": "I'm on a sidewalk. To the north is a fancy doorway - the entrance to the disco club. An old bum sits by the entrance- he's definately seen better days. The guy really looks tormented! To the east is the pharmacy. Apartment houses and homes line the rest of the street.", 
             "OTHERAREAS": "North and East",
             "WHEREAMI": "I'm on a Residential Street",
             "ABBR": "d_street",
