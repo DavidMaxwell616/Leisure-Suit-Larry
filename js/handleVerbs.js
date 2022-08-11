@@ -351,8 +351,9 @@ export default function handleVerb(verb, noun)
                       if(noun == "rubber") {
                         functions.buy_rubber();
                         functions.put_object(noun, "youhaveit");
-                        functions.drop_object(noun);
-                      }
+                        var object = objectData.objects.filter(object => object.ABBR==noun);
+                        game.objects_carried.push(object);
+                       }
                       else
                     {
                        functions.write_message("He takes $100 and gives me the magazine");
@@ -1057,7 +1058,7 @@ break;
     else if(noun == "all") {
        anything_carried = false;
       functions.write_message ("");
-       for (var i = 0; i<game.objects_carried.lrngth; i++){
+       for (var i = 0; i<game.objects_carried.length; i++){
          if(functions.is_carried(noun)) {
             
              anything_carried = true;

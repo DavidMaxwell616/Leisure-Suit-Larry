@@ -60,6 +60,11 @@ function show_visible_items(){
   document.getElementById("items").value =objects;
 }
 
+function SwitchPic(location) {
+  var pic = document.getElementById("gameImage");
+  pic.src = "assets/images/"+ location +".png";
+}
+
 function show_inventory()
 {
   var objects = functions.take_inventory();

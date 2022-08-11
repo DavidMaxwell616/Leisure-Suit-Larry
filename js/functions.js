@@ -376,20 +376,17 @@ function buy_rubber()
 {
 var answer;
    var i;
-      game.rubber_lubricated = "non-lubricated";
-      game.rubber_ribbed = "non-ribbed";
       game.rubber_color = prompt("The man leans over the counter and whispers 'What color?' ");
       game.rubber_flavor = prompt("And what flavor? ");
       var answer = prompt("Lubricated or not? (y/n) ");
-      game.rubber_lubricated = answer == "y" ? "lubricated": "";
+      game.rubber_lubricated = answer == "y" ? "lubricated" : "non-lubricated";
       answer = prompt("Ribbed? (y/n) ");
-      game.rubber_ribbed = answer=="y" ? "ribbed": "";
+      game.rubber_ribbed = answer=="y" ? "ribbed": "non-ribbed";
       var msg = "He yells -- This pervert just bought a " + game.rubber_color + ", " + 
       game.rubber_flavor + " flavored, " + game.rubber_lubricated + ", " +
       game.rubber_ribbed + " rubber!!!!\nA lady walks by and looks at me in disgust!!!!";
       write_message (msg);
 }
-
 
 function xopen(object_open)
 {
