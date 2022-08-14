@@ -9,6 +9,7 @@ export {show_inventory,show_visible_items,GetLocationDescription};
 Start_Game();
 
 var input = document.getElementById("action");
+document.getElementById("action").focus();
 
 input.addEventListener("keypress", function(event) {
   if (event.key === "Enter") {
@@ -20,6 +21,12 @@ input.addEventListener("keypress", function(event) {
 window.Submit_Click = () => {
 let command=document.getElementById("action").value;
 if(command == "")  return;
+
+document.getElementById("location").value ="";
+document.getElementById("description").value ="";
+document.getElementById("actions").value ="";
+document.getElementById("action").value ="";
+
 let verb = command.split(' ')[0].toLowerCase();
 let noun;
 if(command.split(' ').length>1)
@@ -28,6 +35,7 @@ handleVerb(verb, noun);
 GetLocationDescription ();
 show_inventory();
 document.getElementById("action").value = "";
+document.getElementById("action").focus();
 }
 
 function Start_Game(){
@@ -46,6 +54,7 @@ function GetLocationDescription(){
   const otherExits = loc.OTHERFLAG ? loc.OTHEREXITS : '';
   document.getElementById("exits").value =loc.OTHERAREAS+' '+otherExits;
   show_visible_items();
+  SwitchPic(game.your_place);
 }
 
 function show_visible_items(){

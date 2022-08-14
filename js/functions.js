@@ -3,7 +3,7 @@ import objectData from "../assets/json/objects.json" assert { type: "json" };
 import locationData from "../assets/json/locations.json" assert { type: "json" };
 import * as game_functions from "./game.js";
 
-export {is_carried, I_cant_go_that_way, take_inventory,
+export {is_carried, I_cant_go_that_way, take_inventory, sleep, wine_in_taxi, bum_tells_story,
     huh,I_cant_do_that,I_dont_know_that_word,I_dont_have_it,I_already_have_it,
     I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit, buy_rubber,
     object_visible,object_place,write_message,OK,cant_do_that, write_long_message,
@@ -22,11 +22,16 @@ let I_see_nothing_special = () => write_message ("I see nothing special");
 let give_help = () => write_long_message(30);
 let not_yet_but_maybe_later = () => write_message ("Not yet but maybe later!");
 let add_exit = (strloc) => locationData.locations.find(location => location.ABBR==strloc).OTHERFLAG = true;
-let object_place = (noun, strloc) => objectData.objects.find(object => object.ABBR==noun && object.LOCATION==strloc).object==null;
 let write_message = (msg) => document.getElementById("actions").value= msg;
 let I_see_something = () => write_message ("I see something!!!");
 let OK = () => write_message ("OK");
+let sleep_time=5000;
 
+function object_place(noun, strloc)
+{
+  let obj = objectData.objects.find(object => object.ABBR==noun && object.LOCATION==strloc);
+  return  obj != null;
+}
 
 function object_visible(noun)
 {
@@ -250,10 +255,10 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function purgatory()
+async function purgatory()
 {
     var choice, door;
-    sleep(sleep_time);
+    await sleep(sleep_time);
     door = 0;
     var c = write_message("Choose your door as 1, 2 or 3??  ");
     choice = c;
@@ -268,17 +273,14 @@ function purgatory()
     }    
 } 
 
-function bum_tells_story()
+async function bum_tells_story()
 {
-  var i, j;
-  write_message ("He looks at me and starts to speakas");
-  sleep(sleep_time);
+  write_message ("He looks at me and starts to speak");
+  await sleep(sleep_time);
   write_long_message (9)
-  write_message("");
-  sleep(sleep_time);
-  write_message (" ");
+  await sleep(sleep_time*2);
   write_message ("Like I did!!");
-  sleep(sleep_time);
+  await sleep(sleep_time);
   write_message ("He throws up and gives me back the bottle of wine.");
 }
 
@@ -296,15 +298,7 @@ function watch_TV(TV_channel)
 
 function wine_in_taxi()
 {
-  write_long_message (58);
-  sleep(sleep_time);
-  write_message ("");
-  write_message ("What shall I do? ");
-  sleep (sleep_time);
-  write_message ("");
-  write_message ("");
-  write_message ("The idiot cab driver backs over me and kills me!!!!!!");
-  purgatory();
+  write_long_message (28);
 }
 
 function stab_someone()

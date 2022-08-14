@@ -92,9 +92,6 @@ export default function handleVerb(verb, noun)
             game.your_place = "b_hallwy";
             break;
           case "b_backrm":
-            game.your_place = "b_hallwy";
-            break;
-          case "b_backrm":
             game.your_place = "b_bar";
             break;
           case "b_g_dump":
@@ -329,14 +326,14 @@ export default function handleVerb(verb, noun)
           case "wine":
               if(game.your_place != "d_disco") 
                 functions.not_yet_but_maybe_later();
-              else if(functions.object_place(noun, game.your_place)) 
+              else if(!functions.object_place(noun, game.your_place)) 
                    functions.write_message("All out!");
                 else
                     {
                      functions.write_message("The waitress takes $100 and says she'll return");
-                      sleep(3000);
+                     functions.sleep(3000);
                      functions.write_message("Poor service!!!");
-                      sleep (2000);
+                     functions.sleep(2000);
                       game.cash --;
                       functions.put_object(noun, game.your_place);
                     }
@@ -422,12 +419,12 @@ export default function handleVerb(verb, noun)
       else if(! functions.object_visible(noun)) 
        functions.find_me_one();
       else if(noun == "seeds") {
-          functions.put_object ("water", false);
+          functions.put_object ("water", "nowhere");
           game.pitcher_full = false;
           if(game.your_place == p_garden) {
              functions.write_message("A tree sprouts!!");
               functions.put_object ("tree", game.your_place);
-              functions.put_object ("seeds", false);
+              functions.put_object ("seeds", "nowhere");
           }
           else
            functions.write_message("The seeds need better soil to grow.");
@@ -436,7 +433,7 @@ export default function handleVerb(verb, noun)
       else
         
          functions.write_message("It pours into the ground.");
-          functions.put_object ("water", false);
+          functions.put_object ("water", "nowhere");
           game.pitcher_full = false;
         
       break;
@@ -497,20 +494,20 @@ export default function handleVerb(verb, noun)
             case "desk":
               Close(game.drawer_open);
               if(functions.object_visible("newspaper")) {
-                functions.put_object ("newspaper", false);
+                functions.put_object ("newspaper", "nowhere");
               }
               break;
           case "closet":
               Close (game.closet_open);
               if(functions.object_visible("doll")) {
-                functions.put_object ("doll", false);
+                functions.put_object ("doll", "nowhere");
               }
               break;
           case "cabinet":
             if(game.stool_climbed) {
                 Close ("cabinet_open");
                 if(functions.object_visible("pitcher")) 
-                  functions.put_object ("pitcher", false);
+                  functions.put_object ("pitcher", "nowhere");
                 else
                  functions.write_message("I can't reach it!");
                 }
@@ -548,9 +545,8 @@ export default function handleVerb(verb, noun)
          functions.write_long_message (33);
         game.cash -=30;
         functions.put_object ("girl", "c_hmoons");
-        married_to_girl = true;
+        game.married_to_girl = true;
         functions.add_exit (game.your_place, " and South");
-
         //Path c_hallwy, south = c_hmoons
       }
       break;
@@ -580,7 +576,7 @@ export default function handleVerb(verb, noun)
             if(functions.is_carried("doll")) {
               if(game.doll_inflated) {
                    functions.write_long_message (22);
-                  functions.put_object ("doll", false);
+                  functions.put_object ("doll", "nowhere");
                   functions.drop_object("doll");
                 }
               else
@@ -733,9 +729,9 @@ break;
   break;
     case "call":
     case "dial":
-    if(game.your_place = p_pntpch) 
+    if(game.your_place == "p_pntpch") 
      functions.write_message("This only takes incoming calls!!");
-    else if((noun = "555-6969") && (! game.called_555_6969)) {
+    else if((noun == "555-6969") && (! game.called_555_6969)) {
        functions.write_message ("")
        functions.write_message ("A voice says 'Hello, please answer the questions with one word answers")
         girl_name = prompt("What's your favorite girls name?  ")
@@ -751,11 +747,11 @@ break;
           your_part = Lcase(your_part)
           your_object = Lcase(your_object)
     }
-    else if((noun = "555-0439") && (! game.called_555_0439)) {
+    else if((noun == "555-0439") && (! game.called_555_0439)) {
          functions.write_long_message (34)
         game.called_555_0439 = true;
     }
-    else if((noun = "555-0987") && game.married_to_girl && (! game.called_555_0987)) {
+    else if((noun == "555-0987") && game.married_to_girl && (! game.called_555_0987)) {
          functions.write_long_message (35)
         game.wine_ordered = true;
         game.called_555_0987 = true;
@@ -926,6 +922,7 @@ break;
       break;
     case "restore":
       var obj = JSON.parse(localStorage.getItem('lsl_saved_game'));
+      console.log(obj);
       functions.restore_inventory(obj.objects_carried);
       game = obj;
       game_functions.GetLocationDescription ();
@@ -994,15 +991,18 @@ break;
         }
       }
       if(functions.is_carried("wine")) {
-        wine_in_taxi();
-        game.your_place = new_place;
-        functions.put_object ("wine", false);
-        game.remove_object(noun);
+          functions.wine_in_taxi();
+          game.your_place = new_place;
+          functions.put_object ("wine", "nowhere");
+          //game.remove_object(noun);
     }
+      else
+      {
       functions.write_message("We arrive and I get out.");
       game.cash-=5;
       game.your_place = new_place;
-  break;
+        }
+    break;
     case "take":
     case "get":
     case "grab":
@@ -1078,36 +1078,36 @@ break;
         if(noun == "pitcher" && pitcher_full) 
           functions.put_object ("water", game.your_place);
         else if(noun == "rubber") 
-          rubber_worn = false;
+          game.rubber_worn = false;
         else if(game.your_place == "d_disco" && (functions.object_visible("girl")) && (noun == "candy" || noun == "flowers" || noun == "ring")) 
         {
             switch(noun)
             {
               case "candy":
                  functions.write_message("She smiles and eats a couple!!");
-                  candy_given = true;
+                  game.candy_given = true;
+                  functions.put_object ("candy", game.your_place);
                   break;
               case "flowers":
                functions.write_message("She blushes profusely and puts them in her hair!");
-                  flowers_given = true;
-                  functions.put_object ("flowers", false);
+               game.flowers_given = true;
+                  functions.put_object ("flowers", "nowhere");
                 break;              
               case "ring":
                  functions.write_message("She blushes and puts it in her purse.");
-                  ring_given = true;
-                  functions.put_object ("ring", false);
+                 game.ring_given = true;
+                  functions.put_object ("ring", "nowhere");
                   break;
             }
-            if(candy_given && flowers_given && ring_given) {
+            if(game.candy_given && game.flowers_given && game.ring_given) {
               
                functions.write_message("She says: 'See you at the Marriage Center!!'");
                 functions.put_object ("girl", "c_marryc");
               }
         }
         else if(game.your_place =="d_street" && functions.object_visible("bum") && (noun == "wine")) {
-          
-            if(functions.object_place("knife", game.your_place) = false) {
-                bum_tells_story();
+            if(!functions.object_visible("knife") && functions.object_place("knife", game.your_place)) {
+                functions.bum_tells_story();
                 functions.put_object ("knife", game.your_place);
             }            
             else
@@ -1166,8 +1166,7 @@ break;
         functions.put_object ("ring", game.your_place);
         break;
       case "graffiti":
-        console.log('look graffiti');
-        look_graffiti();
+        functions.look_graffiti();
         break;
       case "mirror":
        functions.write_message("There's a pervert looking back at me!!");
@@ -1283,7 +1282,7 @@ break;
        functions.write_message("It says 'Hail taxi here'");
         break;
       case "girl":
-          if(game.your_place == p_jacuzzi) 
+          if(game.your_place == "p_jacuzzi") 
              functions.write_long_message (5);
           else if(game.your_place == "d_disco" || (game.your_place == "c_marryc")) 
              functions.write_long_message (4);
