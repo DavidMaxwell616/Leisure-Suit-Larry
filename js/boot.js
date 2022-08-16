@@ -42,6 +42,7 @@ let game = {
     window_broken: false,
     wine_ordered: false,
     your_place: "b_bar",
+    girl_location: "c_hmoons",
 };
 
 var girl_name='';

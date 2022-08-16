@@ -362,31 +362,11 @@
     },
     {
         "OBJECT": "A Girl",
-        "LOCATION": "c_marryc",
-        "ABBR": "girl",
-        "VISIBLE": true,
-        "YOUHAVEIT": false,
-        "STARTVISIBLE": true,
-        "STARTYOUHAVEIT": false,
-        "TAKEABLE": false
-    },
-    {
-        "OBJECT": "A Girl",
         "LOCATION": "d_disco",
         "ABBR": "girl",
         "VISIBLE": true,
         "YOUHAVEIT": false,
         "STARTVISIBLE": true,
-        "STARTYOUHAVEIT": false,
-        "TAKEABLE": false
-    },
-    {
-        "OBJECT": "A Girl",
-        "LOCATION": "c_hmoons",
-        "ABBR": "girl",
-        "VISIBLE": false,
-        "YOUHAVEIT": false,
-        "STARTVISIBLE": false,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": false
     },
@@ -592,11 +572,11 @@
     },
     {
         "OBJECT": "An Apple",
-        "LOCATION": "p_garden",
+        "LOCATION": "b_g_dump",
         "ABBR": "apple",
-        "VISIBLE": false,
+        "VISIBLE": true,
         "YOUHAVEIT": false,
-        "STARTVISIBLE": false,
+        "STARTVISIBLE": true,
         "STARTYOUHAVEIT": false,
         "TAKEABLE": true
     },

@@ -66,9 +66,9 @@
         {
             "LOCATIONID": "8",
             "Description": "I'm on a window ledge. My safety rope leads back to the fire escape. While it helps some, I could still fall and kill myself SO BE CAREFUL! The window looks into a room-but I can't see to much from here. People down on the street below look up at me and scream something about 'Dont Jump'. What's their problem?", 
-            "OTHERAREAS": "West",
+            "OTHERAREAS": "West and",
             "WHEREAMI": "I'm on a Window Ledge",
-            "ABBR": "b_wledge",
+            "ABBR": "b_ledge",
             "OTHEREXITS": "and South",
             "OTHERFLAG": false
         },
@@ -228,9 +228,9 @@
         {
             "LOCATIONID": "26",
             "Description": "I'm in the jacuzzi!!!! Oh boy- does this feel good!!!  Water swirls around me- It's warmth soaks into my body. The feeling of relaxation is almost numbing. Over on the other side is the most beautiful girl!!!! I hope she doesn't mind my being here!", 
-            "OTHERAREAS": "Down",
+            "OTHERAREAS": "Up",
             "WHEREAMI": "I'm in the Jacuzzi",
-            "ABBR": "p_jacuzi",
+            "ABBR": "p_jacuzzi",
             "OTHEREXITS": "",
             "OTHERFLAG": false
         },
@@ -263,8 +263,8 @@
         },
         {
             "LOCATIONID": "30",
-            "Description": "I'm outside on a expansive rooftop.  The sun shines in amongst the plants and trees. Birds flutter about. There's a jacuzzi in the middle of the porch!! Well- there's the source of the gurgling noise!!  A wooden fence surrounds the entire area.",
-            "OTHERAREAS": "South",
+            "Description": "I'm outside on a expansive rooftop.  The moon shines in amongst the plants and trees. Birds flutter about. There's a jacuzzi in the middle of the porch!! Well- there's the source of the gurgling noise!!  A wooden fence surrounds the entire area.",
+            "OTHERAREAS": "South and Down",
             "WHEREAMI": "I'm outside an expansive rooftop",
             "ABBR": "p_pntpch",
             "OTHEREXITS": "",

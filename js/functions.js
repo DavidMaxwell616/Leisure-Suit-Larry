@@ -4,7 +4,7 @@ import locationData from "../assets/json/locations.json" assert { type: "json" }
 import * as game_functions from "./game.js";
 
 export {is_carried, I_cant_go_that_way, take_inventory, sleep, wine_in_taxi, bum_tells_story,
-    huh,I_cant_do_that,I_dont_know_that_word,I_dont_have_it,I_already_have_it,
+    huh,I_cant_do_that,I_dont_know_that_word,I_dont_have_it,I_already_have_it, falling_down,
     I_see_nothing_special,give_help,not_yet_but_maybe_later,add_exit, buy_rubber,
     object_visible,object_place,write_message,OK,cant_do_that, write_long_message,
     find_me_one,I_see_something,takeable_object,look_around,watch_TV,sorry_no_cash,

@@ -6,8 +6,6 @@ export default function handleVerb(verb, noun)
 {
     if(verb=="go" && (noun=="north" || noun=="south" || noun=="east" || noun=="west"))
       verb = noun;
-    if(noun=="apple")
-      noun= "apple_core";
     switch (verb) {
     case "n":
     case "north":
@@ -20,7 +18,7 @@ export default function handleVerb(verb, noun)
             game.your_place = "b_street";
             break;
           case "b_inroom":
-            game.your_place = "b_wledge";
+            game.your_place = "b_ledge";
             break;
           case "b_bedrm":
             game.your_place = "b_balcny";
@@ -41,7 +39,7 @@ export default function handleVerb(verb, noun)
             game.your_place = "d_disco";
             break;
           case "p_livrom":
-            game.your_place = "p_pnpch";          
+            game.your_place = "p_pntpch";          
           default:
             break;
         }
@@ -78,7 +76,7 @@ export default function handleVerb(verb, noun)
           case "d_telbth":
             game.your_place = "d_disco";
             break;
-          case "p_pnpch":
+          case "p_pntpch":
             game.your_place = "p_livrom";
             break;
       }
@@ -98,7 +96,11 @@ export default function handleVerb(verb, noun)
             game.your_place = "b_street";
             break;
           case "b_balcny":
-            game.your_place = "b_wledge";
+            game.your_place = "b_ledge";
+            if(functions.is_carried("rope"))
+              functions.add_exit(game.your_place);
+            else
+            functions.falling_down();
             break;
           case "d_entrnc":
             game.your_place = "d_disco";
@@ -127,8 +129,13 @@ export default function handleVerb(verb, noun)
         switch (game.your_place) {
           case "b_bar":
             game.your_place = "b_backrm";
+            if(game.TV_channel==6)
+              functions.add_exit(game.your_place);
             break;
-          case "b_hallwy":
+            case "b_ledge":
+              game.your_place = "b_balcny";
+              break;
+           case "b_hallwy":
             game.your_place = "b_bar";
             break;
           case "b_street":
@@ -168,6 +175,9 @@ export default function handleVerb(verb, noun)
             case "p_pntfoy":
               game.your_place = "p_livrom";
               break;
+            case "p_jacuzzi":
+              game.your_place = "p_pntpch";             
+              break;
           }
         }
         break;
@@ -187,6 +197,9 @@ export default function handleVerb(verb, noun)
           case "p_livrom":
             game.your_place = "p_pntfoy";             
             break;
+          case "p_pntpch":
+            game.your_place = "p_jacuzzi";             
+            break;
         }
       }
           break;
@@ -202,7 +215,7 @@ export default function handleVerb(verb, noun)
                     else
                      functions.write_message("Wrong!!");
             }
-            else if(game.your_place = "c_htdesk" || game.your_place == "p_pntfoy") {
+            else if(game.your_place == "c_htdesk" || game.your_place == "p_pntfoy") {
                 if(functions.object_visible("blonde")) {
                    functions.write_message("The blonde says 'You can't go there!'");
                 }
@@ -210,7 +223,7 @@ export default function handleVerb(verb, noun)
                 {    
                      functions.write_long_message (7)
                 }
-                if(game.your_place = "c_htdesk") 
+                if(game.your_place == "c_htdesk") 
                         game.your_place = "p_pntfoy"
                     else
                         game.your_place = "c_htdesk"
@@ -522,8 +535,8 @@ export default function handleVerb(verb, noun)
               }
       break;              
     case "jump":
-      if(game.your_place == "b_balcny" || game.your_place == "b_wledge") 
-        falling_down();
+      if(game.your_place == "b_balcny" || game.your_place == "b_ledge") 
+        functions.falling_down();
       else
        functions.write_message("Whoooopeeeee!!!");
     break;    
@@ -600,11 +613,10 @@ export default function handleVerb(verb, noun)
       }
       else
        functions.write_message("She says  'Get me wine!!!  I'm nervous!!'");
-    }
     break;
   case "p_jacuzzi":
     if(game.apple_given) {
-      game.score ++;
+       game.score ++;
          functions.write_long_message (23);
         // game_}ed = true;
     }
@@ -641,7 +653,8 @@ export default function handleVerb(verb, noun)
     break;
   }
 
-}
+      }
+      }
 break;
     case "wear":
     case "use":
@@ -660,7 +673,7 @@ break;
          functions.write_message("Ahhh...relief! Thanks");
       case "bed":
          functions.write_message("Ahhhhh.......sleep!!!!");
-          sleep (1000);
+          //sleep (1000);
          functions.write_message("No, I can't sleep!  Have to find me a girl!!!!");
       case "rope":
           if(functions.is_carried("rope")) {
@@ -689,7 +702,7 @@ break;
         break;
       case "knife":
          functions.write_message("Let me see if(I still have the knife!");
-          sleep (600);
+         // sleep (600);
           if(functions.is_carried("knife")) {
               if(game.tied_to_bed) {
                  functions.write_message("I do and it worked! Thanks!");
@@ -697,7 +710,7 @@ break;
               }
               else
                  functions.write_message("Samurai sex fi}!!!!!!!!!!!!!!!!!!!");
-                  sleep (600);
+                 // sleep (600);
                  functions.write_message ("I stab myself in extacy!");
                   functions.purgatory();
               }
@@ -818,15 +831,15 @@ break;
     {
       case "pimp":
         if(game.hooker_fucked) 
-          functions.write_message("He says 'I don't want your game.cash - stud!'");
+          functions.write_message("He says 'I don't want your cash - stud!'");
         else
-          functions.write_message("Try going up -- he'll take the game.cash)");
+          functions.write_message("Try going up -- he'll take the cash)");
         break;
       case "hooker":
        functions.write_message("You already paid the pimp, stupid!!");
         break;
       case "blonde", "waitress", "girl":
-         functions.write_message("She yells 'I'm ! a whore!!!' and kills me!");
+         functions.write_message("She yells 'I'm not a whore!!!' and kills me!");
           functions.purgatory();
           break;
       case "preacher":
@@ -836,7 +849,7 @@ break;
        functions.write_message("He's too drunk to do business right now!");
         break;
       case "bartender":
-       functions.write_message("Buy something -- he'll take the game.cash) {");
+       functions.write_message("Buy something -- he'll take the cash) {");
         break;
       case "dealer":
        functions.write_message("Why ! play 21 instead?  You'll lose anyway, fool!");
@@ -917,13 +930,12 @@ break;
      functions.write_message ("Your score is '" & game.score & "' out of a possible '3'");
       break;
     case "save":
-      console.log(game);
       localStorage.setItem('lsl_saved_game', JSON.stringify(game));
       break;
     case "restore":
       var obj = JSON.parse(localStorage.getItem('lsl_saved_game'));
-      console.log(obj);
       functions.restore_inventory(obj.objects_carried);
+      functions.put_object("girl",game.girl_location);
       game = obj;
       game_functions.GetLocationDescription ();
       game_functions.show_inventory();
@@ -951,7 +963,7 @@ break;
                   }
                 }
             else if(game.your_place == "b_balcny" && (direction == west) && (! game.rope_in_use)) {
-              falling_down();
+              functions.falling_down();
             }
             else
             { 
@@ -1126,9 +1138,8 @@ break;
             functions.put_object ("pills", "nowhere");
         }
         else if((noun == "apple") && (game.your_place == "p_jacuzzi") && functions.object_visible("girl")) {
-          
-             functions.write_long_message (20);
-            apple_given = true;
+            functions.write_long_message (20);
+            game.apple_given = true;
         }  
         else
           functions.OK();
